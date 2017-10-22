@@ -34,5 +34,4 @@ function getLastPrices (tickers) {
 }
 
 // Todo:
-//   - format time in json responses
 //   - find other data to query
