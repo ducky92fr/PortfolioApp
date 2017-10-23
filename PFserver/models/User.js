@@ -6,6 +6,7 @@ const passportLocalMongoose = require('passport-local-mongoose')
 // portfolios.
 
 const userSchema = new Schema({
+  name: String,
   portfolios: [String]
 })
 

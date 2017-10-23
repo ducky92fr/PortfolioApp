@@ -1,6 +1,13 @@
 var express = require('express')
 var router = express.Router()
 
+// ======== Sign-up ========
+router.post('/signup', (req, res, next) => {
+  let { username, password, name } = req.body
+  console.log('HERE')
+  console.log(username, password, name)
+})
+
 /* Testing */
 router.get('/', function (req, res, next) {
   getLastPrices(['snap', 'fb', 'aapl']).then((data) => {
@@ -20,6 +27,14 @@ module.exports = router
 // IEX API
 const axios = require('axios')
 
+// Testing axios post for signup
+axios.post('http://localhost:3000/signup', {
+  name: 'name',
+  username: 'woo',
+  password: 'yes'
+})
+
+// IEX base url
 const IEX = axios.create({
   baseURL: 'https://api.iextrading.com/1.0'
 })
