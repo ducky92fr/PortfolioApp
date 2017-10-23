@@ -4,6 +4,13 @@ var router = express.Router()
 /* Testing */
 router.get('/', function (req, res, next) {
   getLastPrices(['snap', 'fb', 'aapl']).then((data) => {
+    console.log('DATA', data)
+    res.json(data)
+  })
+})
+
+router.get('/getall', (req, res, next) => {
+  getAllListedStocksOnIEX().then((data) => {
     res.json(data)
   })
 })
@@ -31,6 +38,20 @@ function getLastPrices (tickers) {
     url += ',' + tickers[i]
   }
   return IEX.get(url).then(response => response.data)
+}
+
+// Screener functions testing
+
+//  Returns a list of all stocks listed on IEX
+// exchange
+function getAllListedStocksOnIEX () {
+  let url = '/ref-data/symbols'
+  return IEX.get(url).then(response => {
+    return {
+      length: response.data.length,
+      tickerList: response.data
+    }
+  })
 }
 
 // Todo:
