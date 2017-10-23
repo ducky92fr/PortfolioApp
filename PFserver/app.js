@@ -2,10 +2,14 @@ var express = require('express')
 var logger = require('morgan')
 var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
+const mongoose = require('mongoose')
 
 var index = require('./routes/index')
 
 var app = express()
+
+// db
+mongoose.connect('mongodb://localhost/portfix', { useMongoClient: true })
 
 app.use(logger('dev'))
 app.use(bodyParser.json())
