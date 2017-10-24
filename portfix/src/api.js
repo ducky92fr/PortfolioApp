@@ -9,3 +9,9 @@ export function signUp (userInfo) {
     return response.data
   })
 }
+
+export function logIn (userInfo) {
+  return auth.post('/login', userInfo).then(response => {
+    return response.data
+  })
+}
