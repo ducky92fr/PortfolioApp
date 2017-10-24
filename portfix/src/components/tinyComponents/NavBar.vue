@@ -6,8 +6,12 @@
     <div class='dropdown-menu'>
       <button>Plus</button>
       <div class="dropdown-content">
-        <p>Create a new portfolio</p>
-        <p>Add a stock position</p>
+        <router-link to="/addportfolio">
+          <p>Create a new portfolio</p>
+        </router-link>
+        <router-link to="/">
+          <p>Add a stock position</p>
+        </router-link>
       </div>
     </div>
     <h2>
