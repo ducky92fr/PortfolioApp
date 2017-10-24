@@ -1,12 +1,5 @@
-var express = require('express')
-var router = express.Router()
-
-// ======== Sign-up ========
-router.post('/api/signup', (req, res, next) => {
-  let { username, password, name } = req.body
-  console.log('HERE')
-  console.log(username, password, name)
-})
+const express = require('express')
+const router = express.Router()
 
 /* Testing */
 router.get('/', function (req, res, next) {
