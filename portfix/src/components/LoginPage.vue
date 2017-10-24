@@ -14,9 +14,11 @@
         ></v-text-field>
         <v-text-field
           label="Password"
+          type="password"
           v-model="password"
           :rules="passwordRules"
           required
+          
         ></v-text-field>
 
         <v-btn
@@ -55,7 +57,7 @@ export default {
       logIn({
         username: this.username,
         password: this.password
-      }).then( () => {
+      }, this.$root).then( data => {
         this.$router.push('/home')
       }).catch( err => {
         this.error = 'Error happened during Log-in'

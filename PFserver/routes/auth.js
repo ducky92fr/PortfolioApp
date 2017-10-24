@@ -42,7 +42,7 @@ router.post('/login', (req, res, next) => {
       }
       if (user) {
         // success!! Save the user id
-        // NEVER save the password here
+        // NEVER save the password `here
         // the id is usually enough because we can get back
         // the actual user by fetching the database later
         const payload = {
