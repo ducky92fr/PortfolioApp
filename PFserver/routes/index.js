@@ -2,7 +2,7 @@ var express = require('express')
 var router = express.Router()
 
 // ======== Sign-up ========
-router.post('/signup', (req, res, next) => {
+router.post('/api/signup', (req, res, next) => {
   let { username, password, name } = req.body
   console.log('HERE')
   console.log(username, password, name)

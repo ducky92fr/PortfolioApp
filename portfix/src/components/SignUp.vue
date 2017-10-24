@@ -1,21 +1,49 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+  <pre>{{$data}}</pre>
+    <p v-if='error'>
+      {{error.message}}
+    </p>
+    <h1>Sign-up</h1>
+    <form @submit.prevent="signup">
+      <input v-model="name" required placeholder="name">
+      <input v-model="username" required placeholder="username">
+      <input v-model="password" required placeholder="password">
+      <button>Create New Account</button>
+    </form>
   </div>
 </template>
 
 <script>
+import { signUp } from '@/api'
 export default {
   name: 'SignUp',
   data () {
     return {
-      msg: 'Sign-up'
+      name: '',
+      username: '',
+      password: '',
+      error: null
+    }
+  },
+  methods: {
+    signup () {
+      this.error = null
+      signUp({
+        name: this.name,
+        username: this.username,
+        password: this.password
+      }).then( () => {
+        this.$router.push('/login')
+      }).catch( err => {
+        this.error = err
+        console.error('Signup error ', err)
+      })
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h1, h2 {
   font-weight: normal;
