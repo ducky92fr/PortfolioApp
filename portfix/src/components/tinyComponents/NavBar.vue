@@ -1,7 +1,8 @@
 <template>
   <div class="navbar">
-  <pre>{{$data}}</pre>
+    <router-link to="home">
     <h1>PortfolioApp</h1>
+    </router-link>
     <div class='dropdown-menu'>
       <button>Plus</button>
       <div class="dropdown-content">
@@ -40,12 +41,17 @@ export default {
     display: flex;
     align-items: center;
   }
+  a {
+    text-decoration: none;
+  }
   h1 {
     font-size: 2em;
     padding: 0px;
     margin: 0px;
     margin-left: 0.8vw;
     font-weight: 600;
+    text-decoration: none;
+    color: black;
   }
   h2 {
     font-size: 1.8em;
@@ -70,6 +76,7 @@ export default {
     width: 10vw;
     border: none;
     cursor: pointer;
+    font-weight: 400;
   }
   .dropdown-content {
     display: none;
