@@ -33,5 +33,6 @@ html {
   width: 100vw;
   margin: 0px;
   padding: 0px;
+  font-size: 16px;
 }
 </style>
