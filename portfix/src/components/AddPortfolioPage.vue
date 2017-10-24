@@ -25,6 +25,7 @@
 
 <script>
 import { checkUser } from '@/api'
+import { createNewPortfolio } from '@/api'
 import NavBar from './tinyComponents/navbar'
 export default {
   name: 'AddPortfolioPage',
@@ -41,7 +42,7 @@ export default {
   },
   methods: {
     submit () {
-
+      createNewPortfolio(this.name)
     }
   },
   components: {

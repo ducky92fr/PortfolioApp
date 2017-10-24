@@ -1,5 +1,15 @@
 const express = require('express')
+const passport = require('passport')
+const config = require('../config')
 const router = express.Router()
+
+// ======= Creating a new Portfolio =======
+router.post('/addportfolio', passport.authenticate('jwt', config.jwtSession), (req, res, nex) => {
+  let userID = req.user._id
+  let portfolioName = req.body.portfolioName
+
+  res.json({userID, portfolioName})
+})
 
 /* Testing */
 router.get('/', function (req, res, next) {

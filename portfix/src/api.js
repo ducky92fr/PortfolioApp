@@ -4,6 +4,10 @@ const auth = axios.create({
   baseURL: 'http://localhost:3000/auth'
 })
 
+const api = axios.create({
+  baseURL: 'http://localhost:3000/api'
+})
+
 function saveUserInfo ({token, user}) {
   axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
   localStorage.setItem('token', token)
@@ -41,4 +45,12 @@ export function logout(vm) {
   localStorage.removeItem('token')
   vm.user = null
   delete axios.defaults.headers.common['Authorization']
+}
+
+// ======= Creating a new Portfolio =======
+export function createNewPortfolio (name) {
+  return api.post('/addportfolio', { portfolioName: name }).then((response) => {
+    console.log('RESPONSE', response.data)
+    return response.data
+  })
 }
