@@ -1,9 +1,9 @@
 <template>
   <div class="signupPage">
-    <p v-if='error'>
-      {{error.message}}
-    </p>
     <h1>Sign-up</h1>
+    <h2 v-if='error'>
+      {{error}}
+    </h2>
     <template>
       <v-form class='signupForm' v-model="valid" ref="form" lazy-validation>
         <v-text-field
@@ -71,7 +71,7 @@ export default {
       }).then( () => {
         this.$router.push('/login')
       }).catch( err => {
-        this.error = err
+        this.error = 'Error happened during sign-up'
         console.error('Signup error ', err)
       })
     },
@@ -86,19 +86,27 @@ export default {
   .signupPage {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    height: 80vh;
+    margin-bottom: 20vh;
   }
 
   .signupForm {
     width: 30%;
-    margin-left:  
+    margin: 2vh 10vw;
   }
 
-  h1, h2 {
+  h1 {
     font-weight: normal;
     font-size: 4em;
-    margin: 5vh auto 5vh 10vw;
+    margin: 5vh 10vw;
+  }
+
+  h2 {
+    font-weight: normal;
+    font-size: 2em;
+    color: #e64444;
   }
 
   ul {
