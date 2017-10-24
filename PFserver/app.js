@@ -61,18 +61,6 @@ passport.use(strategy)
 app.use('/auth', authRoutes)
 app.use('/api', index)
 
-// This is an example of protected route
-app.get(
-  '/api/secret',
-  // this is protecting the route and giving us access to
-  // req.user
-  passport.authenticate('jwt', config.jwtSession),
-  (req, res) => {
-    // send the user his own information
-    res.json(req.user)
-  }
-)
-
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   var err = new Error('Not Found')
