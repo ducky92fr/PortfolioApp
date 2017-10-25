@@ -10,18 +10,18 @@ const portfolioSchema = new Schema({
   userID: String,
   name: String,
   value: Number,
-  startingPortfolio: [{
+  startingPortfolio: {
     stockTicker: String,
     number: Number,
     buyPrice: Number
-  }],
-  currentPortfolio: [{
+  },
+  currentPortfolio: {
     stockTicker: String,
     number: Number,
     buyPrice: Number,
     breakevenPrice: Number
-  }],
-  transactions: [[{
+  },
+  transactions: [{
     date: Date,
     prePortfolio: {
       stockTicker: String,
@@ -37,7 +37,7 @@ const portfolioSchema = new Schema({
       buyPrice: Number,
       transactionPrice: Number
     }
-  }]]
+  }]
 })
 
 const Portfolio = mongoose.model('Portfolio', portfolioSchema)
