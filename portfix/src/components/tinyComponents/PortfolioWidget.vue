@@ -1,12 +1,9 @@
 <template>
-  <div>
-    <h1 id="test">{{ msg }}</h1>
-    <div class='portfolioWidget'>
-      <h1>Portfolios</h1>
-      <div class='portfolios'>
-        <div class='singlePF' v-for="portfolio in portfolios" :key="portfolio._id">
-          <h2>{{portfolio.name}}</h2>
-        </div>
+  <div class='portfolioWidget'>
+    <h1>Portfolios</h1>
+    <div class='portfolios'>
+      <div class='singlePF' v-for="portfolio in portfolios" :key="portfolio._id">
+        <h2>{{portfolio.name}}</h2>
       </div>
     </div>
   </div>
@@ -16,10 +13,9 @@
 import { checkUser } from '@/api'
 import { getUserPortfolios } from '@/api'
 export default {
-  name: 'Test',
+  name: 'PortfolioWidget',
   data () {
     return {
-      msg: 'Test',
       portfolios: []
     }
   },
@@ -36,11 +32,24 @@ export default {
 #test {
   font-size: 4em;
 }
-h1 {
+.portfolioWidget h1 {
   font-size: 3em;
+  margin: 1vh 2vw;
+}
+.singlePF {
+  width: 50vw;
+  background-color: #f3f3f3;
+  height: 30px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 1vh 1vw;
+  margin: 2vh 2vw;
 }
 .singlePF h2 {
-  font-size: 2em;
+  font-size: 1.6em;
   font-weight: 400;
+  margin: 0px;
 }
 </style>

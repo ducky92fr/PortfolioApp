@@ -3,7 +3,7 @@
     <navbar></navbar>
     <div class="homePage">
       <h1>{{ msg }}</h1>
-      <portfolio-widget></portfolio-widget>
+      <portfolio-widget class='PFwidget'></portfolio-widget>
     </div>
   </div>
 </template>
@@ -30,18 +30,13 @@ export default {
 h1, h2 {
   font-weight: normal;
 }
-
-ul {
-  list-style-type: none;
-  padding: 0;
+.homePage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
+.PFwidget {
+  margin-top: 10vh; 
 }
 </style>
