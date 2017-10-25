@@ -36,6 +36,14 @@ router.post('/addportfolio', passport.authenticate('jwt', config.jwtSession), (r
   })
 })
 
+// ======= Getting the User's Portfolios =======
+router.get('/user/portfolios', passport.authenticate('jwt', config.jwtSession), (req, res, next) => {
+  let userID = req.user._id
+  Portfolio.find({userID}).then(portfolios => {
+    res.json(portfolios)
+  })
+})
+
 /* Testing */
 router.get('/', function (req, res, next) {
   getLastPrices(['snap', 'fb', 'aapl']).then((data) => {

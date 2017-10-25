@@ -53,3 +53,10 @@ export function createNewPortfolio (name) {
     return response.data
   })
 }
+
+// ======= Getting the User's Portfolios =======
+export function getUserPortfolios () {
+  return api.get('/user/portfolios').then((response) => {
+    return response.data
+  })
+}

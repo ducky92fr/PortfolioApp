@@ -6,6 +6,7 @@ import LoginPage from '@/components/LoginPage'
 import Home from '@/components/Home'
 import AddPortfolioPage from '@/components/AddPortfolioPage'
 import AddStockPage from '@/components/AddStockPage'
+import Test from '@/components/Test'
 
 Vue.use(Router)
 
@@ -40,6 +41,11 @@ export default new Router({
       path: '/addstock',
       name: 'AddStockoPage',
       component: AddStockPage
+    },
+    {
+      path: '/test',
+      name: 'Test',
+      component: Test
     }
   ]
 })
