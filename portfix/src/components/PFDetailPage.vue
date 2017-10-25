@@ -1,5 +1,6 @@
 <template>
   <div class='main'>
+    <navbar></navbar>
     <!-- <pre>{{$data}}</pre> -->
     <h1 v-if="portfolio">{{portfolio.name}}</h1>
     <div class='currentDashboard' v-if="portfolio">
@@ -11,6 +12,7 @@
 <script>
 import { checkUser } from '@/api'
 import { getUserPortfolio } from '@/api'
+import NavBar from './tinyComponents/navbar'
 export default {
   name: 'PFDetailPage',
   data () {
@@ -24,6 +26,9 @@ export default {
     getUserPortfolio(this.PFid).then(portfolio => {
       this.portfolio = portfolio
     })
+  },
+  components: {
+    navbar: NavBar
   }
 }
 </script>
@@ -35,9 +40,9 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 10vh;
 }
 h1 {
+  padding-top: 10vh;
   font-size: 3em;
 }
 .currentDashboard {

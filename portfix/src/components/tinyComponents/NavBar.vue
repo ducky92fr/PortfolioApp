@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <router-link to="home">
+    <router-link to="/home">
     <h1>PortfolioApp</h1>
     </router-link>
     <div class='dropdown-menu'>
