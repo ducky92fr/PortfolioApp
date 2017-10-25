@@ -3,12 +3,37 @@ const passport = require('passport')
 const config = require('../config')
 const router = express.Router()
 
+const User = require('../models/User')
+const Portfolio = require('../models/Portfolio')
+const Stock = require('../models/Stock')
+
 // ======= Creating a new Portfolio =======
 router.post('/addportfolio', passport.authenticate('jwt', config.jwtSession), (req, res, nex) => {
   let userID = req.user._id
   let portfolioName = req.body.portfolioName
-
-  res.json({userID, portfolioName})
+  let newPortfolio = new Portfolio({
+    userID,
+    name: portfolioName
+  })
+  newPortfolio.save((error, portfolio) => {
+    if (error) {
+      res.json({
+        errorMessage: "Something went wrong, couldn't save new Portfolio"
+      })
+    } else {
+      let portfolioID = portfolio._id
+      User.findByIdAndUpdate(userID, {
+        $push: {
+          portfolios: portfolioID
+        }
+      }, () => {
+        res.json({
+          success: true,
+          errorMessage: false
+        })
+      })
+    }
+  })
 })
 
 /* Testing */
