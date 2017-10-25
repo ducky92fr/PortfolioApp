@@ -14,6 +14,7 @@ router.post('/addportfolio', passport.authenticate('jwt', config.jwtSession), (r
   let newPortfolio = new Portfolio({
     userID,
     name: portfolioName,
+    value: req.body.cash,
     startingPortfolio: [{
       stockTicker: 'PFAPPCASH',
       number: req.body.cash,
