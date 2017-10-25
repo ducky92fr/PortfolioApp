@@ -41,7 +41,7 @@ export default {
     return {
       msg: '',
       ticker: '',
-      portfolio: '',
+      portfolio: this.$route.params.id,
       valid: false,
       user: this.$root.user,
       tickerRules: [

@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     redirectToAddStock: function () {
-      this.$router.push('/portfolio/addStock')
+      this.$router.push('/portfolio/addStock/' + this.PFid)
     }
   },
   components: {
