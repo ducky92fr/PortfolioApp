@@ -5,6 +5,9 @@
       <div class='singlePF' v-for="portfolio in portfolios" :key="portfolio._id">
         <h2>{{portfolio.name}}</h2>
         <h2 class='PFdata'>{{portfolio.value}}</h2>
+        <router-link :to="'/portfolio/' + portfolio._id">
+          <img src="../../assets/icons/eye1.svg" alt="See details">
+        </router-link>
       </div>
     </div>
   </div>
@@ -39,7 +42,7 @@ export default {
 }
 .singlePF {
   width: 50vw;
-  background-color: #f3f3f3;
+  background-color: #e8e8e8;
   height: 30px;
   border-radius: 10px;
   display: flex;
@@ -56,5 +59,13 @@ export default {
 .singlePF .PFdata {
   margin-left: auto;
   margin-right: 1vw;
+}
+.singlePF img {
+  width: 30px;
+}
+.singlePF a {
+  width: 30px;
+  height: 30px;
+  margin-left: 1vw;
 }
 </style>
