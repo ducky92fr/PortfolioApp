@@ -19,6 +19,12 @@
           </v-btn>
         </v-form>
       </template>
+      <div id='error' v-if="errorMessage">
+       <p> {{errorMessage}} </p>
+      </div>
+      <div id='success' v-if="success">
+       <p> {{success}} </p>
+      </div>
     </div>
   </div>
 </template>
@@ -37,12 +43,24 @@ export default {
       user: this.$root.user,
       nameRules: [
         (v) => !!v || 'Portfolio name is required',
-      ]
+      ],
+      success: false,
+      errorMessage: false
     }
   },
   methods: {
     submit () {
-      createNewPortfolio(this.name)
+      createNewPortfolio(this.name).then(response => {
+        if (response.errorMessage) {
+          this.success = false
+          this.errorMessage = response.errorMessage
+        }
+        if (response.success) {
+          this.errorMessage = false
+          this.success = 'Portfolio added successfully, you will be redirected home'
+          setTimeout( () => {this.$router.push('/home')}, 1500)
+        }
+      })
     }
   },
   components: {
@@ -73,5 +91,22 @@ export default {
   }
   button {
     margin-top: 3vh;
+  }
+  #success, #error {
+    padding: 1vh 1vw;
+    margin: 1vh 1vw;
+    margin-top: 2vh;
+    border-radius: 15px;
+    height: 40px;
+  }
+  #success p, #error p {
+    margin: 0px;
+    font-size: 1.3em; 
+  }
+  #success {
+    background-color: #88da8c;
+  }
+  #error {
+    background-color: #fb6868;
   }
 </style>

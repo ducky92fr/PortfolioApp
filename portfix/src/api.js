@@ -50,7 +50,6 @@ export function logout(vm) {
 // ======= Creating a new Portfolio =======
 export function createNewPortfolio (name) {
   return api.post('/addportfolio', { portfolioName: name }).then((response) => {
-    console.log('RESPONSE', response.data)
     return response.data
   })
 }
