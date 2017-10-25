@@ -20,7 +20,8 @@ const portfolioSchema = new Schema({
     number: Number,
     buyPrice: Number,
     breakevenPrice: Number
-  }
+  },
+  transactions: [String]
 })
 
 const Portfolio = mongoose.model('Portfolio', portfolioSchema)

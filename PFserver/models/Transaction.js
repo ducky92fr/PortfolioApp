@@ -6,7 +6,7 @@ const Schema = mongoose.Schema
 
 const transactionSchema = new Schema({
   date: Date,
-  num: Number,
+  portfolioID: String,
   prePortfolio: {
     stockTicker: String,
     number: Number
