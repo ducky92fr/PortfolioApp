@@ -1,3 +1,4 @@
+// Todo: check that cash is a number, add rule
 <template>
   <div>
     <navbar></navbar>
@@ -9,6 +10,12 @@
             label="Portfolio Name"
             v-model="name"
             :rules="nameRules"
+            required
+          ></v-text-field>
+          <v-text-field
+            label="Starting Cash Position"
+            v-model="cash"
+            :rules="cashRules"
             required
           ></v-text-field>
           <v-btn
@@ -39,10 +46,14 @@ export default {
     return {
       msg: '',
       name: '',
+      cash: 0,
       valid: false,
       user: this.$root.user,
       nameRules: [
         (v) => !!v || 'Portfolio name is required',
+      ],
+      cashRules: [
+        (v) => !!v || 'Cash position is required',
       ],
       success: false,
       errorMessage: false
@@ -50,7 +61,7 @@ export default {
   },
   methods: {
     submit () {
-      createNewPortfolio(this.name).then(response => {
+      createNewPortfolio({name: this.name, cash: this.cash}).then(response => {
         if (response.errorMessage) {
           this.success = false
           this.errorMessage = response.errorMessage

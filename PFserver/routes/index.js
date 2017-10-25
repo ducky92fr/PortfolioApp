@@ -13,7 +13,18 @@ router.post('/addportfolio', passport.authenticate('jwt', config.jwtSession), (r
   let portfolioName = req.body.portfolioName
   let newPortfolio = new Portfolio({
     userID,
-    name: portfolioName
+    name: portfolioName,
+    startingPortfolio: [{
+      stockTicker: 'PFAPPCASH',
+      number: req.body.cash,
+      buyPrice: 1
+    }],
+    currentPortfolio: [{
+      stockTicker: 'PFAPPCASH',
+      number: req.body.cash,
+      buyPrice: 1,
+      breakevenPrice: 1
+    }]
   })
   newPortfolio.save((error, portfolio) => {
     if (error) {

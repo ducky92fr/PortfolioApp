@@ -4,6 +4,7 @@
     <div class='portfolios'>
       <div class='singlePF' v-for="portfolio in portfolios" :key="portfolio._id">
         <h2>{{portfolio.name}}</h2>
+        <h2>{{portfolio.currentPortfolio}}</h2>
       </div>
     </div>
   </div>
