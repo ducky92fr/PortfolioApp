@@ -7,6 +7,7 @@ import Home from '@/components/Home'
 import AddPortfolioPage from '@/components/AddPortfolioPage'
 import AddStockPage from '@/components/AddStockPage'
 import Test from '@/components/Test'
+import PFdetailPage from '@/components/PFdetailPage'
 
 Vue.use(Router)
 
@@ -46,6 +47,11 @@ export default new Router({
       path: '/test',
       name: 'Test',
       component: Test
+    },
+    {
+      path: '/portfolio/:id',
+      name: 'PFdetailPage',
+      component: PFdetailPage
     }
   ]
 })
