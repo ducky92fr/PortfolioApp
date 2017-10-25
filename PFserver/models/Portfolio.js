@@ -20,24 +20,7 @@ const portfolioSchema = new Schema({
     number: Number,
     buyPrice: Number,
     breakevenPrice: Number
-  },
-  transactions: [{
-    date: Date,
-    prePortfolio: {
-      stockTicker: String,
-      number: Number
-    },
-    postPortfolio: {
-      stockTicker: String,
-      number: Number
-    },
-    change: {
-      stockTicker: String,
-      buy: Boolean, // true if the user buys more, false if the user sells
-      buyPrice: Number,
-      transactionPrice: Number
-    }
-  }]
+  }
 })
 
 const Portfolio = mongoose.model('Portfolio', portfolioSchema)
