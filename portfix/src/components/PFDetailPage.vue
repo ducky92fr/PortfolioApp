@@ -1,8 +1,10 @@
 <template>
-  <div>
-    <pre>{{$data}}</pre>
-    <h1 id="test">{{ msg }}</h1>
-    {{$route.params.id}}
+  <div class='main'>
+    <!-- <pre>{{$data}}</pre> -->
+    <h1 v-if="portfolio">{{portfolio.name}}</h1>
+    <div class='currentDashboard' v-if="portfolio">
+      <p>Current value: {{portfolio.value}}</p>
+    </div>
   </div>
 </template>
 
@@ -13,7 +15,6 @@ export default {
   name: 'PFDetailPage',
   data () {
     return {
-      msg: 'PFDetailPage',
       PFid: this.$route.params.id,
       portfolio: null,
     }
@@ -28,10 +29,21 @@ export default {
 </script>
 
 <style scoped>
-#test {
-  font-size: 4em;
+.main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10vh;
 }
 h1 {
   font-size: 3em;
+}
+.currentDashboard {
+  margin-top: 5vh;
+}
+.currentDashboard p {
+  font-size: 1.5em;
 }
 </style>
