@@ -39,7 +39,7 @@ export default new Router({
       component: AddPortfolioPage
     },
     {
-      path: '/addstock',
+      path: '/portfolio/addstock',
       name: 'AddStockoPage',
       component: AddStockPage
     },

@@ -3,6 +3,7 @@
     <navbar></navbar>
     <!-- <pre>{{$data}}</pre> -->
     <h1 v-if="portfolio">{{portfolio.name}}</h1>
+    <button @click="redirectToAddStock()">Add a Stock position</button>
     <div class='currentDashboard' v-if="portfolio">
       <p>Current value: {{portfolio.value}}</p>
     </div>
@@ -27,6 +28,11 @@ export default {
       this.portfolio = portfolio
     })
   },
+  methods: {
+    redirectToAddStock: function () {
+      this.$router.push('/portfolio/addStock')
+    }
+  },
   components: {
     navbar: NavBar
   }
@@ -50,5 +56,17 @@ h1 {
 }
 .currentDashboard p {
   font-size: 1.5em;
+}
+button {
+  font-size: 1.5em;
+  font-weight: 400;
+  background-color: #4296EC;
+  width: 230px;
+  height: 45px;
+  margin: 0px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-family: Roboto;
+  color: #FFFFFF;
 }
 </style>
