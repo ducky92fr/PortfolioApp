@@ -3,12 +3,14 @@
     <navbar></navbar>
     <div class="homePage">
       <h1>{{ msg }}</h1>
+      <portfolio-widget></portfolio-widget>
     </div>
   </div>
 </template>
 
 <script>
 import NavBar from './tinyComponents/navbar'
+import PortfolioWidget from './tinyComponents/PortfolioWidget'
 export default {
   name: 'Home',
   data () {
@@ -17,7 +19,8 @@ export default {
     }
   },
   components: {
-    navbar: NavBar
+    navbar: NavBar,
+    portfolioWidget: PortfolioWidget
   }
 }
 </script>
