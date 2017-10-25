@@ -60,3 +60,10 @@ export function getUserPortfolios () {
     return response.data
   })
 }
+
+// ======= Getting a single user Portfolio, given ID =======
+export function getUserPortfolio (id) {
+  return api.post('/user/portfolio', {portfolioID: id}).then((response) => {
+    return response.data
+  })
+}

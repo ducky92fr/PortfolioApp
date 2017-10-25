@@ -56,6 +56,21 @@ router.get('/user/portfolios', passport.authenticate('jwt', config.jwtSession), 
   })
 })
 
+// ======= Getting a single Portfolio, given ID =======
+router.post('/user/portfolio', passport.authenticate('jwt', config.jwtSession), (req, res, next) => {
+  let userID = req.user._id
+  let portfolioID = req.body.portfolioID
+
+  Portfolio.findById(portfolioID).then(portfolio => {
+    // Checking that the PF belongs to the user requesting the info
+    if (userID.equals(portfolio.userID)) {
+      res.json(portfolio)
+    } else {
+      res.json({errorMessage: 'unauthorized'})
+    }
+  })
+})
+
 /* Testing */
 router.get('/', function (req, res, next) {
   getLastPrices(['snap', 'fb', 'aapl']).then((data) => {
