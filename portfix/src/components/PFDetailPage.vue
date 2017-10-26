@@ -7,7 +7,7 @@
     <div class='currentDashboard' v-if="portfolio">
       <p>Current value: {{portfolio.value}}</p>
     </div>
-    <transactionwidget class='transactionWidget'></transactionwidget>
+    <transactionwidget :portfolioID='PFid' class='transactionWidget'></transactionwidget>
   </div>
 </template>
 

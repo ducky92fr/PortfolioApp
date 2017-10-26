@@ -76,6 +76,8 @@ export function addStockToPortfolio (data) {
 }
 
 // ======= Getting a Portfolio's Transactions, given ID =======
-export function getPortfolioTransactions (data) {
-  
+export function getPortfolioTransactions (portfolioID) {
+  return api.post('/portfolio/transactions', { portfolioID }).then((response) => {
+    return response.data
+  })
 }

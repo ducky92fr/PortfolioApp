@@ -106,6 +106,16 @@ router.post('/addstock', passport.authenticate('jwt', config.jwtSession), (req, 
   })
 })
 
+// ======= Getting a Portfolio's Transactions, given ID =======
+router.post('/portfolio/transactions', passport.authenticate('jwt', config.jwtSession), (req, res, next) => {
+  let userID = req.user._id
+  let portfolioID = req.body.portfolioID
+
+  Transaction.find({portfolioID, userID}).then(transactions => {
+    res.json(transactions)
+  })
+})
+
 // ======= Getting the User's Portfolios =======
 router.get('/user/portfolios', passport.authenticate('jwt', config.jwtSession), (req, res, next) => {
   let userID = req.user._id

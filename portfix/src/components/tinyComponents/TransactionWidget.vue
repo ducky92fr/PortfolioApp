@@ -17,9 +17,15 @@ export default {
       transactions: []
     }
   },
+  props: ['portfolioID'],
+  computed: {
+    pfID: function () {
+      return this.portfolioID
+    }
+  },
   created () {
     checkUser(this.$root)
-    getPortfolioTransactions().then(transactions => {
+    getPortfolioTransactions(this.pfID).then(transactions => {
       this.transactions = transactions
     })
   }
