@@ -1,7 +1,6 @@
 <template>
   <div class='main'>
     <navbar></navbar>
-    <pre>{{$data}}</pre>
     <h1 v-if="portfolio">{{portfolio.name}}</h1>
     <button @click="redirectToAddStock()">Add a Stock position</button>
     <div class='currentDashboard' v-if="portfolio">
@@ -68,7 +67,8 @@ button {
   font-weight: 400;
   background-color: #4296EC;
   width: 230px;
-  height: 45px;
+  height: 50px;
+  min-height: 50px;
   margin: 0px;
   padding: 5px 10px;
   border-radius: 5px;
