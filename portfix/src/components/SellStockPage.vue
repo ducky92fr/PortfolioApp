@@ -7,7 +7,6 @@
     <navbar></navbar>
     <div class="sellStockPage">
       <h1>Sell a Stock position</h1>
-      <datepicker :value="state.date" v-bind:class="{ hide: hideCalendar}" :inline="true" v-on:selected="datePicked"></datepicker>
       <template>
         <v-form class='form' v-model="valid" ref="form" lazy-validation>
           <v-text-field
@@ -27,7 +26,9 @@
             v-model="state.date"
             :rules="dateRules"
             required
+            v-on:click="dateFieldClicked"
           ></v-text-field>
+          <datepicker :value="state.date" v-bind:class="{ hide: hideCalendar}" :inline="true" v-on:selected="datePicked"></datepicker>
           <v-text-field
             label="Quantity"
             v-model="quantity"
@@ -75,7 +76,7 @@ export default {
       user: this.$root.user,
       price: null,
       quantity: 1,
-      hideCalendar: false,
+      hideCalendar: true,
       state: {
         date: new Date()
       },
@@ -116,8 +117,10 @@ export default {
         }
     })
     },
+    dateFieldClicked () {
+      this.hideCalendar = !this.hideCalendar 
+    },
     datePicked (date) {
-      console.log(date)
       this.hideCalendar = true
       this.state.date = date
     }
