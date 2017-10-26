@@ -23,10 +23,12 @@
           ></v-text-field>
           <v-text-field
             label="At Date"
-            v-model="date"
+            v-model="state.date"
             :rules="dateRules"
             required
+            v-on:click="dateFieldClicked"
           ></v-text-field>
+          <datepicker :value="state.date" v-bind:class="{ hide: hideCalendar}" :inline="true" v-on:selected="datePicked"></datepicker>
           <v-text-field
             label="Quantity"
             v-model="quantity"
@@ -60,6 +62,7 @@
 <script>
 import { checkUser, addStockToPortfolio } from '@/api'
 import NavBar from './tinyComponents/navbar'
+import Datepicker from 'vuejs-datepicker'
 export default {
   name: 'AddStockPage',
   data () {
@@ -68,11 +71,14 @@ export default {
       success: null,
       ticker: '',
       portfolio: this.$route.params.id,
-      date: Date.now(),
       valid: false,
       user: this.$root.user,
       price: null,
       quantity: 1,
+      hideCalendar: true,
+      state: {
+        date: new Date()
+      },
       tickerRules: [
         (v) => !!v || 'Stock ticker is required',
       ],
@@ -95,7 +101,7 @@ export default {
       addStockToPortfolio({
         ticker: this.ticker,
         portfolioID: this.portfolio,
-        date: this.date,
+        date: this.state.date,
         price: this.price,
         quantity: this.quantity
       }).then(response=> {
@@ -109,10 +115,18 @@ export default {
           setTimeout( () => {this.$router.push('/portfolio/'+ this.portfolio)}, 1400)
         }
     })
+    },
+    dateFieldClicked () {
+      this.hideCalendar = !this.hideCalendar 
+    },
+    datePicked (date) {
+      this.hideCalendar = true
+      this.state.date = date
     }
   },
   components: {
-    navbar: NavBar
+    navbar: NavBar,
+    datepicker: Datepicker
   },
   created () {
     checkUser(this.$root)
@@ -156,5 +170,8 @@ export default {
   }
   #error {
     background-color: #fb6868;
+  }
+  .hide {
+    display: none;
   }
 </style>
