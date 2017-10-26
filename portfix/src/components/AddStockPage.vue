@@ -1,5 +1,6 @@
 // Todo:
 // - Dropdown list with the user PFs as options
+// - Proper data verification rules
 
 <template>
   <div>
@@ -18,6 +19,24 @@
             label="Portfolio"
             v-model="portfolio"
             :rules="portfolioRules"
+            required
+          ></v-text-field>
+          <v-text-field
+            label="At Date"
+            v-model="date"
+            :rules="dateRules"
+            required
+          ></v-text-field>
+          <v-text-field
+            label="Quantity"
+            v-model="quantity"
+            :rules="quantityRules"
+            required
+          ></v-text-field>
+          <v-text-field
+            label="And Price"
+            v-model="price"
+            :rules="priceRules"
             required
           ></v-text-field>
           <v-btn
@@ -42,19 +61,37 @@ export default {
       msg: '',
       ticker: '',
       portfolio: this.$route.params.id,
+      date: Date.now(),
       valid: false,
       user: this.$root.user,
+      price: null,
+      quantity: 1,
       tickerRules: [
         (v) => !!v || 'Stock ticker is required',
       ],
       portfolioRules: [
         (v) => !!v || 'Portfolio is required',
+      ],
+      dateRules: [
+        (v) => !!v || 'Date is required',
+      ],
+      priceRules: [
+        (v) => !!v || 'Price is required',
+      ],
+      quantityRules: [
+        (v) => !!v || 'Quantity is required',
       ]
     }
   },
   methods: {
     submit () {
-      addStockToPortfolio({ticker: this.ticker, portfolioID: this.portfolio})
+      addStockToPortfolio({
+        ticker: this.ticker,
+        portfolioID: this.portfolio,
+        date: this.date,
+        price: this.price,
+        quantity: this.quantity
+      })
     }
   },
   components: {

@@ -6,22 +6,18 @@ const Schema = mongoose.Schema
 // as a stock, ie: {stockTicker: PFAPPCASH (not a real ticker and unlikely to become one),
 // number, and an unchanging price of 1}.
 
+// stocks will follow the format {ticker: num}
+
 const portfolioSchema = new Schema({
   userID: String,
   name: String,
   current: {
     date: Date,
-    stocks: [{
-      ticker: String,
-      num: Number
-    }]
+    stocks: Object
   },
   history: [{
     date: Date,
-    stocks: [{
-      ticker: String,
-      num: Number
-    }]
+    stocks: Object
   }]
 })
 

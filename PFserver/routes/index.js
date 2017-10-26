@@ -50,34 +50,58 @@ router.post('/addportfolio', passport.authenticate('jwt', config.jwtSession), (r
 
 // ======= Adding a Stock to a Portfolio =======
 router.post('/addstock', passport.authenticate('jwt', config.jwtSession), (req, res, nex) => {
-  let portfolioID = req.body.portfolioID
   let userID = req.user._id
+  let portfolioID = req.body.portfolioID
+  let date = req.body.date
   let ticker = req.body.ticker
+  let quantity = req.body.quantity
+  let price = req.body.price
 
   // check if useriD = PF ID, then update PF, then create transaction
+  Portfolio.findById(portfolioID).then(portfolio => {
+    // Checking that the PF belongs to the user requesting the info
+    if (userID.equals(portfolio.userID)) {
+      // Current portfolio becomes old portfolio
+      let oldPortfolio = Object.assign({}, portfolio.current)
+      // Creating new transaction
+      let newTransaction = new Transaction({
+        date,
+        userID,
+        portfolioID,
+        affectedStocks: [{
+          ticker,
+          preNum: oldPortfolio.stocks.ticker,
+          change: quantity,
+          atPrice: price,
+          postNum: oldPortfolio.stocks.ticker + quantity
+        }]
+      })
+      newTransaction.save((error) => {
+        if (error) {
+          res.json({
+            errorMessage: "Something went wrong, couldn't save new Portfolio"
+          })
+        } else {
+          portfolio.history.push(oldPortfolio)
+          portfolio.date = date
+          portfolio.stocks.ticker = oldPortfolio.stocks.ticker + quantity
 
-  let newTransaction = new Transaction({
-    date: Date.now(),
-    userID,
-    portfolioID,
-    affectedStocks: [{
-      ticker,
-      preNum: 0,
-      change: 1,
-      atPrice: 10,
-      postNum: 1
-    }]
-  })
-  newTransaction.save((error) => {
-    if (error) {
-      res.json({
-        errorMessage: "Something went wrong, couldn't save new Portfolio"
+          portfolio.save((error) => {
+            if (error) {
+              res.json({
+                errorMessage: "Something went wrong, couldn't save new Portfolio"
+              })
+            } else {
+              res.json({
+                success: true,
+                errorMessage: false
+              })
+            }
+          })
+        }
       })
     } else {
-      res.json({
-        success: true,
-        errorMessage: false
-      })
+      res.json({errorMessage: 'unauthorized'})
     }
   })
 })
