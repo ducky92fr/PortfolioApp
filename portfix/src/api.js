@@ -75,6 +75,13 @@ export function addStockToPortfolio (data) {
   })
 }
 
+// ======= Selling a Stock from a Portfolio =======
+export function sellStockFromPortfolio (data) {
+  return api.post('/addstock', data).then((response) => {
+    return response.data
+  })
+}
+
 // ======= Getting a Portfolio's Transactions, given ID =======
 export function getPortfolioTransactions (portfolioID) {
   return api.post('/portfolio/transactions', { portfolioID }).then((response) => {
