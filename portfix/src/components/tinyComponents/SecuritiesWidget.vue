@@ -4,7 +4,9 @@
     <h1>Stocks</h1>
     <div class='securities'>
       <div class='singleSEC' v-for="stock in stocks" :key="stock">
-        {{stock}}
+        <h2 v-if="stock != 'PFAPPCASH'">{{stock}}</h2>
+        <h2 v-else>Cash</h2>
+        <h2 class="SECdata">Quantity: {{portfolio.current.stocks[stock]}}</h2>
       </div>
     </div>
   </div>
@@ -45,7 +47,7 @@ export default {
 .singleSEC {
   width: 50vw;
   background-color: #e8e8e8;
-  height: 30px;
+  height: 40px;
   border-radius: 10px;
   display: flex;
   flex-direction: row;
@@ -57,6 +59,10 @@ export default {
   font-size: 1.6em;
   font-weight: 400;
   margin: 0px;
+}
+.singleSEC .SECdata {
+  margin-left: auto;
+  margin-right: 1vw;
 }
 .singleSEC {
   margin-left: auto;
