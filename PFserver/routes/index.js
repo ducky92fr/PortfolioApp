@@ -11,21 +11,17 @@ const Transaction = require('../models/transaction')
 router.post('/addportfolio', passport.authenticate('jwt', config.jwtSession), (req, res, nex) => {
   let userID = req.user._id
   let portfolioName = req.body.portfolioName
+  let cash = req.body.cash
   let newPortfolio = new Portfolio({
-    userID,
+    userID: userID,
     name: portfolioName,
-    value: req.body.cash,
-    startingPortfolio: [{
-      stockTicker: 'PFAPPCASH',
-      number: req.body.cash,
-      buyPrice: 1
-    }],
-    currentPortfolio: [{
-      stockTicker: 'PFAPPCASH',
-      number: req.body.cash,
-      buyPrice: 1,
-      breakevenPrice: 1
-    }]
+    current: {
+      date: Date.now(),
+      stocks: {
+        PFAPPCASH: cash
+      }
+    },
+    history: []
   })
   newPortfolio.save((error, portfolio) => {
     if (error) {
