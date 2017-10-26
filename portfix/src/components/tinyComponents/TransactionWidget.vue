@@ -1,10 +1,22 @@
 <template>
   <div class='transactionWidget'>
     <h1>Transactions</h1>
-    <pre>{{$data}}</pre>
     <div class='transactions'>
-      <div class='singleTR' v-for="transaction in transactions" :key="transaction._id">
-      </div>
+    <template>
+      <v-data-table
+          v-bind:headers="headers"
+          :items="transactions"
+          hide-actions
+          class="elevation-1"
+        >
+        <template slot="items" slot-scope="props">
+          <td>{{ props.item.affectedStocks[0].ticker }}</td>
+          <td class="text-xs-right">{{ props.item.date }}</td>
+          <td class="text-xs-right">{{ props.item.affectedStocks[0].change }}</td>
+          <td class="text-xs-right">{{ props.item.affectedStocks[0].atPrice }}</td>
+        </template>
+      </v-data-table>
+    </template>
     </div>
   </div>
 </template>
@@ -15,6 +27,12 @@ export default {
   name: 'TransactionWidget',
   data () {
     return {
+      headers: [
+        { text: 'Ticker', value: 'ticker', align: 'left', sortable: false },
+        { text: 'Date', value:'date' },
+        { text: 'Change', value:'change' },
+        { text: 'At Price', value:'atPrice' },
+      ],
       transactions: []
     }
   },
