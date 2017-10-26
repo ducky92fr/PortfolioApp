@@ -72,4 +72,7 @@ button {
   font-family: Roboto;
   color: #FFFFFF;
 }
+.transactionWidget {
+  height: 40vh;
+}
 </style>
