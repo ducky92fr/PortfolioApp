@@ -7,6 +7,7 @@
     <navbar></navbar>
     <div class="sellStockPage">
       <h1>Sell a Stock position</h1>
+      <datepicker :value="state.date" v-bind:class="{ hide: hideCalendar}" :inline="true" v-on:selected="datePicked"></datepicker>
       <template>
         <v-form class='form' v-model="valid" ref="form" lazy-validation>
           <v-text-field
@@ -23,7 +24,7 @@
           ></v-text-field>
           <v-text-field
             label="At Date"
-            v-model="date"
+            v-model="state.date"
             :rules="dateRules"
             required
           ></v-text-field>
@@ -61,6 +62,7 @@
 <script>
 import { checkUser, sellStockFromPortfolio } from '@/api'
 import NavBar from './tinyComponents/navbar'
+import Datepicker from 'vuejs-datepicker'
 export default {
   name: 'SellStockPage',
   data () {
@@ -69,11 +71,14 @@ export default {
       success: null,
       ticker: '',
       portfolio: this.$route.params.id,
-      date: Date.now(),
       valid: false,
       user: this.$root.user,
       price: null,
       quantity: 1,
+      hideCalendar: false,
+      state: {
+        date: new Date()
+      },
       tickerRules: [
         (v) => !!v || 'Stock ticker is required',
       ],
@@ -96,7 +101,7 @@ export default {
       sellStockFromPortfolio({
         ticker: this.ticker,
         portfolioID: this.portfolio,
-        date: this.date,
+        date: this.state.date,
         price: this.price,
         quantity: this.quantity
       }).then(response=> {
@@ -110,10 +115,16 @@ export default {
           setTimeout( () => {this.$router.push('/portfolio/'+ this.portfolio)}, 1400)
         }
     })
+    },
+    datePicked (date) {
+      console.log(date)
+      this.hideCalendar = true
+      this.state.date = date
     }
   },
   components: {
-    navbar: NavBar
+    navbar: NavBar,
+    datepicker: Datepicker
   },
   created () {
     checkUser(this.$root)
@@ -157,5 +168,8 @@ export default {
   }
   #error {
     background-color: #fb6868;
+  }
+  .hide {
+    display: none;
   }
 </style>
