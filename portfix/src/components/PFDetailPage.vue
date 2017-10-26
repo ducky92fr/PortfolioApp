@@ -31,7 +31,7 @@ export default {
     getUserPortfolio(this.PFid).then(portfolio => {
       this.portfolio = portfolio
     })
-    getLastIEXPrice()
+    // getLastIEXPrice()
   },
   methods: {
     redirectToAddStock: function () {

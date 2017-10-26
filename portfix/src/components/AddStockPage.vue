@@ -106,7 +106,7 @@ export default {
         if (response.success) {
           this.errorMessage = false
           this.success = 'Stock added successfully, you will be redirected back to your portfolio'
-          setTimeout( () => {this.$router.push('/home')}, 1400)
+          setTimeout( () => {this.$router.push('/portfolio/'+ this.portfolio)}, 1400)
         }
     })
     }
