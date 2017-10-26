@@ -7,6 +7,7 @@
     <div class='currentDashboard' v-if="portfolio">
       <p>Current value: {{portfolio.value}}</p>
     </div>
+    <transactionwidget class='transactionWidget'></transactionwidget>
   </div>
 </template>
 
@@ -14,6 +15,7 @@
 import { checkUser } from '@/api'
 import { getUserPortfolio } from '@/api'
 import NavBar from './tinyComponents/navbar'
+import TransactionWidget from './tinyComponents/TransactionWidget'
 export default {
   name: 'PFDetailPage',
   data () {
@@ -34,7 +36,8 @@ export default {
     }
   },
   components: {
-    navbar: NavBar
+    navbar: NavBar,
+    transactionwidget: TransactionWidget
   }
 }
 </script>

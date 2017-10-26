@@ -74,3 +74,8 @@ export function addStockToPortfolio (data) {
     return response.data
   })
 }
+
+// ======= Getting a Portfolio's Transactions, given ID =======
+export function getPortfolioTransactions (data) {
+  
+}
