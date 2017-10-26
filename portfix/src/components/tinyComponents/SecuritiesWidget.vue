@@ -1,7 +1,7 @@
 <template>
   <div class='securitiesWidget'>
-    <pre>{{$data}}</pre>
     <h1>Stocks</h1>
+    <p v-if='portfolio'> Portfolio last changed on {{portfolio.current.date}}</p>
     <div class='securities'>
       <div class='singleSEC' v-for="stock in stocks" :key="stock">
         <h2 v-if="stock != 'PFAPPCASH'">{{stock}}</h2>
