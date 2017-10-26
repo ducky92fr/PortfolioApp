@@ -8,6 +8,15 @@ const api = axios.create({
   baseURL: 'http://localhost:3000/api'
 })
 
+const IEX = axios.create({
+  baseURL: 'https://api.iextrading.com/1.0',
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT',
+    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+  }
+})
+
 function saveUserInfo ({token, user}) {
   axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
   localStorage.setItem('token', token)
@@ -41,7 +50,7 @@ export function logIn (userInfo, vm) {
   })
 }
 
-export function logout(vm) {
+export function logout (vm) {
   localStorage.removeItem('token')
   vm.user = null
   delete axios.defaults.headers.common['Authorization']
@@ -85,6 +94,15 @@ export function sellStockFromPortfolio (data) {
 // ======= Getting a Portfolio's Transactions, given ID =======
 export function getPortfolioTransactions (portfolioID) {
   return api.post('/portfolio/transactions', { portfolioID }).then((response) => {
+    return response.data
+  })
+}
+
+// https://api.iextrading.com/1.0/tops/last?symbols=SNAP,fb,AIG
+// ======= Getting last IEX prices for given Stocks =======
+export function getLastIEXPrice (stocks) {
+  return IEX.get('/tops/last?symbols=SNAP,fb,AIG').then((response) => {
+    console.log(response.data)
     return response.data
   })
 }

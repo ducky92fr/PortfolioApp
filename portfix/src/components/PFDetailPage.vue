@@ -14,7 +14,7 @@
 
 <script>
 import { checkUser } from '@/api'
-import { getUserPortfolio } from '@/api'
+import { getUserPortfolio, getLastIEXPrice } from '@/api'
 import NavBar from './tinyComponents/navbar'
 import TransactionWidget from './tinyComponents/TransactionWidget'
 import securitiesWidget from './tinyComponents/securitiesWidget'
@@ -31,6 +31,7 @@ export default {
     getUserPortfolio(this.PFid).then(portfolio => {
       this.portfolio = portfolio
     })
+    getLastIEXPrice()
   },
   methods: {
     redirectToAddStock: function () {
