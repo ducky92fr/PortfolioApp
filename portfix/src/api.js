@@ -77,7 +77,7 @@ export function addStockToPortfolio (data) {
 
 // ======= Selling a Stock from a Portfolio =======
 export function sellStockFromPortfolio (data) {
-  return api.post('/addstock', data).then((response) => {
+  return api.post('/sellstock', data).then((response) => {
     return response.data
   })
 }

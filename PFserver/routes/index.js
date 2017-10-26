@@ -107,6 +107,80 @@ router.post('/addstock', passport.authenticate('jwt', config.jwtSession), (req, 
   })
 })
 
+// ======= Selling a Stock from a Portfolio =======
+router.post('/sellstock', passport.authenticate('jwt', config.jwtSession), (req, res, nex) => {
+  let userID = req.user._id
+  let portfolioID = req.body.portfolioID
+  let date = req.body.date
+  let ticker = req.body.ticker
+  let quantity = req.body.quantity
+  let price = req.body.price
+
+  // check if useriD = PF ID, then update PF, then create transaction
+  Portfolio.findById(portfolioID).then(portfolio => {
+    // Checking that the PF belongs to the user requesting the info
+    if (userID.equals(portfolio.userID)) {
+      // Current portfolio becomes old portfolio
+      let oldPortfolio = Object.assign({}, portfolio.current)
+      let oldStockNum = oldPortfolio.stocks[ticker] || 0
+      let newStockNum = parseInt(oldStockNum, 10) - parseInt(quantity, 10)
+
+      if (parseInt(oldStockNum, 10) < parseInt(quantity, 10)) {
+        res.json({
+          errorMessage: 'Something went wrong - You seem to be trying to sell more stocks than you have in your Portfolio'
+        })
+        return undefined
+      }
+
+      // Creating new transaction
+      let newTransaction = new Transaction({
+        date,
+        userID,
+        portfolioID,
+        affectedStocks: [{
+          ticker,
+          preNum: oldStockNum,
+          change: quantity,
+          atPrice: price,
+          postNum: newStockNum
+        }]
+      })
+      newTransaction.save((error) => {
+        if (error) {
+          console.log(error)
+          res.json({
+            errorMessage: "Something went wrong, couldn't save new Portfolio"
+          })
+        } else {
+          portfolio.history.push(oldPortfolio)
+          portfolio.date = date
+          if (newStockNum > 0) {
+            portfolio.current.stocks[ticker] = newStockNum
+          } else {
+            delete portfolio.current.stocks[ticker]
+          }
+
+          portfolio.markModified('current')
+          portfolio.save((error) => {
+            if (error) {
+              res.json({
+                errorMessage: "Something went wrong, couldn't save new Portfolio"
+              })
+            } else {
+              res.json({
+                success: true,
+                errorMessage: false
+              })
+            }
+          })
+        }
+      })
+    } else {
+      res.json({errorMessage: 'unauthorized'})
+    }
+  })
+})
+
 // ======= Getting a Portfolio's Transactions, given ID =======
 router.post('/portfolio/transactions', passport.authenticate('jwt', config.jwtSession), (req, res, next) => {
   let userID = req.user._id
