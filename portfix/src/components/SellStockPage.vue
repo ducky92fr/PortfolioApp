@@ -47,6 +47,13 @@
           </v-btn>
         </v-form>
       </template>
+      <div id='error' v-if="errorMessage">
+        <p> {{errorMessage}} </p>
+      </div>
+      <div id='success' v-if="success">
+        <p> {{success}} </p>
+      </div>
+    </div>
     </div>
   </div>
 </template>
@@ -58,7 +65,8 @@ export default {
   name: 'SellStockPage',
   data () {
     return {
-      msg: '',
+      errorMessage: null,
+      success: null,
       ticker: '',
       portfolio: this.$route.params.id,
       date: Date.now(),
@@ -91,7 +99,17 @@ export default {
         date: this.date,
         price: this.price,
         quantity: this.quantity
-      })
+      }).then(response=> {
+      if (response.errorMessage) {
+          this.success = false
+          this.errorMessage = "Couldn't sell stock"
+        }
+        if (response.success) {
+          this.errorMessage = false
+          this.success = 'Stock sold successfully, you will be redirected back to your portfolio'
+          setTimeout( () => {this.$router.push('/home')}, 1400)
+        }
+    })
     }
   },
   components: {
@@ -122,5 +140,22 @@ export default {
   }
   button {
     margin-top: 3vh;
+  }
+  #success, #error {
+    padding: 1vh 1vw;
+    margin: 1vh 1vw;
+    margin-top: 2vh;
+    border-radius: 15px;
+    height: 40px;
+  }
+  #success p, #error p {
+    margin: 0px;
+    font-size: 1.3em; 
+  }
+  #success {
+    background-color: #88da8c;
+  }
+  #error {
+    background-color: #fb6868;
   }
 </style>
