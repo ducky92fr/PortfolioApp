@@ -37,7 +37,7 @@ export default {
       this.$router.push('/portfolio/addStock/' + this.PFid)
     },
     redirectToSellStock: function () {
-      console.log('Sell!!')
+      this.$router.push('/portfolio/sellStock/' + this.PFid)
     }
   },
   components: {

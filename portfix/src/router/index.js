@@ -5,6 +5,7 @@ import SignUp from '@/components/SignUp'
 import LoginPage from '@/components/LoginPage'
 import Home from '@/components/Home'
 import AddPortfolioPage from '@/components/AddPortfolioPage'
+import SellStockPage from '@/components/SellStockPage'
 import AddStockPage from '@/components/AddStockPage'
 import Test from '@/components/Test'
 import PFdetailPage from '@/components/PFdetailPage'
@@ -40,8 +41,13 @@ export default new Router({
     },
     {
       path: '/portfolio/addstock/:id',
-      name: 'AddStockoPage',
+      name: 'AddStockPage',
       component: AddStockPage
+    },
+    {
+      path: '/portfolio/sellstock/:id',
+      name: 'SellStock',
+      component: SellStockPage
     },
     {
       path: '/test',
