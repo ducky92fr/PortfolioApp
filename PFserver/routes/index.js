@@ -5,7 +5,7 @@ const router = express.Router()
 
 const User = require('../models/User')
 const Portfolio = require('../models/Portfolio')
-const Stock = require('../models/Stock')
+const Transaction = require('../models/transaction')
 
 // ======= Creating a new Portfolio =======
 router.post('/addportfolio', passport.authenticate('jwt', config.jwtSession), (req, res, nex) => {
@@ -43,6 +43,40 @@ router.post('/addportfolio', passport.authenticate('jwt', config.jwtSession), (r
           success: true,
           errorMessage: false
         })
+      })
+    }
+  })
+})
+
+// ======= Adding a Stock to a Portfolio =======
+router.post('/addstock', passport.authenticate('jwt', config.jwtSession), (req, res, nex) => {
+  let portfolioID = req.body.portfolioID
+  let userID = req.user._id
+  let ticker = req.body.ticker
+
+  // check if useriD = PF ID, then update PF, then create transaction
+
+  let newTransaction = new Transaction({
+    date: Date.now(),
+    userID,
+    portfolioID,
+    affectedStocks: [{
+      ticker,
+      preNum: 0,
+      change: 1,
+      atPrice: 10,
+      postNum: 1
+    }]
+  })
+  newTransaction.save((error) => {
+    if (error) {
+      res.json({
+        errorMessage: "Something went wrong, couldn't save new Portfolio"
+      })
+    } else {
+      res.json({
+        success: true,
+        errorMessage: false
       })
     }
   })

@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { checkUser } from '@/api'
+import { checkUser, addStockToPortfolio } from '@/api'
 import NavBar from './tinyComponents/navbar'
 export default {
   name: 'AddStockPage',
@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     submit () {
-
+      addStockToPortfolio({ticker: this.ticker, portfolioID: this.portfolio})
     }
   },
   components: {

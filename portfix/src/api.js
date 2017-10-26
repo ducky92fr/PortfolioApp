@@ -67,3 +67,10 @@ export function getUserPortfolio (id) {
     return response.data
   })
 }
+
+// ======= Adding a Stock to a Portfolio =======
+export function addStockToPortfolio (args) {
+  return api.post('/addstock', { portfolioID: args.portfolioID, ticker: args.ticker }).then((response) => {
+    return response.data
+  })
+}
