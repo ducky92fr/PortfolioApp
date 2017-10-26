@@ -1,11 +1,11 @@
 <template>
   <div class='main'>
     <navbar></navbar>
-    <!-- <pre>{{$data}}</pre> -->
+    <pre>{{$data}}</pre>
     <h1 v-if="portfolio">{{portfolio.name}}</h1>
     <button @click="redirectToAddStock()">Add a Stock position</button>
     <div class='currentDashboard' v-if="portfolio">
-      <p>Current value: {{portfolio.value}}</p>
+      <p>Current value: {{portfolio.current.stocks.PFAPPCASH}}</p>
     </div>
     <transactionwidget :portfolioID='PFid' class='transactionWidget'></transactionwidget>
   </div>

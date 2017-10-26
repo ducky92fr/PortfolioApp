@@ -1,6 +1,7 @@
 <template>
   <div class='transactionWidget'>
     <h1>Transactions</h1>
+    <pre>{{$data}}</pre>
     <div class='transactions'>
       <div class='singleTR' v-for="transaction in transactions" :key="transaction._id">
       </div>
