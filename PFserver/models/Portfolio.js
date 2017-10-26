@@ -9,19 +9,20 @@ const Schema = mongoose.Schema
 const portfolioSchema = new Schema({
   userID: String,
   name: String,
-  value: Number,
-  startingPortfolio: {
-    stockTicker: String,
-    number: Number,
-    buyPrice: Number
+  current: {
+    date: Date,
+    stocks: [{
+      ticker: String,
+      num: Number
+    }]
   },
-  currentPortfolio: {
-    stockTicker: String,
-    number: Number,
-    buyPrice: Number,
-    breakevenPrice: Number
-  },
-  transactions: [String]
+  history: [{
+    date: Date,
+    stocks: [{
+      ticker: String,
+      num: Number
+    }]
+  }]
 })
 
 const Portfolio = mongoose.model('Portfolio', portfolioSchema)
