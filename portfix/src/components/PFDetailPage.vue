@@ -3,6 +3,7 @@
     <navbar></navbar>
     <h1 v-if="portfolio">{{portfolio.name}}</h1>
     <button @click="redirectToAddStock()">Add a Stock position</button>
+    <button @click="redirectToSellStock()">Sell a Stock</button>
     <div class='currentDashboard' v-if="portfolio">
       <p>Current value: {{portfolio.current.stocks.PFAPPCASH}}</p>
     </div>
@@ -34,6 +35,9 @@ export default {
   methods: {
     redirectToAddStock: function () {
       this.$router.push('/portfolio/addStock/' + this.PFid)
+    },
+    redirectToSellStock: function () {
+      console.log('Sell!!')
     }
   },
   components: {
@@ -69,7 +73,7 @@ button {
   width: 230px;
   height: 50px;
   min-height: 50px;
-  margin: 0px;
+  margin: 1vh 0px;
   padding: 5px 10px;
   border-radius: 5px;
   font-family: Roboto;
