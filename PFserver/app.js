@@ -10,7 +10,7 @@ const passport = require('passport')
 const path = require('path')
 const { Strategy, ExtractJwt } = require('passport-jwt')
 
-const history = require('connect-history-api-fallback')
+const history = require('express-history-api-fallback')
 const config = require('./config')
 const index = require('./routes/api')
 const authRoutes = require('./routes/auth')
