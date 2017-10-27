@@ -4,7 +4,7 @@
   "description": "An app to help you manage your portfolio, built with Vue.js as a final project for IronHack",
   "main": "index.js",
   "scripts": {
-    "postinstall": "cd server && npm install",
+    "postinstall": "cd PFserver && npm install",
     "start": "cd PFserver && npm start"
   },
   "repository": {
