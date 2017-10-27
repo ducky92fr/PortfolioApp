@@ -28,7 +28,7 @@
             required
             v-on:click="dateFieldClicked"
           ></v-text-field>
-          <datepicker :value="state.date" v-bind:class="{ hide: hideCalendar}" :inline="true" v-on:selected="datePicked"></datepicker>
+          <datepicker :value="state.date" v-bind:class="{ hide: hideCalendar}" :inline="true" v-on:selected="datePicked" class='calendar'></datepicker>
           <v-text-field
             label="Quantity"
             v-model="quantity"
@@ -174,5 +174,9 @@ export default {
   }
   .hide {
     display: none;
+  }
+  .calendar {
+    position: absolute;
+    z-index: 2;
   }
 </style>
