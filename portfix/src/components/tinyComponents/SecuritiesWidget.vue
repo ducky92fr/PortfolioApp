@@ -7,18 +7,20 @@
         <h2 v-if="stock != 'PFAPPCASH'">{{stock}}</h2>
         <h2 v-else>Cash</h2>
         <h2 class="SECdata">Quantity: {{portfolio.current.stocks[stock]}}</h2>
+        <h2 v-if='stockPrices'>{{stockPrices[stock]}}</h2>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { checkUser, getUserPortfolio } from '@/api'
+import { checkUser, getUserPortfolio, getLastPriceFromIEX } from '@/api'
 export default {
   name: 'SecuritiesWidget',
   data () {
     return {
-      portfolio: null
+      portfolio: null,
+      stockPrices: null
     }
   },
   props: ['portfolioID'],
@@ -34,6 +36,16 @@ export default {
     checkUser(this.$root)
     getUserPortfolio(this.pfID).then(portfolio => {
       this.portfolio = portfolio
+
+      // Then get the prices from IEX, for all the stocks in the user's portfolio
+      getLastPriceFromIEX(this.stocks).then(priceArray => {
+        let prices = {}
+        priceArray.forEach(price => {
+          if (price) prices[price.symbol] = price.price
+        })
+        console.log(prices)
+        this.stockPrices = prices
+      })
     })
   }
 }

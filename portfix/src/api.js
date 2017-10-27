@@ -122,7 +122,6 @@ export function getAllListedStocksOnIEX () {
 // only pass the part AFTER iextrading.com/1.0/
 function proxyFetchFromIEX (url) {
   return IEXproxy.get(url).then((response) => {
-    console.log(response.data)
     return response.data
   })
 }

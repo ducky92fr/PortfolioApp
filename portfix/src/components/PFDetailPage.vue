@@ -14,7 +14,7 @@
 
 <script>
 import { checkUser } from '@/api'
-import { getUserPortfolio, getLastPriceFromIEX } from '@/api'
+import { getUserPortfolio } from '@/api'
 import NavBar from './tinyComponents/navbar'
 import TransactionWidget from './tinyComponents/TransactionWidget'
 import securitiesWidget from './tinyComponents/securitiesWidget'
@@ -26,11 +26,6 @@ export default {
       portfolio: null,
     }
   },
-  computed: {
-    stocksArray: function () {
-      return Object.keys(this.portfolio.current.stocks)
-    }
-  },
   // When component is created:
   created () {
     // Check if the user is logged in
@@ -38,8 +33,6 @@ export default {
     // Get the user's Portfolio info from the server
     getUserPortfolio(this.PFid).then(portfolio => {
       this.portfolio = portfolio
-      // Then get the prices from IEX, for all the stocks in the user's portfolio
-      getLastPriceFromIEX(this.stocksArray)
     })
   },
   methods: {
