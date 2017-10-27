@@ -119,9 +119,16 @@ export function getAllListedStocksOnIEX () {
 }
 
 // ======= Sending requests to IEX via our API =======
-export function proxyFetchFromIEX (url) {
+// only pass the part AFTER iextrading.com/1.0/
+function proxyFetchFromIEX (url) {
   return IEXproxy.get(url).then((response) => {
     console.log(response.data)
     return response.data
   })
+}
+
+// ======= Getting the last sale price on IEX for given stocks =======
+export function getLastPriceFromIEX (stocksArray) {
+  let url = '/tops/last?symbols=' + stocksArray.join()
+  return proxyFetchFromIEX(url)
 }
