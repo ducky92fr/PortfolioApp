@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 var express = require('express')
 var logger = require('morgan')
 var cookieParser = require('cookie-parser')
@@ -5,17 +7,19 @@ var bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const passport = require('passport')
+const path = require('path')
 const { Strategy, ExtractJwt } = require('passport-jwt')
 
+const history = require('connect-history-api-fallback')
 const config = require('./config')
-const index = require('./routes/index')
+const index = require('./routes/api')
 const authRoutes = require('./routes/auth')
 const User = require('./models/User')
 
 var app = express()
 
 // db
-mongoose.connect('mongodb://localhost/portfix', { useMongoClient: true })
+mongoose.connect(process.env.MONGODB_URI, { useMongoClient: true })
 
 app.use(logger('dev'))
 app.use(bodyParser.json())
@@ -67,6 +71,10 @@ passport.use(strategy)
 
 app.use('/auth', authRoutes)
 app.use('/api', index)
+
+const clientRoot = path.join(__dirname, '../client/dist')
+app.use('/', express.static(clientRoot))
+app.use(history('index.html', { root: clientRoot }))
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

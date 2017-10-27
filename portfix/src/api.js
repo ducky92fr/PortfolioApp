@@ -1,15 +1,15 @@
 import axios from 'axios'
 
 const auth = axios.create({
-  baseURL: 'http://localhost:3000/auth'
+  baseURL: process.env.NODE_ENV === 'production' ? '/auth' : 'http://localhost:3000/auth'
 })
 
 const api = axios.create({
-  baseURL: 'http://localhost:3000/api'
+  baseURL: process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:3000/api'
 })
 
 const IEXproxy = axios.create({
-  baseURL: 'http://localhost:3000/api/IEXfetch'
+  baseURL: process.env.NODE_ENV === 'production' ? '/api/IEXfetch' : 'http://localhost:3000/api/IEXfetch'
 })
 
 const IEX = axios.create({

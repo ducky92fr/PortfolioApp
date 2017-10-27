@@ -1,0 +1,21 @@
+{
+  "name": "stockawesome",
+  "version": "1.0.0",
+  "description": "An app to help you manage your portfolio, built with Vue.js as a final project for IronHack",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "cd server && npm install",
+    "start": "cd server && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jadch/PortfolioApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jadch/PortfolioApp/issues"
+  },
+  "homepage": "https://github.com/jadch/PortfolioApp#readme"
+}
