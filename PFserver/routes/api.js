@@ -277,6 +277,17 @@ router.get('/IEXfetch/*', (req, res, next) => {
   })
 })
 
+// Getting basic Stock financial info from IEX
+router.get('/getfinancials', (req, res, next) => {
+  let url = '/stock/market/batch?symbols=aapl,fb,aig,gs,googl&types=quote,company,stats,peers,financials'
+
+  return IEX.get(url).then(response => {
+    res.json(response.data)
+  }).catch((error) => {
+    console.error('ERROR FETCHING FINANCIALS, ', error)
+  })
+})
+
 // Get real-time price
 // Last provides trade data for executions on IEX. It is a near real time,intraday API that provides IEX last sale price, size and time.
 function getLastPrices (tickers) {
