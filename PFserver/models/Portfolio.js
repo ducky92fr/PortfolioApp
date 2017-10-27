@@ -13,7 +13,8 @@ const portfolioSchema = new Schema({
   name: String,
   current: {
     date: Date,
-    stocks: Object
+    stocks: Object,
+    BEPs: Object
   },
   history: [{
     date: Date,

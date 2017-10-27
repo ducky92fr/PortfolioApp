@@ -19,6 +19,9 @@ router.post('/addportfolio', passport.authenticate('jwt', config.jwtSession), (r
       date: Date.now(),
       stocks: {
         PFAPPCASH: cash
+      },
+      BEPs: {
+        PFAPPCASH: 1
       }
     },
     history: []
@@ -60,6 +63,7 @@ router.post('/addstock', passport.authenticate('jwt', config.jwtSession), (req, 
       // Current portfolio becomes old portfolio
       let oldPortfolio = Object.assign({}, portfolio.current)
       let oldStockNum = oldPortfolio.stocks[ticker] || 0
+      let oldStockBEP = oldPortfolio.BEPs[ticker] || 0
       let newStockNum = parseInt(oldStockNum, 10) + parseInt(quantity, 10)
 
       // Creating new transaction
@@ -75,6 +79,7 @@ router.post('/addstock', passport.authenticate('jwt', config.jwtSession), (req, 
           postNum: newStockNum
         }]
       })
+      // Saving the new transaction to our DB
       newTransaction.save((error) => {
         if (error) {
           console.log(error)
@@ -82,9 +87,11 @@ router.post('/addstock', passport.authenticate('jwt', config.jwtSession), (req, 
             errorMessage: "Something went wrong, couldn't save new Portfolio"
           })
         } else {
+          // Updating the portfolio object
           portfolio.history.push(oldPortfolio)
           portfolio.date = date
           portfolio.current.stocks[ticker] = newStockNum
+          portfolio.current.BEPs[ticker] = (price * quantity + oldStockBEP * oldStockNum) / (newStockNum)
 
           portfolio.markModified('current')
           portfolio.save((error) => {
