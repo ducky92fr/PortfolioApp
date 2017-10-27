@@ -106,3 +106,10 @@ export function getLastIEXPrice (stocks) {
     return response.data
   })
 }
+
+// ======= Getting all stocks listed on IEX =======
+export function getAllListedStocksOnIEX () {
+  return api.get('/getall').then((response) => {
+    return response.data
+  })
+}

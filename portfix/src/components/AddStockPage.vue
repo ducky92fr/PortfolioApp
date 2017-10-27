@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { checkUser, addStockToPortfolio } from '@/api'
+import { checkUser, addStockToPortfolio, getAllListedStocksOnIEX } from '@/api'
 import NavBar from './tinyComponents/navbar'
 import Datepicker from 'vuejs-datepicker'
 export default {
@@ -93,7 +93,8 @@ export default {
       ],
       quantityRules: [
         (v) => !!v || 'Quantity is required',
-      ]
+      ],
+      tickerList: null
     }
   },
   methods: {
@@ -131,6 +132,9 @@ export default {
   created () {
     checkUser(this.$root)
     this.user = this.$root.user
+    getAllListedStocksOnIEX().then(result => {
+      this.tickerList = result.tickerList
+    })
   }
 }
 </script>
