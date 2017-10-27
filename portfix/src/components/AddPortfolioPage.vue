@@ -69,9 +69,11 @@ export default {
         if (response.success) {
           this.errorMessage = false
           this.success = 'Portfolio added successfully, you will be redirected home'
-          setTimeout( () => {this.$router.push('/home')}, 1400)
+          setTimeout( () => {this.$router.push('/')}, 1400)
         }
-      })
+      }).catch((error) => {
+    console.error(error)
+  })
     }
   },
   components: {

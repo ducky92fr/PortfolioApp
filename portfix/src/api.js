@@ -43,6 +43,8 @@ export function checkUser (vm) {
 export function signUp (userInfo) {
   return auth.post('/signup', userInfo).then(response => {
     return response.data
+  }).catch((error) => {
+    console.error(error)
   })
 }
 
@@ -51,6 +53,8 @@ export function logIn (userInfo, vm) {
     saveUserInfo(response.data)
     vm.user = response.data.user
     return response.data
+  }).catch((error) => {
+    console.error(error)
   })
 }
 
@@ -71,6 +75,8 @@ export function createNewPortfolio (args) {
 export function getUserPortfolios () {
   return api.get('/user/portfolios').then((response) => {
     return response.data
+  }).catch((error) => {
+    console.error(error)
   })
 }
 
@@ -78,6 +84,8 @@ export function getUserPortfolios () {
 export function getUserPortfolio (id) {
   return api.post('/user/portfolio', {portfolioID: id}).then((response) => {
     return response.data
+  }).catch((error) => {
+    console.error(error)
   })
 }
 
@@ -85,6 +93,8 @@ export function getUserPortfolio (id) {
 export function addStockToPortfolio (data) {
   return api.post('/addstock', data).then((response) => {
     return response.data
+  }).catch((error) => {
+    console.error(error)
   })
 }
 
@@ -92,6 +102,8 @@ export function addStockToPortfolio (data) {
 export function sellStockFromPortfolio (data) {
   return api.post('/sellstock', data).then((response) => {
     return response.data
+  }).catch((error) => {
+    console.error(error)
   })
 }
 
@@ -99,6 +111,8 @@ export function sellStockFromPortfolio (data) {
 export function getPortfolioTransactions (portfolioID) {
   return api.post('/portfolio/transactions', { portfolioID }).then((response) => {
     return response.data
+  }).catch((error) => {
+    console.error(error)
   })
 }
 
@@ -108,6 +122,8 @@ export function getLastIEXPrice (stocks) {
   return IEX.get('/tops/last?symbols=SNAP,fb,AIG').then((response) => {
     console.log(response.data)
     return response.data
+  }).catch((error) => {
+    console.error(error)
   })
 }
 
@@ -115,6 +131,8 @@ export function getLastIEXPrice (stocks) {
 export function getAllListedStocksOnIEX () {
   return api.get('/getall').then((response) => {
     return response.data
+  }).catch((error) => {
+    console.error(error)
   })
 }
 
@@ -123,6 +141,8 @@ export function getAllListedStocksOnIEX () {
 function proxyFetchFromIEX (url) {
   return IEXproxy.get(url).then((response) => {
     return response.data
+  }).catch((error) => {
+    console.error(error)
   })
 }
 

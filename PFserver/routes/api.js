@@ -111,6 +111,8 @@ router.post('/addstock', passport.authenticate('jwt', config.jwtSession), (req, 
     } else {
       res.json({errorMessage: 'unauthorized'})
     }
+  }).catch((error) => {
+    console.error('ERROR ADDING STOCK, ', error)
   })
 })
 
@@ -185,6 +187,8 @@ router.post('/sellstock', passport.authenticate('jwt', config.jwtSession), (req,
     } else {
       res.json({errorMessage: 'unauthorized'})
     }
+  }).catch((error) => {
+    console.error('ERROR SELLING STOCK, ', error)
   })
 })
 
@@ -195,6 +199,8 @@ router.post('/portfolio/transactions', passport.authenticate('jwt', config.jwtSe
 
   Transaction.find({portfolioID, userID}).then(transactions => {
     res.json(transactions)
+  }).catch((error) => {
+    console.error('ERROR GETTING TRANSACTIONS, ', error)
   })
 })
 
@@ -203,6 +209,8 @@ router.get('/user/portfolios', passport.authenticate('jwt', config.jwtSession), 
   let userID = req.user._id
   Portfolio.find({userID}).then(portfolios => {
     res.json(portfolios)
+  }).catch((error) => {
+    console.error('ERROR GETTING PORTFOLIOS, ', error)
   })
 })
 
@@ -218,6 +226,8 @@ router.post('/user/portfolio', passport.authenticate('jwt', config.jwtSession), 
     } else {
       res.json({errorMessage: 'unauthorized'})
     }
+  }).catch((error) => {
+    console.error('ERROR GETTING PORTFOLIO, ', error)
   })
 })
 
@@ -226,12 +236,16 @@ router.get('/', function (req, res, next) {
   getLastPrices(['snap', 'fb', 'aapl']).then((data) => {
     console.log('DATA', data)
     res.json(data)
+  }).catch((error) => {
+    console.error('ERROR GETTING TRANSACTIONS, ', error)
   })
 })
 
 router.get('/getall', (req, res, next) => {
   getAllListedStocksOnIEX().then((data) => {
     res.json(data)
+  }).catch((error) => {
+    console.error('ERROR FETCHING ALL LISTED STOCKS, ', error)
   })
 })
 
@@ -258,23 +272,22 @@ router.get('/IEXfetch/*', (req, res, next) => {
   url = url.slice(13) // getting the original request
   return IEX.get(url).then(response => {
     res.json(response.data)
+  }).catch((error) => {
+    console.error('ERROR FETCHING IEX REQUEST, ', error)
   })
 })
 
 // Get real-time price
 // Last provides trade data for executions on IEX. It is a near real time,intraday API that provides IEX last sale price, size and time.
-function getLastPrice (ticker) {
-  let url = `/tops/last?symbols=${ticker}`
-  return IEX.get(url).then(response => response.data)
-}
-
 function getLastPrices (tickers) {
   let url = `/tops/last/?symbols=${tickers[0]}`
   let length = tickers.length
   for (let i = 1; i < length; i++) {
     url += ',' + tickers[i]
   }
-  return IEX.get(url).then(response => response.data)
+  return IEX.get(url).then(response => response.data).catch((error) => {
+    console.error('ERROR FETCHING LAST PRICES, ', error)
+  })
 }
 
 // Screener functions testing
@@ -288,6 +301,8 @@ function getAllListedStocksOnIEX () {
       length: response.data.length,
       tickerList: response.data
     }
+  }).catch((error) => {
+    console.error('ERROR FETCHING ALL LISTED STOCKS, ', error)
   })
 }
 

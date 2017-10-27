@@ -63,6 +63,8 @@ const strategy = new Strategy(
       } else {
         done(new Error('User not found'))
       }
+    }).catch((error) => {
+      console.error('ERROR FINDING USER IN PASSPORT STRATEGY, ', error)
     })
   }
 )
@@ -77,11 +79,8 @@ app.use('/', express.static(clientRoot))
 app.use(history('index.html', { root: clientRoot }))
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  var err = new Error('Not Found')
-  err.status = 404
-  next(err)
-})
+//  ******* TO DO *******
+// 404 ERROR HANDLING
 
 // error handler
 // Todo: Add error handler

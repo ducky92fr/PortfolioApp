@@ -72,8 +72,12 @@ export default {
           this.securities.push(stock_display_info)
           }
         })
-      })
-    })
+      }).catch((error) => {
+    console.error(error)
+  })
+    }).catch((error) => {
+    console.error(error)
+  })
   }
 }
 </script>

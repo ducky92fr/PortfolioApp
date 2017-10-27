@@ -27,7 +27,9 @@ export default {
     checkUser(this.$root)
     getUserPortfolios().then(portfolios => {
       this.portfolios = portfolios
-    })
+    }).catch((error) => {
+    console.error(error)
+  })
   }
 }
 </script>

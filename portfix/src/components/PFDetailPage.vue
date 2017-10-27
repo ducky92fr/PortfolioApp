@@ -33,7 +33,9 @@ export default {
     // Get the user's Portfolio info from the server
     getUserPortfolio(this.PFid).then(portfolio => {
       this.portfolio = portfolio
-    })
+    }).catch((error) => {
+    console.error(error)
+  })
   },
   methods: {
     redirectToAddStock: function () {

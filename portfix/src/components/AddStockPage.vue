@@ -115,7 +115,9 @@ export default {
           this.success = 'Stock added successfully, you will be redirected back to your portfolio'
           setTimeout( () => {this.$router.push('/portfolio/'+ this.portfolio)}, 1400)
         }
-    })
+    }).catch((error) => {
+    console.error(error)
+  })
     },
     dateFieldClicked () {
       this.hideCalendar = !this.hideCalendar 
@@ -134,7 +136,9 @@ export default {
     this.user = this.$root.user
     getAllListedStocksOnIEX().then(result => {
       this.tickerList = result.tickerList
-    })
+    }).catch((error) => {
+    console.error(error)
+  })
   }
 }
 </script>

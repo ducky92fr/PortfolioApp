@@ -46,7 +46,9 @@ export default {
     checkUser(this.$root)
     getPortfolioTransactions(this.pfID).then(transactions => {
       this.transactions = transactions
-    })
+    }).catch((error) => {
+    console.error(error)
+  })
   }
 }
 </script>
