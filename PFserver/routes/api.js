@@ -5,7 +5,7 @@ const router = express.Router()
 
 const User = require('../models/User')
 const Portfolio = require('../models/Portfolio')
-const Transaction = require('../models/transaction')
+const Transaction = require('../models/Transaction')
 
 // ======= Creating a new Portfolio =======
 router.post('/addportfolio', passport.authenticate('jwt', config.jwtSession), (req, res, nex) => {
