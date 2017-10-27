@@ -8,6 +8,10 @@ const api = axios.create({
   baseURL: 'http://localhost:3000/api'
 })
 
+const IEXproxy = axios.create({
+  baseURL: 'http://localhost:3000/api/IEXfetch'
+})
+
 const IEX = axios.create({
   baseURL: 'https://api.iextrading.com/1.0',
   headers: {
@@ -110,6 +114,14 @@ export function getLastIEXPrice (stocks) {
 // ======= Getting all stocks listed on IEX =======
 export function getAllListedStocksOnIEX () {
   return api.get('/getall').then((response) => {
+    return response.data
+  })
+}
+
+// ======= Sending requests to IEX via our API =======
+export function proxyFetchFromIEX (url) {
+  return IEXproxy.get(url).then((response) => {
+    console.log(response.data)
     return response.data
   })
 }

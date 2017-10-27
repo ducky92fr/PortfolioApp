@@ -245,6 +245,15 @@ const IEX = axios.create({
   baseURL: 'https://api.iextrading.com/1.0'
 })
 
+// IEX Fetching
+router.get('/IEXfetch/*', (req, res, next) => {
+  let url = req.originalUrl
+  url = url.slice(13) // getting the original request
+  return IEX.get(url).then(response => {
+    res.json(response.data)
+  })
+})
+
 // Get real-time price
 // Last provides trade data for executions on IEX. It is a near real time,intraday API that provides IEX last sale price, size and time.
 function getLastPrice (ticker) {

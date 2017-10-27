@@ -14,7 +14,7 @@
 
 <script>
 import { checkUser } from '@/api'
-import { getUserPortfolio, getLastIEXPrice } from '@/api'
+import { getUserPortfolio, getLastIEXPrice, proxyFetchFromIEX } from '@/api'
 import NavBar from './tinyComponents/navbar'
 import TransactionWidget from './tinyComponents/TransactionWidget'
 import securitiesWidget from './tinyComponents/securitiesWidget'
@@ -31,7 +31,8 @@ export default {
     getUserPortfolio(this.PFid).then(portfolio => {
       this.portfolio = portfolio
     })
-    // getLastIEXPrice()
+    // getLastIEXPrice() doesnt work right now, test outside of localhost
+    proxyFetchFromIEX('/tops/last?symbols=SNAP,fb,AIG')
   },
   methods: {
     redirectToAddStock: function () {
