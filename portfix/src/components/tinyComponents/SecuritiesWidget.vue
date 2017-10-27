@@ -9,6 +9,21 @@
         <h2 class="SECdata">Quantity: {{portfolio.current.stocks[stock]}}</h2>
         <h2 v-if='stockPrices'>{{stockPrices[stock]}}</h2>
       </div>
+        <template>
+          <v-data-table
+              v-bind:headers="headers"
+              :items="securities"
+              hide-actions
+              class="elevation-1"
+            >
+          <template slot="items" slot-scope="props">
+            <td>{{ props.item.ticker }}</td>
+            <td class="text-xs-right">{{ props.item.IEXprice }}</td>
+            <td class="text-xs-right">{{ props.item.breakEven }}</td>
+            <td class="text-xs-right">{{ props.item.PL }}</td>
+          </template>
+        </v-data-table>
+      </template>
     </div>
   </div>
 </template>
@@ -20,7 +35,14 @@ export default {
   data () {
     return {
       portfolio: null,
-      stockPrices: null
+      stockPrices: null,
+      headers: [
+        { text: 'Ticker', value: 'ticker', align: 'left' },
+        { text: 'IEX Price', value: 'IEXprice' },
+        { text: 'Bought At/Break-Even', value: 'breakEven' },
+        { text: 'P&L', value: 'PL' },
+      ],
+      securities: []
     }
   },
   props: ['portfolioID'],
@@ -38,13 +60,18 @@ export default {
       this.portfolio = portfolio
 
       // Then get the prices from IEX, for all the stocks in the user's portfolio
-      getLastPriceFromIEX(this.stocks).then(priceArray => {
-        let prices = {}
-        priceArray.forEach(price => {
-          if (price) prices[price.symbol] = price.price
+      getLastPriceFromIEX(this.stocks).then(responseArray => {
+        responseArray.forEach(stockObject => {
+          if (stockObject) {
+            let stock_display_info = {
+              ticker: stockObject.symbol,
+              IEXprice : stockObject.price,
+              breakEven: portfolio.current.BEPs[stockObject.symbol],
+              PL: 'ooohhn'
+            }
+          this.securities.push(stock_display_info)
+          }
         })
-        console.log(prices)
-        this.stockPrices = prices
       })
     })
   }
