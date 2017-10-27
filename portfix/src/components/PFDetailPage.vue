@@ -6,8 +6,9 @@
     <button @click="redirectToSellStock()">Sell a Stock</button>
     <div class='currentDashboard' v-if="portfolio">
       <p>Current value: {{portfolio.current.stocks.PFAPPCASH}}</p>
+      <p v-if="portfolioPL">P&L: {{portfolioPL}}</p>
     </div>
-    <securitieswidget :portfolioID='PFid' class='securitiesWidget'></securitieswidget>
+    <securitieswidget :portfolioID='PFid' class='securitiesWidget' v-on:PLcalculated='updatePL($event)'></securitieswidget>
     <transactionwidget :portfolioID='PFid' class='transactionWidget'></transactionwidget>
   </div>
 </template>
@@ -24,6 +25,7 @@ export default {
     return {
       PFid: this.$route.params.id,
       portfolio: null,
+      portfolioPL: null
     }
   },
   // When component is created:
@@ -43,6 +45,9 @@ export default {
     },
     redirectToSellStock: function () {
       this.$router.push('/portfolio/sellStock/' + this.PFid)
+    },
+    updatePL: function (event) {
+      this.portfolioPL = event
     }
   },
   components: {

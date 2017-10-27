@@ -30,6 +30,7 @@
 
 <script>
 import { checkUser, getUserPortfolio, getLastPriceFromIEX } from '@/api'
+import { calculatePortfolioPnL, calculateSecurityPnL } from './helperFunctions'
 export default {
   name: 'SecuritiesWidget',
   data () {
@@ -67,11 +68,12 @@ export default {
               ticker: stockObject.symbol,
               IEXprice : stockObject.price,
               breakEven: portfolio.current.BEPs[stockObject.symbol],
-              PL: 'ooohhn'
+              PL: (stockObject.price - portfolio.current.BEPs[stockObject.symbol]) * portfolio.current.stocks[stockObject.symbol]
             }
           this.securities.push(stock_display_info)
           }
         })
+        this.$emit('PLcalculated', calculatePortfolioPnL(this.securities))
       }).catch((error) => {
     console.error(error)
   })
