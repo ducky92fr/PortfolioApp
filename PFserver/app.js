@@ -72,7 +72,7 @@ passport.use(strategy)
 app.use('/auth', authRoutes)
 app.use('/api', index)
 
-const clientRoot = path.join(__dirname, '../client/dist')
+const clientRoot = path.join(__dirname, '../portfix/dist')
 app.use('/', express.static(clientRoot))
 app.use(history('index.html', { root: clientRoot }))
 
