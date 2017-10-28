@@ -32,6 +32,7 @@ const stockSchema = new Schema({
     grossProfit: String,
     cash: String,
     debt: String,
+    ttmEPS: String,
     revenuePerShare: String,
     returnOnAssets: String,
     profitMargin: String,
