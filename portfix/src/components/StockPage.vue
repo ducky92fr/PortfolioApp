@@ -7,6 +7,7 @@
         <h2>({{stockInfo.ticker}})</h2>
       </article>
       <marketstats v-if="stockInfo" :stats="stockInfo.stats" :price="stockInfo.price"></marketstats>
+      <valuationratios v-if="stockInfo" :stats="stockInfo.stats"></valuationratios>
       <companyinfo v-if="stockInfo" :company="stockInfo.company"></companyinfo>
     </div>
   </div>
@@ -18,6 +19,7 @@ import { getStockInfoFromDB } from '@/api'
 import NavBar from './tinyComponents/navbar'
 import CompanyInfo from './tinyComponents/StockRelated/CompanyInfo'
 import MarketStats from './tinyComponents/StockRelated/MarketStats'
+import ValuationRatios from './tinyComponents/StockRelated/ValuationRatios'
 export default {
   name: 'PFDetailPage',
   data () {
@@ -36,7 +38,8 @@ export default {
   components: {
     navbar: NavBar,
     companyinfo: CompanyInfo,
-    marketstats: MarketStats
+    marketstats: MarketStats,
+    valuationratios: ValuationRatios
   }
 }
 </script>

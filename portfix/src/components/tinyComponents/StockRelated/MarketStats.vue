@@ -1,4 +1,3 @@
-
 <template>
   <div class='market-stats'>
     <h1>Market Stats</h1>
@@ -7,7 +6,7 @@
       <p>Updated on: {{latestUpdate}}</p>
       <p>YTD High: {{stats.week52high}}</p>
       <p>YTD Low: {{stats.week52low}}</p>
-      <p>YTD Change: {{stats.week52change}}</p>
+      <p>YTD Change: {{stats.ytdChangePercent}}</p>
       <p>Beta: {{stats.beta}}</p>
     </div>
   </div>
