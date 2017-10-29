@@ -289,6 +289,19 @@ router.get('/getfinancials', (req, res, next) => {
   })
 })
 
+// Getting Stock data from database
+router.get('/stock/:ticker', (req, res, next) => {
+  let ticker = req.params.ticker.toUpperCase()
+
+  Stock.findOne({ticker})
+       .then(stock => {
+         res.json(stock)
+       })
+      .catch((error) => {
+        console.error('ERROR FETCHING FINANCIALS, ', error)
+      })
+})
+
 // TEST: populating the Stock db
 router.get('/getfinancials/populate', (req, res, next) => {
   let stocksArray = ['fb']

@@ -136,6 +136,15 @@ export function getAllListedStocksOnIEX () {
   })
 }
 
+// ======= Getting a Stock's financial info =======
+export function getStockInfoFromDB (ticker) {
+  return api.get(`/stock/${ticker}`).then(response => {
+    return response.data
+  }).catch((error) => {
+    console.error(error)
+  })
+}
+
 // ======= Sending requests to IEX via our API =======
 // only pass the part AFTER iextrading.com/1.0/
 function proxyFetchFromIEX (url) {

@@ -8,6 +8,7 @@ import SellStockPage from '@/components/SellStockPage'
 import AddStockPage from '@/components/AddStockPage'
 import Test from '@/components/Test'
 import PFdetailPage from '@/components/PFdetailPage'
+import StockPage from '@/components/StockPage'
 
 Vue.use(Router)
 
@@ -53,6 +54,11 @@ export default new Router({
       path: '/portfolio/:id',
       name: 'PFdetailPage',
       component: PFdetailPage
+    },
+    {
+      path: '/stock/:id',
+      name: 'StockPage',
+      component: StockPage
     }
   ]
 })
