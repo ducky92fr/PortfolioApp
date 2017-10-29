@@ -26,21 +26,21 @@ export default {
 
 <style scoped>
 .market-stats {
-  width: 80vw;
-  margin-top: 5vh;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: start;
 }
+.indicators {
+  margin-top: 5vh;
+  margin-left: 1vw;
+  font-size: 1.4em;
+}
+.indicators p {
+  margin-bottom: 12px;
+}
 h1 {
   font-size: 3em;
   margin: 0px;
-}
-h2 {
-  font-size: 2em;
-  font-size: 1.7em;
-  margin: auto 0px 2px 12px;
-  color: #797575;
 }
 </style>

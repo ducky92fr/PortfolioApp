@@ -17,8 +17,6 @@ export default {
 
 <style scoped>
 .company-info {
-  width: 80vw;
-  margin-top: 5vh;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

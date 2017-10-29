@@ -21,12 +21,18 @@ export default {
 
 <style scoped>
 .valuation-ratios {
-  width: 80vw;
-  margin-top: 5vh;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: start;
+}
+.ratios {
+  margin-top: 5vh;
+  margin-left: 1vw;
+  font-size: 1.4em;
+}
+.ratios p {
+  margin-bottom: 12px;
 }
 h1 {
   font-size: 3em;
