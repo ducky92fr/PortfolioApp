@@ -60,6 +60,7 @@
 </template>
 
 <script>
+import Sifter from 'sifter'
 import { checkUser, addStockToPortfolio, getAllListedStocksOnIEX } from '@/api'
 import NavBar from './tinyComponents/navbar'
 import Datepicker from 'vuejs-datepicker'
@@ -70,6 +71,7 @@ export default {
       errorMessage: null,
       success: null,
       ticker: '',
+      tickerList: null,
       portfolio: this.$route.params.id,
       valid: false,
       user: this.$root.user,
@@ -93,8 +95,24 @@ export default {
       ],
       quantityRules: [
         (v) => !!v || 'Quantity is required',
-      ],
-      tickerList: null
+      ]
+    }
+  },
+  computed: {
+    tickerSuggestions: function () {
+      let tickerList = this.tickerList
+      let sifter = new Sifter(tickerList)
+      var result = sifter.search('appl', {
+        fields: ['symbol', 'name'],
+        sort: [{field: 'symbol', direction: 'asc'}],
+        limit: 5
+      })
+      return result.items.map(item => {
+        return {
+          symbol: tickerList[item.id].symbol,
+          name: tickerList[item.id].name
+          }
+        })
     }
   },
   methods: {
