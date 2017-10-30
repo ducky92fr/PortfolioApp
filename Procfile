@@ -1,2 +1,2 @@
-web: node PFserver/app.js
+web: node app.js
 worker: node PFserver/bin/populateDB.js
