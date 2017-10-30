@@ -11,15 +11,15 @@ function populateDB () {
   let stocksArray = ['FB', 'AAPL', 'GS', 'GOOGL', 'MSFT', 'AMZN']
   let stocks = stocksArray.join()
   let url = `/stock/market/batch?symbols=${stocks}&types=quote,company,stats,peers,financials`
-  console.log('*************** Here 1 ***************')
+  console.log('*************** Here 1 ***************', stocks)
 
-  return IEX.get(url).then(response => {
+  IEX.get(url).then(response => {
     let stocks = Object.keys(response.data)
-    
+
     stocks.forEach((stock) => {
       let stockObj = response.data[stock]
       console.log('*************** Here 2 ***************', stockObj.quote.symbol)
-  
+
       let newStock = new Stock({
         ticker: stockObj.quote.symbol,
         companyName: stockObj.quote.companyName,
