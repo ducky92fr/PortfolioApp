@@ -101,7 +101,7 @@ function populateDB () {
 
     return Promise.all(chunks.map(chunk => {
       let stocks = chunk.join()
-      console.log(stocks)
+
       return populateDB100(stocks)
     }))
   })
