@@ -9,18 +9,9 @@
       <h1>Add a new Stock position</h1>
       <template>
         <v-form class='form' v-model="valid" ref="form" lazy-validation>
-          <v-text-field
-            label="Ticker"
-            v-model="ticker"
-            :rules="tickerRules"
-            required
-          ></v-text-field>
-          <template>
-            <autocomplete :items="items" v-model="item" :get-label="getLabel" :component-item='template' @update-items="updateItems" :min-len="0"
-            placeholder="Ticker"
-            >
+            <autocomplete id="auto" :items="items" v-model="item" :get-label="getLabel" :component-item='template' @update-items="updateItems" :min-len="0"
+            placeholder="Ticker" :wait="50">
             </autocomplete>
-          </template>
           <v-text-field
             label="Portfolio"
             v-model="portfolio"
@@ -140,7 +131,7 @@ export default {
     },
     getLabel (item) {
       this.ticker = item.symbol
-      return item.symbol + ' (' + item.name + ')'
+      if (item.symbol) return item.symbol + ' (' + item.name + ')'
     },
     updateItems (text) {
       let tickerList = this.tickerList
@@ -224,4 +215,15 @@ export default {
     position: absolute;
     z-index: 2;
   }
+
+  /* Autocomplete stylings */
+  #auto {
+      font-size: 1.5em;
+      padding: 10px 15px;
+      box-shadow: none;
+      border: 1px solid #157977;
+      width: calc(100% - 32px);
+      outline: none;
+      background-color: #eee;
+      }
 </style>
