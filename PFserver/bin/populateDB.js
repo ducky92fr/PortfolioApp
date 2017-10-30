@@ -1,5 +1,12 @@
 #! /app/bin/node
+const path = require('path')
+require('dotenv').config({path: path.join(__dirname, '../.env')})
 const axios = require('axios')
+const mongoose = require('mongoose')
+const _ = require('lodash')
+
+mongoose.connect(process.env.MONGODB_URI, { useMongoClient: true })
+
 const Stock = require('../models/Stock')
 
 // IEX base url
@@ -7,20 +14,25 @@ const IEX = axios.create({
   baseURL: 'https://api.iextrading.com/1.0'
 })
 
-function populateDB () {
-  let stocksArray = ['FB', 'AAPL', 'GS', 'GOOGL', 'MSFT', 'AMZN']
-  let stocks = stocksArray.join()
-  let url = `/stock/market/batch?symbols=${stocks}&types=quote,company,stats,peers,financials`
-  console.log('*************** Here 1 ***************', stocks)
+function getAllListedStocksOnIEX () {
+  let url = '/ref-data/symbols'
+  return IEX.get(url).then(response => {
+    return response.data
+  }).catch((error) => {
+    console.error('ERROR FETCHING ALL LISTED STOCKS, ', error)
+  })
+}
 
-  IEX.get(url).then(response => {
+function populateDB100 (stocks) {
+  let url = `/stock/market/batch?symbols=${stocks}&types=quote,company,stats,peers,financials`
+
+  return IEX.get(url).then(response => {
     let stocks = Object.keys(response.data)
 
-    stocks.forEach((stock) => {
+    return Promise.all(stocks.map((stock) => {
       let stockObj = response.data[stock]
-      console.log('*************** Here 2 ***************', stockObj.quote.symbol)
 
-      let newStock = new Stock({
+      let newStock = {
         ticker: stockObj.quote.symbol,
         companyName: stockObj.quote.companyName,
         sector: stockObj.quote.sector,
@@ -67,30 +79,33 @@ function populateDB () {
           day5ChangePercent: stockObj.stats.day5ChangePercent
         },
         peers: stockObj.peers
-      })
+      }
 
-      Stock.findOneAndUpdate(
+      return Stock.findOneAndUpdate(
         {ticker: newStock.ticker},
         newStock,
         {upsert: true, new: true}
-      ).then((arg) =>
-        console.log('done, ', arg)
       ).catch((error) => {
         console.error('Error saving stock, ', error)
       })
-    })
+    }))
   }).catch((error) => {
     console.error('ERROR FETCHING FINANCIALS, ', error)
   })
 }
 
-function sayHello () {
-  console.log('*************************************')
-  console.log('*************** HELLO ***************')
-  console.log('*************************************')
+function populateDB () {
+  return getAllListedStocksOnIEX().then(response => {
+    let stocksArray = response.map(item => item.symbol)
+    let chunks = _.chunk(stocksArray, 100)
+
+    return Promise.all(chunks.map(chunk => {
+      let stocks = chunk.join()
+      console.log(stocks)
+      return populateDB100(stocks)
+    }))
+  })
 }
 
-sayHello()
 populateDB()
-
-process.exit()
+.then(() => mongoose.connection.close())
