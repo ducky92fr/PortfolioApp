@@ -18,7 +18,8 @@ function populateDB () {
     
     stocks.forEach((stock) => {
       let stockObj = response.data[stock]
-
+      console.log('*************** Here 2 ***************', stockObj.quote.symbol)
+  
       let newStock = new Stock({
         ticker: stockObj.quote.symbol,
         companyName: stockObj.quote.companyName,
