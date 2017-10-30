@@ -160,3 +160,9 @@ export function getLastPriceFromIEX (stocksArray) {
   let url = '/tops/last?symbols=' + stocksArray.join()
   return proxyFetchFromIEX(url)
 }
+
+// ======= Getting the 5Y chart from IEX for a given stock =======
+export function get5YChartFromIEX (ticker) {
+  let url = `/stock/${ticker}/chart/5y`
+  return proxyFetchFromIEX(url)
+}

@@ -11,6 +11,7 @@
         <valuationratios v-if="stockInfo" :stats="stockInfo.stats" class='valuationratios'></valuationratios>
       </article>
       <companyinfo v-if="stockInfo" :company="stockInfo.company" class='companyinfo'></companyinfo>
+      <chart :ticker="ticker"></chart>
     </div>
   </div>
 </template>
@@ -22,6 +23,7 @@ import NavBar from './tinyComponents/navbar'
 import CompanyInfo from './tinyComponents/StockRelated/CompanyInfo'
 import MarketStats from './tinyComponents/StockRelated/MarketStats'
 import ValuationRatios from './tinyComponents/StockRelated/ValuationRatios'
+import Chart5Y from './tinyComponents/StockRelated/Chart5Y'
 export default {
   name: 'PFDetailPage',
   data () {
@@ -33,7 +35,6 @@ export default {
   created () {
     checkUser(this.$root)
     getStockInfoFromDB(this.ticker).then(stockInfo => {
-      console.log(stockInfo)
       this.stockInfo = stockInfo
     })
   },
@@ -41,7 +42,8 @@ export default {
     navbar: NavBar,
     companyinfo: CompanyInfo,
     marketstats: MarketStats,
-    valuationratios: ValuationRatios
+    valuationratios: ValuationRatios,
+    chart: Chart5Y
   }
 }
 </script>
