@@ -2,7 +2,7 @@
   <div class='securitiesWidget'>
     <h1>Stocks</h1>
     <p v-if='portfolio'> Portfolio last changed on {{portfolio.current.date}}</p>
-    <div class='securities'>
+    <div v-if='portfolio' class='securities'>
         <template>
           <v-data-table
               v-bind:headers="headers"
