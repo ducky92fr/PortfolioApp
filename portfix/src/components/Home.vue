@@ -2,8 +2,8 @@
   <div>
     <navbar></navbar>
     <div class="homePage">
-      <h1>{{ msg }}</h1>
-      <portfolio-widget class='PFwidget'></portfolio-widget>
+      <portfolio-widget v-on:gotStocks="displayNews" class="PFwidget"></portfolio-widget>
+      <newswidget class="newsWidget" :stocks="allStocksArray"></newswidget>
     </div>
   </div>
 </template>
@@ -11,16 +11,23 @@
 <script>
 import NavBar from './tinyComponents/navbar'
 import PortfolioWidget from './tinyComponents/PortfolioWidget'
+import NewsWidget from './tinyComponents/NewsWidget'
 export default {
   name: 'Home',
   data () {
     return {
-      msg: 'Home'
+      allStocksArray: null
     }
   },
   components: {
     navbar: NavBar,
-    portfolioWidget: PortfolioWidget
+    portfolioWidget: PortfolioWidget,
+    newswidget: NewsWidget
+  },
+  methods: {
+    displayNews: function (array) {
+      this.allStocksArray = array
+    }
   }
 }
 </script>

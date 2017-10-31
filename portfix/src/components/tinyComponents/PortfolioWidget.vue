@@ -27,6 +27,11 @@ export default {
     checkUser(this.$root)
     getUserPortfolios().then(portfolios => {
       this.portfolios = portfolios
+      let allStocksArray = []
+      portfolios.forEach(portfolio => {
+        allStocksArray = allStocksArray.concat(Object.keys(portfolio.current.stocks))
+      })
+      this.$emit('gotStocks', allStocksArray)
     }).catch((error) => {
     console.error(error)
   })
