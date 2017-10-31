@@ -9,9 +9,9 @@
       <h1>Add a new Stock position</h1>
       <template>
         <v-form class='form' v-model="valid" ref="form" lazy-validation>
-            <autocomplete id="auto" :items="items" v-model="item" :get-label="getLabel" :component-item='template' @update-items="updateItems" :min-len="0"
-            placeholder="Ticker" :wait="50">
-            </autocomplete>
+          <autocomplete id="auto" :items="items" v-model="item" :get-label="getLabel" :component-item='template' @update-items="updateItems" :min-len="0"
+          placeholder="Ticker" :wait="50">
+          </autocomplete>
           <v-text-field
             label="Portfolio"
             v-model="portfolio"
@@ -182,7 +182,7 @@ export default {
   }
   form {
     margin-top: 5vh;
-    width: 30%;
+    width: 320px;
   }
   h1 {
     font-weight: normal;
@@ -215,15 +215,25 @@ export default {
     position: absolute;
     z-index: 2;
   }
-
   /* Autocomplete stylings */
   #auto {
-      font-size: 1.5em;
-      padding: 10px 15px;
-      box-shadow: none;
-      border: 1px solid #157977;
-      width: calc(100% - 32px);
-      outline: none;
-      background-color: #eee;
-      }
+    font-size: 1.5em;
+    box-shadow: none;
+    border-bottom: 1px solid #919191;
+    margin-bottom: 30px;
+    width: 320px;
+    outline: none;
+  }
+  .v-autocomplete-list {
+    width: 100%;
+    text-align: left;
+    border: none;
+    border-top: none;
+    max-height: 400px;
+    overflow-y: auto;
+    border-bottom: 1px solid #157977;
+  }
+  #auto > div > .v-autocomplete-input {
+    width: 320px;    
+  }
 </style>
