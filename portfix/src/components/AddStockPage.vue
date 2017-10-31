@@ -60,7 +60,7 @@
 import Sifter from 'sifter'
 import Autocomplete from 'v-autocomplete'
 import AutocompleteTemplate from './tinyComponents/AutocompleteTemplate'
-import { checkUser, addStockToPortfolio, getAllListedStocksOnIEX } from '@/api'
+import { checkUser, addStockToPortfolio, getAllListedStocksOnIEX, getLastPriceFromIEX } from '@/api'
 import NavBar from './tinyComponents/navbar'
 import Datepicker from 'vuejs-datepicker'
 export default {
@@ -131,6 +131,9 @@ export default {
     },
     getLabel (item) {
       this.ticker = item.symbol
+       getLastPriceFromIEX([item.symbol]).then(response => {
+         this.price = response[0].price
+       })
       if (item.symbol) return item.symbol + ' (' + item.name + ')'
     },
     updateItems (text) {
