@@ -1,7 +1,7 @@
 <template>
   <div class="navbar">
     <router-link to="/">
-    <h1>PortfolioApp</h1>
+    <h1>StockAwesome</h1>
     </router-link>
     <div class='dropdown-menu'>
       <button>Plus</button>
