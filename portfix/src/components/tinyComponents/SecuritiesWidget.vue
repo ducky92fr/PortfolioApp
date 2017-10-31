@@ -3,12 +3,6 @@
     <h1>Stocks</h1>
     <p v-if='portfolio'> Portfolio last changed on {{portfolio.current.date}}</p>
     <div class='securities'>
-      <div class='singleSEC' v-for="stock in stocks" :key="stock">
-        <h2 v-if="stock != 'PFAPPCASH'">{{stock}}</h2>
-        <h2 v-else>Cash</h2>
-        <h2 class="SECdata">Quantity: {{portfolio.current.stocks[stock]}}</h2>
-        <h2 v-if='stockPrices'>{{stockPrices[stock]}}</h2>
-      </div>
         <template>
           <v-data-table
               v-bind:headers="headers"
@@ -18,6 +12,7 @@
             >
           <template slot="items" slot-scope="props">
             <td>{{ props.item.ticker }}</td>
+            <td class="text-xs-right">{{ props.item.quantity }}</td>            
             <td class="text-xs-right">{{ props.item.IEXprice }}</td>
             <td class="text-xs-right">{{ props.item.breakEven }}</td>
             <td class="text-xs-right">{{ props.item.PL }}</td>
@@ -39,8 +34,9 @@ export default {
       stockPrices: null,
       headers: [
         { text: 'Ticker', value: 'ticker', align: 'left' },
+        { text: 'Quantity', value: 'quantity'},
         { text: 'IEX Price', value: 'IEXprice' },
-        { text: 'Bought At/Break-Even', value: 'breakEven' },
+        { text: 'Break-Even', value: 'breakEven' },
         { text: 'P&L', value: 'PL' },
       ],
       securities: []
@@ -66,6 +62,7 @@ export default {
           if (stockObject) {
             let stock_display_info = {
               ticker: stockObject.symbol,
+              quantity: portfolio.current.stocks[stockObject.symbol],
               IEXprice : stockObject.price,
               breakEven: portfolio.current.BEPs[stockObject.symbol],
               PL: (stockObject.price - portfolio.current.BEPs[stockObject.symbol]) * portfolio.current.stocks[stockObject.symbol]
