@@ -13,12 +13,6 @@
           placeholder="Ticker" :wait="50">
           </autocomplete>
           <v-text-field
-            label="Portfolio"
-            v-model="portfolio"
-            :rules="portfolioRules"
-            required
-          ></v-text-field>
-          <v-text-field
             label="At Date"
             v-model="state.date"
             :rules="dateRules"
@@ -74,7 +68,6 @@ export default {
       item: {name: '', symbol:''},
       items: null,
       template: AutocompleteTemplate,
-      portfolio: this.$route.params.id,
       valid: false,
       user: this.$root.user,
       price: null,
@@ -104,7 +97,7 @@ export default {
     submit () {
       addStockToPortfolio({
         ticker: this.ticker,
-        portfolioID: this.portfolio,
+        portfolioID: this.$route.params.id,
         date: this.state.date,
         price: this.price,
         quantity: this.quantity
