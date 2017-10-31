@@ -68,6 +68,7 @@ export default {
       item: {name: '', symbol:''},
       items: null,
       template: AutocompleteTemplate,
+      portfolio: this.$route.params.id,
       valid: false,
       user: this.$root.user,
       price: null,
@@ -97,7 +98,7 @@ export default {
     submit () {
       addStockToPortfolio({
         ticker: this.ticker,
-        portfolioID: this.$route.params.id,
+        portfolioID: this.portfolio,
         date: this.state.date,
         price: this.price,
         quantity: this.quantity
