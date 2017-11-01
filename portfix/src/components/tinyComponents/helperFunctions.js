@@ -13,3 +13,8 @@ export function calculatePortfolioPnL (securities) {
 export function calculateSecurityPnL (security) {
   return security.IEXprice - security.breakEven
 }
+
+// Function that formats the P&L
+export function formatPL (PL) {
+  return (PL * 100).toFixed(2) + '%'
+}

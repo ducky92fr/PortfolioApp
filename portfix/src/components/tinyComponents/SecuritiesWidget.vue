@@ -31,7 +31,7 @@
 
 <script>
 import { checkUser, getUserPortfolio, getLastPriceFromIEX } from '@/api'
-import { calculatePortfolioPnL, calculateSecurityPnL } from './helperFunctions'
+import { calculatePortfolioPnL, calculateSecurityPnL, formatPL } from './helperFunctions'
 export default {
   name: 'SecuritiesWidget',
   data () {
@@ -69,9 +69,9 @@ export default {
             let stock_display_info = {
               ticker: stockObject.symbol,
               quantity: portfolio.current.stocks[stockObject.symbol],
-              IEXprice : stockObject.price,
-              breakEven: portfolio.current.BEPs[stockObject.symbol],
-              PL: (stockObject.price - portfolio.current.BEPs[stockObject.symbol]) * portfolio.current.stocks[stockObject.symbol]
+              IEXprice : stockObject.price.toFixed(2),
+              breakEven: portfolio.current.BEPs[stockObject.symbol].toFixed(2),
+              PL: formatPL((stockObject.price - portfolio.current.BEPs[stockObject.symbol]) / stockObject.price)
             }
           this.securities.push(stock_display_info)
           }
