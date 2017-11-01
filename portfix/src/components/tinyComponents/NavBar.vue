@@ -41,9 +41,10 @@ export default {
   .navbar {
     width: 100vw;
     height: 10vh;
-    background-color: gainsboro;
+    background-color: #f3f3f3;
     display: flex;
     align-items: center;
+    box-shadow: 0px 2px 5px 0px rgba(95, 95, 95, 0.2);
   }
   a {
     text-decoration: none;
@@ -72,7 +73,7 @@ export default {
   }
   /* Dropdown Button */
   .dropdownmenu button {
-    background-color: gainsboro;
+    background-color: #f3f3f3;
     padding: 0px;
     margin: 0px;
     font-size: 1.8em;
@@ -95,12 +96,12 @@ export default {
     display: block;
   } 
   .dropdown-content p:hover {
-    background-color: #f1f1f1
+    background-color: #efefef
   }
   .dropdownmenu:hover .dropdown-content {
     display: block;
   }
   .dropdownmenu:hover button {
-    background-color: #d4d4d4;
+    background-color: #efefef;
   }
 </style>
