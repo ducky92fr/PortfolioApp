@@ -1,22 +1,25 @@
 <template>
   <div class='transactionWidget'>
     <h1>Transactions</h1>
-    <div class='transactions'>
-    <template>
-      <v-data-table
-          v-bind:headers="headers"
-          :items="transactions"
-          hide-actions
-          class="elevation-1"
-        >
-        <template slot="items" slot-scope="props">
-          <td>{{ props.item.affectedStocks[0].ticker }}</td>
-          <td class="text-xs-right">{{ props.item.date }}</td>
-          <td class="text-xs-right">{{ props.item.affectedStocks[0].change }}</td>
-          <td class="text-xs-right">{{ props.item.affectedStocks[0].atPrice }}</td>
-        </template>
-      </v-data-table>
-    </template>
+    <div class='transactions' id='transactionstable'>
+      <table class="table transactions-table">
+        <thead>
+          <tr>
+            <th>Ticked</th>
+            <th>Date</th>
+            <th>Qt Change</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in transactions" :key="item.date">
+            <td>{{ item.affectedStocks[0].ticker }}</td>
+            <td>{{ item.date }}</td>
+            <td>{{ item.affectedStocks[0].change }}</td>
+            <td>{{ item.affectedStocks[0].atPrice }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
@@ -27,12 +30,6 @@ export default {
   name: 'TransactionWidget',
   data () {
     return {
-      headers: [
-        { text: 'Ticker', value: 'ticker', align: 'left', sortable: false },
-        { text: 'Date', value:'date' },
-        { text: 'Change', value:'change' },
-        { text: 'At Price', value:'atPrice' },
-      ],
       transactions: []
     }
   },
@@ -63,4 +60,19 @@ export default {
 .transactions {
   height: 70%;
 }
+#transactionstable table {
+  table-layout: fixed;
+  overflow-y: auto;
+  width: 100%;
+}
+#transactionstable table td {
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: 400;
+  width: 70px;
+  height: auto;
+  margin: 15px 0px;
+  border: none;
+}
+
 </style>

@@ -38,13 +38,6 @@ export default {
     return {
       portfolio: null,
       stockPrices: null,
-      headers: [
-        { text: 'Ticker', value: 'ticker', align: 'left' },
-        { text: 'Quantity', value: 'quantity'},
-        { text: 'IEX Price', value: 'IEXprice' },
-        { text: 'Break-Even', value: 'breakEven' },
-        { text: 'P&L', value: 'PL' },
-      ],
       securities: []
     }
   },
