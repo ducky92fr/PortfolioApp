@@ -7,10 +7,10 @@
         <p>Current value {{portfolio.current.stocks.PFAPPCASH}}</p>
         <p>Change <span v-if="portfolioPL">{{portfolioPL}}</span></p>
       </section>
-    </div>
-    <div class='row'>
-      <button @click="redirectToAddStock()">Add a Stock position</button>
-      <button @click="redirectToSellStock()">Sell a Stock</button>
+      <section class='PFactions'>
+        <button @click="redirectToAddStock()" class='buy'>Buy Stock</button>
+        <button @click="redirectToSellStock()" class='sell'>Sell Stock</button>
+      </section>
     </div>
     <div class='row'>
       <securitieswidget :portfolioID='PFid' class='securitiesWidget' v-on:PLcalculated='updatePL($event)'></securitieswidget>
@@ -72,7 +72,9 @@ export default {
   align-items: center;
 }
 .currentDashboard {
-  margin-top: 5vh;
+  margin: 5vh 0vw;
+  margin-left: 20vw;
+  min-height: 110px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -83,8 +85,10 @@ export default {
 }
 .currentDashboard h1 {
   font-size: 3em;
+  margin-bottom: 0px;  
+  margin-right: 12px;
 }
-.PFvalue {
+.PFvalue, .PFactions {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -93,11 +97,34 @@ export default {
   margin-left: 1vw;
   padding: 1vh 1vw;
 }
+.PFvalue {
+  align-items: flex-start;
+  min-height: 65px;
+  margin-bottom: 0px;
+}
 .PFvalue  p {
   margin: 0px;
   font-weight: 600;
   font-size: 1.3em;
   color: #fffbfb;
+}
+.PFactions {
+  flex-direction: row;
+  padding: 0px;
+  margin-left: 3vw;
+}
+.PFactions button {
+  font-size: 1.3em;
+  margin: 0px 7px;
+  padding: 6px 27px;
+  border-radius: 3px;
+  color: #FFFFFF;
+}
+.PFactions .buy {
+  background-color: #3a7aef;
+}
+.PFactions .sell {
+  background-color: #9520eed4;
 }
 .row {
   display: flex;
@@ -113,18 +140,5 @@ export default {
 .transactionWidget, .securitiesWidget {
   height: 70vh;
   width: 48%;
-}
-button {
-  font-size: 1.5em;
-  font-weight: 400;
-  background-color: #4296EC;
-  width: 230px;
-  height: 50px;
-  min-height: 50px;
-  margin: 1vh 0px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-family: Roboto;
-  color: #FFFFFF;
 }
 </style>

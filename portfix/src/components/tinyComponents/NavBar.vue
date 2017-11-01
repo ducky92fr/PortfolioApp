@@ -69,7 +69,7 @@ export default {
     position: relative;
     display: inline-block;
     width: 10vw;
-    height: 10vh;
+    height: 7vh;
   }
   /* Dropdown Button */
   .dropdownmenu button {
@@ -77,7 +77,7 @@ export default {
     padding: 0px;
     margin: 0px;
     font-size: 1.8em;
-    height: 10vh;
+    height: 7vh;
     width: 10vw;
     border: none;
     cursor: pointer;
