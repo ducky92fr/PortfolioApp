@@ -3,8 +3,10 @@
     <navbar></navbar>
     <div class='currentDashboard' v-if="portfolio">
       <h1 v-if="portfolio">{{portfolio.name}}</h1>
-      <p>Current value: {{portfolio.current.stocks.PFAPPCASH}}</p>
-      <p v-if="portfolioPL">P&L: {{portfolioPL}}</p>
+      <section class='notification is-info PFvalue'>
+        <p>Current value {{portfolio.current.stocks.PFAPPCASH}}</p>
+        <p>Change <span v-if="portfolioPL">{{portfolioPL}}</span></p>
+      </section>
     </div>
     <div class='row'>
       <button @click="redirectToAddStock()">Add a Stock position</button>
@@ -20,6 +22,7 @@
 <script>
 import { checkUser } from '@/api'
 import { getUserPortfolio } from '@/api'
+import { formatPL } from './tinyComponents/helperFunctions'
 import NavBar from './tinyComponents/navbar'
 import TransactionWidget from './tinyComponents/TransactionWidget'
 import securitiesWidget from './tinyComponents/securitiesWidget'
@@ -51,7 +54,7 @@ export default {
       this.$router.push('/portfolio/sellStock/' + this.PFid)
     },
     updatePL: function (event) {
-      this.portfolioPL = event
+      this.portfolioPL = formatPL(event)
     }
   },
   components: {
@@ -80,6 +83,21 @@ export default {
 }
 .currentDashboard h1 {
   font-size: 3em;
+}
+.PFvalue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  margin-left: 1vw;
+  padding: 1vh 1vw;
+}
+.PFvalue  p {
+  margin: 0px;
+  font-weight: 600;
+  font-size: 1.3em;
+  color: #fffbfb;
 }
 .row {
   display: flex;
