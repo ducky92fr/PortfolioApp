@@ -4,10 +4,14 @@ import Vue from 'vue'
 import Vuetify from 'vuetify'
 import App from './App'
 import router from './router'
+import AsyncComputed from 'vue-async-computed'
 
-// Vuetify CSS
+
+// CSS
+import 'bulma/css/bulma.css'
 import('../node_modules/vuetify/dist/vuetify.min.css')
 
+Vue.use(AsyncComputed)
 Vue.use(Vuetify)
 Vue.config.productionTip = false
 

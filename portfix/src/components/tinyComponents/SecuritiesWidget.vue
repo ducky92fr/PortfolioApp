@@ -1,21 +1,23 @@
 <template>
   <div class='securitiesWidget'>
-    <h1>Stocks</h1>
-    <p v-if='portfolio'> Portfolio last changed on {{portfolio.current.date}}</p>
-    <div v-if='portfolio' class='securities'>
+    <article class='title'>
+      <h1>Stocks</h1>
+      <p v-if='portfolio'> Portfolio last changed on {{portfolio.current.date}}</p>
+    </article>
+    <div v-if='portfolio' class='securities' id='securitiestable'>
         <template>
           <v-data-table
               v-bind:headers="headers"
               :items="securities"
               hide-actions
-              class="elevation-1"
+              class="table"
             >
           <template slot="items" slot-scope="props">
             <td>{{ props.item.ticker }}</td>
-            <td class="text-xs-right">{{ props.item.quantity }}</td>            
-            <td class="text-xs-right">{{ props.item.IEXprice }}</td>
-            <td class="text-xs-right">{{ props.item.breakEven }}</td>
-            <td class="text-xs-right">{{ props.item.PL }}</td>
+            <td style="width:50px" class="text-xs-right">{{ props.item.quantity }}</td>            
+            <td style="width:50px" class="text-xs-right">{{ props.item.IEXprice }}</td>
+            <td style="width:50px" class="text-xs-right">{{ props.item.breakEven }}</td>
+            <td style="width:50px" class="text-xs-right">{{ props.item.PL }}</td>
           </template>
         </v-data-table>
       </template>
@@ -86,28 +88,27 @@ export default {
   font-size: 3em;
   margin: 1vh 2vw;
 }
-.singleSEC {
-  width: 50vw;
-  background-color: #e8e8e8;
-  height: 40px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 1vh 1vw;
-  margin: 2vh 2vw;
+.title {
+  height: 30%;
+  box-sizing: border-box;
 }
-.singleSEC h2 {
-  font-size: 1.6em;
+.title p {
+  font-size: 1em;
   font-weight: 400;
-  margin: 0px;
 }
-.singleSEC .SECdata {
-  margin-left: auto;
-  margin-right: 1vw;
+.securities {
+  height: 70%;
 }
-.singleSEC {
-  margin-left: auto;
-  margin-right: 1vw;
+#securitiestable td {
+  table-layout: fixed;
+  padding: 0px 15px;
+  width: 30px;
+  /* background-color: red; */
+}
+#securitiestable .table table {
+  table-layout: fixed;
+}
+.table {
+  table-layout: fixed;  
 }
 </style>

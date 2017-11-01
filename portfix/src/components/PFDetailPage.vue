@@ -1,15 +1,19 @@
 <template>
   <div class='main'>
     <navbar></navbar>
-    <h1 v-if="portfolio">{{portfolio.name}}</h1>
-    <button @click="redirectToAddStock()">Add a Stock position</button>
-    <button @click="redirectToSellStock()">Sell a Stock</button>
     <div class='currentDashboard' v-if="portfolio">
+      <h1 v-if="portfolio">{{portfolio.name}}</h1>
       <p>Current value: {{portfolio.current.stocks.PFAPPCASH}}</p>
       <p v-if="portfolioPL">P&L: {{portfolioPL}}</p>
     </div>
-    <securitieswidget :portfolioID='PFid' class='securitiesWidget' v-on:PLcalculated='updatePL($event)'></securitieswidget>
-    <transactionwidget :portfolioID='PFid' class='transactionWidget'></transactionwidget>
+    <div class='row'>
+      <button @click="redirectToAddStock()">Add a Stock position</button>
+      <button @click="redirectToSellStock()">Sell a Stock</button>
+    </div>
+    <div class='row'>
+      <securitieswidget :portfolioID='PFid' class='securitiesWidget' v-on:PLcalculated='updatePL($event)'></securitieswidget>
+      <transactionwidget :portfolioID='PFid' class='transactionWidget'></transactionwidget>
+    </div>
   </div>
 </template>
 
@@ -29,7 +33,7 @@ export default {
     }
   },
   // When component is created:
-  created () {
+  created () { 
     // Check if the user is logged in
     checkUser(this.$root)
     // Get the user's Portfolio info from the server
@@ -64,15 +68,33 @@ export default {
   flex-direction: column;
   align-items: center;
 }
-h1 {
-  padding-top: 10vh;
-  font-size: 3em;
-}
 .currentDashboard {
   margin-top: 5vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 .currentDashboard p {
   font-size: 1.5em;
+}
+.currentDashboard h1 {
+  font-size: 3em;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  margin-left: 8vw;
+  margin-right: 8vw;
+  
+}
+.securitiesWidget {
+  margin-right: 4vw;
+}
+.transactionWidget, .securitiesWidget {
+  height: 70vh;
+  /* width: 40vw; */
+  overflow-y: auto;
 }
 button {
   font-size: 1.5em;
@@ -86,8 +108,5 @@ button {
   border-radius: 5px;
   font-family: Roboto;
   color: #FFFFFF;
-}
-.transactionWidget {
-  height: 40vh;
 }
 </style>

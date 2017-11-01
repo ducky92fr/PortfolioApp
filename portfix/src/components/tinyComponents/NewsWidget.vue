@@ -15,9 +15,12 @@ export default {
       fakenews: []
     }
   },
-  computed: {
+  asyncComputed: {
     news: function () {
-      return 1
+      return getNewsFromIEX(this.stocks).then(newsObject => {
+        console.log(newsObject)
+        return newsObject
+      })
     }
   },
   props: ['stocks']

@@ -56,26 +56,11 @@ export default {
 <style scoped>
 .transactionWidget h1 {
   font-size: 3em;
-  margin: 1vh 2vw;
+  margin: 1vh 2vw 0vh 2vw;
+  height: 30%;
+  box-sizing: border-box;
 }
-.singleTR {
-  width: 50vw;
-  background-color: #e8e8e8;
-  height: 30px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 1vh 1vw;
-  margin: 2vh 2vw;
-}
-.singleTR h2 {
-  font-size: 1.6em;
-  font-weight: 400;
-  margin: 0px;
-}
-.singleTR {
-  margin-left: auto;
-  margin-right: 1vw;
+.transactions {
+  height: 70%;
 }
 </style>
