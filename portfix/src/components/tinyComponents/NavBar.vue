@@ -3,7 +3,7 @@
     <router-link to="/">
     <h1>StockAwesome</h1>
     </router-link>
-    <div class='dropdown-menu'>
+    <div class='dropdownmenu'>
       <button>Plus</button>
       <div class="dropdown-content">
         <router-link to="/addportfolio">
@@ -63,7 +63,7 @@ export default {
     margin: 0px 4vw 0px 3vw;
     font-weight: 400;
   }
-  .dropdown-menu {
+  .dropdownmenu {
     margin: 0px 1vw 0px auto;
     position: relative;
     display: inline-block;
@@ -71,7 +71,7 @@ export default {
     height: 10vh;
   }
   /* Dropdown Button */
-  .dropdown-menu button {
+  .dropdownmenu button {
     background-color: gainsboro;
     padding: 0px;
     margin: 0px;
@@ -97,10 +97,10 @@ export default {
   .dropdown-content p:hover {
     background-color: #f1f1f1
   }
-  .dropdown-menu:hover .dropdown-content {
+  .dropdownmenu:hover .dropdown-content {
     display: block;
   }
-  .dropdown-menu:hover button {
+  .dropdownmenu:hover button {
     background-color: #d4d4d4;
   }
 </style>

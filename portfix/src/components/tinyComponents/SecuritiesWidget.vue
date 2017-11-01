@@ -5,22 +5,26 @@
       <p v-if='portfolio'> Portfolio last changed on {{portfolio.current.date}}</p>
     </article>
     <div v-if='portfolio' class='securities' id='securitiestable'>
-        <template>
-          <v-data-table
-              v-bind:headers="headers"
-              :items="securities"
-              hide-actions
-              class="table"
-            >
-          <template slot="items" slot-scope="props">
-            <td>{{ props.item.ticker }}</td>
-            <td style="width:50px" class="text-xs-right">{{ props.item.quantity }}</td>            
-            <td style="width:50px" class="text-xs-right">{{ props.item.IEXprice }}</td>
-            <td style="width:50px" class="text-xs-right">{{ props.item.breakEven }}</td>
-            <td style="width:50px" class="text-xs-right">{{ props.item.PL }}</td>
-          </template>
-        </v-data-table>
-      </template>
+      <table class="table securities-table">
+        <thead>
+          <tr>
+            <th class='col-1'>Ticker</th>
+            <th class='col-2'>Quantity</th>
+            <th class='col-3'>Price</th>
+            <th class='col-4'>Break-Even</th>
+            <th class='col-5'>Profit/Loss</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in securities" :key="item.ticker">
+            <td>{{ item.ticker }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.IEXprice }}</td>
+            <td>{{ item.breakEven }}</td>
+            <td>{{ item.PL }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
@@ -99,16 +103,27 @@ export default {
 .securities {
   height: 70%;
 }
-#securitiestable td {
+#securitiestable table {
   table-layout: fixed;
-  padding: 0px 15px;
-  width: 30px;
-  /* background-color: red; */
+  overflow-y: auto;
+  width: 100%;
 }
-#securitiestable .table table {
-  table-layout: fixed;
+#securitiestable table td {
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: 400;
+  width: 70px;
+  height: auto;
+  margin: 15px 0px;
+  border: none;
 }
-.table {
-  table-layout: fixed;  
+
+#securitiestable table .col-1,
+#securitiestable table .col-2,
+#securitiestable table .col-3,
+#securitiestable table .col-4,
+#securitiestable table .col-5,
+ {
+  /* width: 50px; */
 }
 </style>

@@ -84,17 +84,17 @@ export default {
 .row {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   margin-left: 8vw;
   margin-right: 8vw;
-  
+  width: 84vw;
 }
 .securitiesWidget {
-  margin-right: 4vw;
+  margin-right: 4%;
 }
 .transactionWidget, .securitiesWidget {
   height: 70vh;
-  /* width: 40vw; */
-  overflow-y: auto;
+  width: 48%;
 }
 button {
   font-size: 1.5em;
