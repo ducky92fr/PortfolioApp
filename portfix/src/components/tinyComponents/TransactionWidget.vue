@@ -26,6 +26,7 @@
 
 <script>
 import { checkUser, getPortfolioTransactions } from '@/api'
+import { formatDates } from './helperFunctions'
 export default {
   name: 'TransactionWidget',
   data () {
@@ -43,6 +44,9 @@ export default {
     checkUser(this.$root)
     getPortfolioTransactions(this.pfID).then(transactions => {
       this.transactions = transactions
+      transactions.forEach(transaction => {
+        transaction.date = formatDates(transaction.date)
+      })
     }).catch((error) => {
     console.error(error)
   })
@@ -65,7 +69,7 @@ export default {
   overflow-y: auto;
   width: 100%;
 }
-#transactionstable table td {
+#transactionstable table td, #transactionstable table th {
   text-align: center;
   font-size: 1.2em;
   font-weight: 400;

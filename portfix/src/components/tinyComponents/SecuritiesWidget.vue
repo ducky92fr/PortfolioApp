@@ -21,7 +21,7 @@
             <td>{{ item.quantity }}</td>
             <td>{{ item.IEXprice }}</td>
             <td>{{ item.breakEven }}</td>
-            <td>{{ item.PL }}</td>
+            <td>{{ item.formattedPL }}</td>
           </tr>
         </tbody>
       </table>
@@ -64,7 +64,8 @@ export default {
               quantity: portfolio.current.stocks[stockObject.symbol],
               IEXprice : stockObject.price.toFixed(2),
               breakEven: portfolio.current.BEPs[stockObject.symbol].toFixed(2),
-              PL: formatPL((stockObject.price - portfolio.current.BEPs[stockObject.symbol]) / stockObject.price)
+              formattedPL: formatPL((stockObject.price - portfolio.current.BEPs[stockObject.symbol]) / stockObject.price),
+              PL: (stockObject.price - portfolio.current.BEPs[stockObject.symbol]) / stockObject.price
             }
           this.securities.push(stock_display_info)
           }
@@ -101,7 +102,7 @@ export default {
   overflow-y: auto;
   width: 100%;
 }
-#securitiestable table td {
+#securitiestable table td, #securitiestable table th {
   text-align: center;
   font-size: 1.2em;
   font-weight: 400;

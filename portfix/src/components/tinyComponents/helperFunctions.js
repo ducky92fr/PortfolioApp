@@ -1,3 +1,4 @@
+import dateFormat from 'dateformat'
 
 // Function that takes in the securities in the Portfolio and returns
 // the portfolio P&L
@@ -17,4 +18,9 @@ export function calculateSecurityPnL (security) {
 // Function that formats the P&L
 export function formatPL (PL) {
   return (PL * 100).toFixed(2) + '%'
+}
+
+// Function that formats Dates
+export function formatDates (date) {
+  return dateFormat(date, 'd mmm yyyy')
 }
