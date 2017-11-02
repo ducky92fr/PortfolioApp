@@ -4,12 +4,12 @@
     <section class='news-section'>
       <article v-for='article in news' :key='article.url' class="message is-info">
         <div class='message-header news-title'>
-          <h1>{{titleFormat(article.headline)}}</h1>
+          <h1><a :href="article.url" target="_blank">{{titleFormat(article.headline)}}</a></h1>
           <p>{{date(article.datetime)}}</p>  
         </div>
         <div class='message-body news-body'>
           <p>
-            <span>{{article.headline}} - </span>          
+            <span><a :href="article.url" target="_blank">{{article.headline}}</a> - </span>          
             {{article.summary}}
           </p>
         </div>
@@ -59,6 +59,11 @@ export default {
   padding: 23px 20px 20px 20px;
   margin-top: auto;
   background: #2196f3d1;
+  border: 1px solid #6db0ea;
+  box-shadow: 0px 1px 3px 1px rgb(96, 99, 101);
+}
+#newsWidget a {
+  text-decoration: none;
 }
 h1 {
   font-size: 2em;
@@ -104,6 +109,8 @@ h1 {
 .news-section article .news-title h1 {
   font-weight: 600;
   font-size: 1.4em;
+  height: 60%;
+  line-height: 27px;
   text-align: left;
   overflow-y: hidden;
   margin: 0px;
@@ -111,6 +118,7 @@ h1 {
 .news-section article .news-title p {
   font-weight: 600;
   font-size: 1.3em;
+  height: 40%;
   font-style: italic;
   text-align: left;
   overflow-y: hidden;

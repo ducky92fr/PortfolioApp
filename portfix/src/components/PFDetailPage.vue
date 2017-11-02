@@ -102,12 +102,13 @@ export default {
   align-items: flex-start;
   min-height: 65px;
   margin-bottom: 0px;
+  background-color: #f3f3f3;
+  color: #525252;
 }
 .PFvalue  p {
   margin: 0px;
   font-weight: 600;
   font-size: 1.3em;
-  color: #fffbfb;
 }
 .PFactions {
   flex-direction: row;
