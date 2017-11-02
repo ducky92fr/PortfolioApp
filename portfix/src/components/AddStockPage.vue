@@ -6,7 +6,7 @@
   <div>
     <navbar></navbar>
     <div class="addStockPage">
-      <h1>Add a new Stock position</h1>
+      <h1>Buy Stock</h1>
       <template>
         <v-form class='form' v-model="valid" ref="form" lazy-validation>
           <autocomplete id="auto" :items="items" v-model="item" :get-label="getLabel" :component-item='template' @update-items="updateItems" :min-len="0"

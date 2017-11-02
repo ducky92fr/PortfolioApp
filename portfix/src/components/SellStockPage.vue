@@ -6,7 +6,7 @@
   <div>
     <navbar></navbar>
     <div class="sellStockPage">
-      <h1>Sell a Stock position</h1>
+      <h1>Sell Stock</h1>
       <template>
         <v-form class='form' v-model="valid" ref="form" lazy-validation>
           <v-text-field
