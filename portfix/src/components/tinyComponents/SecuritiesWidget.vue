@@ -1,29 +1,22 @@
 <template>
   <div class='securitiesWidget'>
-    <article class='title'>
-      <h1>Stocks</h1>
-      <p v-if='portfolio'> Portfolio last changed on {{date}}</p>
-    </article>
+    <h1>Stocks</h1>
     <div v-if='portfolio' class='securities' id='securitiestable'>
       <table class="table securities-table">
-        <thead>
-          <tr>
-            <th class='col-1'>Ticker</th>
-            <th class='col-2'>Quantity</th>
-            <th class='col-3'>Price</th>
-            <th class='col-4'>Break-Even</th>
-            <th class='col-5'>Profit/Loss</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item in securities" :key="item.ticker">
-            <td><router-link :to="'/stock/' + item.ticker">{{ item.ticker }}</router-link></td>
-            <td>{{ item.quantity }}</td>
-            <td>{{ item.IEXprice }}</td>
-            <td>{{ item.breakEven }}</td>
-            <td>{{ item.formattedPL }}</td>
-          </tr>
-        </tbody>
+        <tr>
+          <th class='col-1'>Ticker</th>
+          <th class='col-2'>Quantity</th>
+          <th class='col-3'>Price</th>
+          <th class='col-4'>Break-Even</th>
+          <th class='col-5'>Profit/Loss</th>
+        </tr>
+        <tr v-for="item in securities" :key="item.ticker">
+          <td><router-link :to="'/stock/' + item.ticker">{{ item.ticker }}</router-link></td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.IEXprice }}</td>
+          <td>{{ item.breakEven }}</td>
+          <td>{{ item.formattedPL }}</td>
+        </tr>
       </table>
     </div>
   </div>
@@ -74,7 +67,10 @@ export default {
           this.securities.push(stock_display_info)
           }
         })
-        this.$emit('PLcalculated', calculatePortfolioPnL(this.securities))
+        this.$emit('PLcalculated', {
+          PL: calculatePortfolioPnL(this.securities),
+          lastUpdate: this.date
+        })
       }).catch((error) => {
     console.error(error)
   })
@@ -86,18 +82,13 @@ export default {
 </script>
 
 <style scoped>
-.securitiesWidget h1, .transactionWidget h1 {
-  font-size: 2.5em;
+.securitiesWidget h1 {
+  font-size: 35px;
   font-weight: 600;
   margin: 1vh 2vw;
-}
-.title {
-  height: 30%;
+  height: 20%;
+  max-height: 60px;
   box-sizing: border-box;
-}
-.title p {
-  font-size: 0.9em;
-  font-weight: 200;
 }
 .securities {
   height: 70%;
@@ -109,20 +100,15 @@ export default {
 }
 #securitiestable table td, #securitiestable table th {
   text-align: center;
+  vertical-align: center;
   font-size: 1.2em;
   font-weight: 400;
   width: 70px;
-  height: auto;
-  margin: 15px 0px;
+  height: 35px;
+  margin: 0px 0px;
+  padding: 0px;
   border: none;
 }
 
-#securitiestable table .col-1,
-#securitiestable table .col-2,
-#securitiestable table .col-3,
-#securitiestable table .col-4,
-#securitiestable table .col-5,
- {
-  /* width: 50px; */
-}
+
 </style>

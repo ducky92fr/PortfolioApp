@@ -89,6 +89,7 @@ h1 {
   flex-shrink: 0;
   border: 1px solid #3f51b5;
   box-shadow: 2px 2px 3px 1px rgba(64, 64, 64, 0.8);
+  background-color: white;
 }
 .news-section article .news-title {
   height: 15%;
@@ -99,12 +100,15 @@ h1 {
   justify-content: flex-end;
   overflow-y: hidden;
   border-radius: 0px;
-  background-color: #3f51b5;
+  background-color: #fbfbfb;
+  color: #11537d;
 }
 .news-section article .news-body {
   height: 85%;
   overflow-y: hidden;
+  padding: 5px 10px;
   padding-left: 10px;
+  border: none;
 }
 .news-section article .news-title h1 {
   font-weight: 600;
@@ -132,6 +136,7 @@ h1 {
   text-align: justify;
   margin: 0px;
   padding: 0px;
+  color: #2b2a2a;
 }
 .news-section article .news-body p span {
   font-weight: 600;

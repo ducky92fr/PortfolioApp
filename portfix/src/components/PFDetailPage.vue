@@ -1,6 +1,7 @@
 <template>
   <div class='main'>
     <navbar></navbar>
+    <!-- <p v-if='lastUpdate'> Portfolio last changed on {{lastUpdate}}</p> -->
     <div class='currentDashboard' v-if="portfolio">
       <h1 v-if="portfolio">{{portfolio.name}}</h1>
       <section class='notification is-info PFvalue'>
@@ -8,8 +9,8 @@
         <p>Change <span v-if="portfolioPL">{{portfolioPL}}</span></p>
       </section>
       <section class='PFactions'>
-        <button @click="redirectToAddStock()" class='buy'>Buy Stock</button>
-        <button @click="redirectToSellStock()" class='sell'>Sell Stock</button>
+        <button @click="redirectToAddStock()" class='buy'>ADD STOCK</button>
+        <button @click="redirectToSellStock()" class='sell'>REMOVE STOCK</button>
       </section>
     </div>
     <div class='row'>
@@ -32,7 +33,8 @@ export default {
     return {
       PFid: this.$route.params.id,
       portfolio: null,
-      portfolioPL: null
+      portfolioPL: null,
+      lastUpdate: null
     }
   },
   // When component is created:
@@ -54,7 +56,8 @@ export default {
       this.$router.push('/portfolio/sellStock/' + this.PFid)
     },
     updatePL: function (event) {
-      this.portfolioPL = formatPL(event)
+      this.portfolioPL = formatPL(event.PL)
+      this.lastUpdate = event.lastUpdate
     }
   },
   components: {
@@ -72,12 +75,13 @@ export default {
   align-items: center;
 }
 .currentDashboard {
-  margin: 5vh 0vw;
-  margin-left: 20vw;
-  min-height: 110px;
+  margin: 30px 0px 50px 0px;
+  padding: 0px 50px;
+  min-height: 100px;
+  width: 100vw;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 .currentDashboard p {
@@ -113,20 +117,20 @@ export default {
 .PFactions {
   flex-direction: row;
   padding: 0px;
-  margin-left: 3vw;
+  margin-left: auto;
+  margin-right: 50px;
 }
 .PFactions button {
   font-size: 1.3em;
+  font-weight: 600;
+  width: 178px;
   margin: 0px 7px;
-  padding: 6px 27px;
+  padding: 6px 15px;
   border-radius: 3px;
   color: #FFFFFF;
 }
-.PFactions .buy {
+.PFactions .buy, .PFactions .sell {
   background-color: #3a7aef;
-}
-.PFactions .sell {
-  background-color: #9520eed4;
 }
 .row {
   display: flex;

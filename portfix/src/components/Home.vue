@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import { checkUser } from '@/api'
 import NavBar from './tinyComponents/navbar'
 import PortfolioWidget from './tinyComponents/PortfolioWidget'
 import NewsWidget from './tinyComponents/NewsWidget'
@@ -18,6 +19,10 @@ export default {
     return {
       allStocksArray: null
     }
+  },
+  created () {
+    checkUser(this.$root)
+    if (!this.$root.user) this.$router.push('/landing')
   },
   components: {
     navbar: NavBar,

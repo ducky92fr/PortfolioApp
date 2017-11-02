@@ -14,6 +14,9 @@
         </router-link>
       </div>
     </div>
+    <div v-on:click='callLogout'>
+      Logout
+    </div>
     <h2>
       Hello, {{user.name}}
     </h2>
@@ -21,7 +24,7 @@
 </template>
 
 <script>
-import { checkUser } from '@/api'
+import { checkUser, logout} from '@/api'
 export default {
   name: 'NavBar',
   data () {
@@ -32,6 +35,12 @@ export default {
   created () {
     checkUser(this.$root)
     this.user = this.$root.user
+  },
+  methods: {
+    callLogout: function () {
+      logout(this.$root)
+      this.$router.push('/landing')
+    }
   }
 }
 </script>

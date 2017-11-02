@@ -3,22 +3,18 @@
     <h1>Transactions</h1>
     <div class='transactions' id='transactionstable'>
       <table class="table transactions-table">
-        <thead>
-          <tr>
-            <th>Ticked</th>
-            <th>Date</th>
-            <th>Qt Change</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item in transactions" :key="item.date">
-            <td><router-link :to="'/stock/' + item.affectedStocks[0].ticker">{{ item.affectedStocks[0].ticker }}</router-link></td>
-            <td>{{ item.date }}</td>
-            <td>{{ item.affectedStocks[0].change }}</td>
-            <td>{{ item.affectedStocks[0].atPrice }}</td>
-          </tr>
-        </tbody>
+        <tr>
+          <th>Ticked</th>
+          <th>Date</th>
+          <th>Qt Change</th>
+          <th>Price</th>
+        </tr>
+        <tr v-for="item in transactions" :key="item.date">
+          <td><router-link :to="'/stock/' + item.affectedStocks[0].ticker">{{ item.affectedStocks[0].ticker }}</router-link></td>
+          <td>{{ item.date }}</td>
+          <td>{{ item.affectedStocks[0].change }}</td>
+          <td>{{ item.affectedStocks[0].atPrice }}</td>
+        </tr>
       </table>
     </div>
   </div>
@@ -56,11 +52,13 @@ export default {
 
 <style scoped>
 .transactionWidget h1 {
-  font-size: 2.5em;
+  font-size: 35px;
   font-weight: 600;
-  margin: 1vh 2vw 0vh 2vw;
-  height: 30%;
+  margin: 1vh 2vw;
+  height: 20%;
+  max-height: 60px;
   box-sizing: border-box;
+  color: #363636;
 }
 .transactions {
   height: 70%;
@@ -75,8 +73,9 @@ export default {
   font-size: 1.2em;
   font-weight: 400;
   width: 70px;
-  height: auto;
-  margin: 15px 0px;
+  height: 35px;
+  margin: 0px 0px;
+  padding: 0px;
   border: none;
 }
 
