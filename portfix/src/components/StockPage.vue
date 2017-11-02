@@ -72,7 +72,7 @@ export default {
   justify-content: center;
   background-color: #f3f3f3;
   width: 80vw;
-  margin-top: 5vh;  
+  margin-top: 50px;  
   padding: 5vh 5vw;
 }
 .marketstats, .valuationratios {
@@ -83,6 +83,10 @@ export default {
 }
 .valuationratios {
   margin-left: 10vw;
+}
+.company-info {
+  width: 80vw;
+  margin-top: 50px;
 }
 h1 {
   font-size: 3.5em;

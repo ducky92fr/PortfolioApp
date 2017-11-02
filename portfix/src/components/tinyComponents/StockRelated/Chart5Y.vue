@@ -3,7 +3,7 @@
     <div class='chart'>
       <canvas id="myChart" width="700" height="400"></canvas>
     </div>
-    <h1>Five years {{ticker}} closing price</h1>
+    <h1>{{ticker}} closing price, five years period</h1>
   </div>
 </template>
 
