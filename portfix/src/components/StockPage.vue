@@ -6,12 +6,12 @@
         <h1>{{stockInfo.companyName}}</h1>
         <h2>({{stockInfo.ticker}})</h2>
       </article>
+      <chart :ticker="ticker"></chart>
       <article class='row'>
         <marketstats v-if="stockInfo" :stats="stockInfo.stats" :price="stockInfo.price" class='marketstats'></marketstats>
         <valuationratios v-if="stockInfo" :stats="stockInfo.stats" class='valuationratios'></valuationratios>
       </article>
       <companyinfo v-if="stockInfo" :company="stockInfo.company" class='companyinfo'></companyinfo>
-      <chart :ticker="ticker"></chart>
     </div>
   </div>
 </template>
@@ -85,8 +85,10 @@ export default {
   margin-left: 10vw;
 }
 h1 {
-  font-size: 3em;
+  font-size: 3.5em;
+  font-weight: 600;
   margin: 0px;
+  margin-bottom: 0px;
 }
 h2 {
   font-size: 2em;

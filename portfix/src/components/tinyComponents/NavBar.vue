@@ -41,6 +41,7 @@ export default {
   .navbar {
     width: 100vw;
     height: 10vh;
+    max-height: 65px;
     background-color: #f3f3f3;
     display: flex;
     align-items: center;

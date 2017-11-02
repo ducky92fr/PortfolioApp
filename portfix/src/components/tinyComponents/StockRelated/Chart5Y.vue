@@ -1,9 +1,9 @@
 <template>
   <div class='market-stats'>
-    <h1>5Y Chart</h1>
     <div class='chart'>
-      <canvas id="myChart" width="800" height="500"></canvas>
+      <canvas id="myChart" width="700" height="400"></canvas>
     </div>
+    <h1>Five years {{ticker}} closing price</h1>
   </div>
 </template>
 
@@ -73,8 +73,9 @@ export default {
 .market-stats {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   text-align: start;
+  justify-content: center;
+  align-items: center;
 }
 .indicators {
   margin-top: 5vh;
@@ -85,12 +86,18 @@ export default {
   margin-bottom: 12px;
 }
 .chart {
-  width: 900px;
-  height: 600px;
-  background-color: #272626;
+  width: 970px;
+  height: 540px;
+  background-color: #2d2d2d;
+  padding: 20px 30px;
+  border: 1px solid #2d2d2d;
+  box-shadow: 2px 0px 7px 1px rgba(99, 99, 99, 0.8);
 }
 h1 {
-  font-size: 3em;
+  font-size: 1.7em;
+  font-weight: 400;
   margin: 0px;
+  margin-top: 15px;
+  font-style: italic;
 }
 </style>
