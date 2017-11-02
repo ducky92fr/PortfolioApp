@@ -43,7 +43,7 @@ h1, h2 {
   justify-content: center;
   align-items: center;
   flex: auto;
-  height: 90vh;
+  height: 92vh;
 }
 .PFwidget {
   margin-top: 8vh; 

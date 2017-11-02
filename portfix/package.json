@@ -10,6 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "accounting": "^0.4.1",
     "axios": "^0.17.0",
     "bulma": "^0.6.0",
     "dateformat": "^3.0.2",

@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import accounting from 'accounting'
 export default {
   name: 'MarketStats',
   props: ['stats', 'price'],
