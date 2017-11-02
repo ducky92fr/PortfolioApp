@@ -1,6 +1,6 @@
 <template>
   <div class='portfolioWidget'>
-    <h1>Portfolios</h1>
+    <h1>Your Portfolios</h1>
     <div class='portfolios'>
       <div class='singlePF' v-for="portfolio in portfolios" :key="portfolio._id">
         <h2>{{portfolio.name}}</h2>
@@ -45,17 +45,19 @@ export default {
 }
 .portfolioWidget h1 {
   font-size: 3em;
-  margin: 1vh 2vw;
+  font-weight: 600;
+  margin: 1vh 2vw 5vh 2vw;
 }
 .singlePF {
-  width: 50vw;
-  background-color: #e8e8e8;
-  height: 30px;
-  border-radius: 10px;
+  width: 60vw;
+  max-width: 600px;
+  background-color: #607d8bb0;
+  height: 40px;
+  border-radius: 5px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 1vh 1vw;
+  padding: 1vh 4vw;
   margin: 2vh 2vw;
 }
 .singlePF h2 {

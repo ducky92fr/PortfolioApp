@@ -56,9 +56,9 @@ export default {
   align-items: flex-start;
   width: 100vw;
   height: 350px;
-  padding: 40px 20px 20px 20px;
+  padding: 23px 20px 20px 20px;
   margin-top: auto;
-  background: grey;
+  background: #2196f3d1;
 }
 h1 {
   font-size: 2em;
@@ -70,18 +70,20 @@ h1 {
   align-items: center;
   justify-content: flex-start;
   width: 96vw;
-  height: 360px;
+  height: 380px;
   box-sizing: content-box;
   overflow-x: scroll;
   align-self: flex-start;
 }
 .news-section article {
   width: 360px;
-  height: 100%;
+  height: 95%;
   overflow-y: hidden;
   border-radius: 0px;
   margin: 0px 5px;
   flex-shrink: 0;
+  border: 1px solid #3f51b5;
+  box-shadow: 2px 2px 3px 1px rgba(64, 64, 64, 0.8);
 }
 .news-section article .news-title {
   height: 15%;
@@ -92,6 +94,7 @@ h1 {
   justify-content: flex-end;
   overflow-y: hidden;
   border-radius: 0px;
+  background-color: #3f51b5;
 }
 .news-section article .news-body {
   height: 85%;

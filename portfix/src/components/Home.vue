@@ -46,7 +46,7 @@ h1, h2 {
   height: 90vh;
 }
 .PFwidget {
-  margin-top: 10vh; 
+  margin-top: 8vh; 
   padding-bottom: 1vh;
 }
 </style>

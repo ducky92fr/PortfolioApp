@@ -4,7 +4,7 @@
     <h1>StockAwesome</h1>
     </router-link>
     <div class='dropdownmenu'>
-      <button>Plus</button>
+      <button><img src="../../assets/icons/sign1.svg" alt="Add"></button>
       <div class="dropdown-content">
         <router-link to="/addportfolio">
           <p>Create a new portfolio</p>
@@ -61,33 +61,36 @@ export default {
   h2 {
     font-size: 1.8em;
     padding: 0px;
-    margin: 0px 4vw 0px 3vw;
+    margin: 0px 5vw 0px 2vw;
     font-weight: 400;
   }
   .dropdownmenu {
     margin: 0px 1vw 0px auto;
     position: relative;
     display: inline-block;
-    width: 10vw;
+    width: 7vw;
     height: 7vh;
   }
   /* Dropdown Button */
   .dropdownmenu button {
-    background-color: #f3f3f3;
     padding: 0px;
     margin: 0px;
     font-size: 1.8em;
-    height: 7vh;
-    width: 10vw;
+    width: 45px;
+    height: 45px;
     border: none;
     cursor: pointer;
     font-weight: 400;
+  }
+  .dropdownmenu button img {
+    width: 100%;
   }
   .dropdown-content {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding-top: 0px;    
   }
   .dropdown-content p {
     color: black;
@@ -96,12 +99,9 @@ export default {
     display: block;
   } 
   .dropdown-content p:hover {
-    background-color: #efefef
+    background-color: #efefef;
   }
   .dropdownmenu:hover .dropdown-content {
     display: block;
-  }
-  .dropdownmenu:hover button {
-    background-color: #efefef;
   }
 </style>
