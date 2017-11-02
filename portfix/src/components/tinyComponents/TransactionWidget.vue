@@ -56,7 +56,8 @@ export default {
 
 <style scoped>
 .transactionWidget h1 {
-  font-size: 3em;
+  font-size: 2.5em;
+  font-weight: 600;
   margin: 1vh 2vw 0vh 2vw;
   height: 30%;
   box-sizing: border-box;

@@ -2,7 +2,7 @@
   <div class='securitiesWidget'>
     <article class='title'>
       <h1>Stocks</h1>
-      <p v-if='portfolio'> Portfolio last changed on {{portfolio.current.date}}</p>
+      <p v-if='portfolio'> Portfolio last changed on {{date}}</p>
     </article>
     <div v-if='portfolio' class='securities' id='securitiestable'>
       <table class="table securities-table">
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import dateFormat from 'dateformat'
 import { checkUser, getUserPortfolio, getLastPriceFromIEX } from '@/api'
 import { calculatePortfolioPnL, calculateSecurityPnL, formatPL } from './helperFunctions'
 export default {
@@ -48,6 +49,9 @@ export default {
     },
     stocks: function () {
       if (this.portfolio) return Object.keys(this.portfolio.current.stocks)
+    },
+    date: function () {
+      return dateFormat(this.portfolio.current.date, 'mmmm dS, yyyy')
     }
   },
   created () {
@@ -82,8 +86,9 @@ export default {
 </script>
 
 <style scoped>
-.securitiesWidget h1 {
-  font-size: 3em;
+.securitiesWidget h1, .transactionWidget h1 {
+  font-size: 2.5em;
+  font-weight: 600;
   margin: 1vh 2vw;
 }
 .title {
@@ -91,8 +96,8 @@ export default {
   box-sizing: border-box;
 }
 .title p {
-  font-size: 1em;
-  font-weight: 400;
+  font-size: 0.9em;
+  font-weight: 200;
 }
 .securities {
   height: 70%;

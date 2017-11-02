@@ -84,7 +84,8 @@ export default {
   font-size: 1.5em;
 }
 .currentDashboard h1 {
-  font-size: 3em;
+  font-size: 4em;
+  font-weight: 600;
   margin-bottom: 0px;  
   margin-right: 12px;
 }
