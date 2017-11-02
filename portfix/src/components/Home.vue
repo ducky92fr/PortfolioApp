@@ -42,8 +42,11 @@ h1, h2 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex: auto;
+  height: 90vh;
 }
 .PFwidget {
   margin-top: 10vh; 
+  padding-bottom: 1vh;
 }
 </style>

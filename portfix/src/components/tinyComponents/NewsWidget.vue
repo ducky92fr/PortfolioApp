@@ -4,10 +4,14 @@
     <section class='news-section'>
       <article v-for='article in news' :key='article.url' class="message is-info">
         <div class='message-header news-title'>
-          <h1>{{article.headline}}</h1>
+          <h1>{{titleFormat(article.headline)}}</h1>
+          <p>{{date(article.datetime)}}</p>  
         </div>
         <div class='message-body news-body'>
-          <p>{{article.summary}}</p>
+          <p>
+            <span>{{article.headline}} - </span>          
+            {{article.summary}}
+          </p>
         </div>
       </article>
     </section>
@@ -16,6 +20,7 @@
 
 <script>
 import { getNewsFromIEX } from '@/api'
+import dateFormat from 'dateformat'
 export default {
   name: 'NewsWidget',
   asyncComputed: {
@@ -29,61 +34,95 @@ export default {
       })
     }
   },
-  props: ['stocks']
+  props: ['stocks'],
+  methods: {
+    titleFormat: function (title) {
+        if (title.length <= 30) {
+          return title
+        } else {
+          return title.slice(0, 35) + '...'
+        }
+      },
+    date: function (date) {
+      return  dateFormat(date, 'mmmm dS, yyyy')
+    }
+  }
 }
 </script>
 
 <style scoped>
 #newsWidget {
   flex-direction: column;
+  align-items: flex-start;
+  width: 100vw;
   height: 350px;
-  padding: 0px;
-  margin-top: 10vh;
-  background: #fafafa;
+  padding: 40px 20px 20px 20px;
+  margin-top: auto;
+  background: grey;
 }
 h1 {
   font-size: 2em;
+  font-weight: 600;
 }
 .news-section {
   display: flex;
   flex-direction: rows;
   align-items: center;
   justify-content: flex-start;
-  width: 90vw;
-  height: 300px;
+  width: 96vw;
+  height: 360px;
+  box-sizing: content-box;
   overflow-x: scroll;
   align-self: flex-start;
 }
 .news-section article {
   width: 360px;
-  height: 300px;
+  height: 100%;
   overflow-y: hidden;
   border-radius: 0px;
   margin: 0px 5px;
   flex-shrink: 0;
 }
 .news-section article .news-title {
-  height: 60px;
+  height: 15%;
+  min-height: 45px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
   overflow-y: hidden;
   border-radius: 0px;
 }
 .news-section article .news-body {
-  height: 240px;
+  height: 85%;
   overflow-y: hidden;
+  padding-left: 10px;
 }
 .news-section article .news-title h1 {
   font-weight: 600;
   font-size: 1.4em;
   text-align: left;
-  height: 60px;
+  overflow-y: hidden;
   margin: 0px;
-  padding: 10px 10.5px 7px 10.5px;
+}
+.news-section article .news-title p {
+  font-weight: 600;
+  font-size: 1.3em;
+  font-style: italic;
+  text-align: left;
+  overflow-y: hidden;
+  margin: 0px;
 }
 .news-section article .news-body p {
   font-weight: 400;
   font-size: 1.3em;
   text-align: left;
+  line-height: 25px;
+  text-align: justify;
   margin: 0px;
   padding: 0px;
+}
+.news-section article .news-body p span {
+  font-weight: 600;
 }
 </style>
