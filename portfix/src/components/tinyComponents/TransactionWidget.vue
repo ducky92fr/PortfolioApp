@@ -13,7 +13,7 @@
         </thead>
         <tbody>
           <tr v-for="item in transactions" :key="item.date">
-            <td>{{ item.affectedStocks[0].ticker }}</td>
+            <td><router-link :to="'/stock/' + item.affectedStocks[0].ticker">{{ item.affectedStocks[0].ticker }}</router-link></td>
             <td>{{ item.date }}</td>
             <td>{{ item.affectedStocks[0].change }}</td>
             <td>{{ item.affectedStocks[0].atPrice }}</td>

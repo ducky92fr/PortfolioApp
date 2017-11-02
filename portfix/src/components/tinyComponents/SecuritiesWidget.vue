@@ -17,7 +17,7 @@
         </thead>
         <tbody>
           <tr v-for="item in securities" :key="item.ticker">
-            <td>{{ item.ticker }}</td>
+            <td><router-link :to="'/stock/' + item.ticker">{{ item.ticker }}</router-link></td>
             <td>{{ item.quantity }}</td>
             <td>{{ item.IEXprice }}</td>
             <td>{{ item.breakEven }}</td>
