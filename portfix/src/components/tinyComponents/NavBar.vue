@@ -5,7 +5,7 @@
     </router-link>
     <div class='dropdownmenu'>
       <router-link to="/addportfolio">      
-        <button><img src="../../assets/icons/sign1.svg" alt="Add"></button>
+        <button><img src="../../assets/icons/add.svg" alt="Add"></button>
       </router-link>
       <div class="dropdown-content">
         <router-link to="/addportfolio">
@@ -117,7 +117,11 @@ export default {
     color: white;
     font-weight: 900;
     font-size: 1.1em;
-    height: 30px;
+    height: 32px;
     width: 70px;
+  }
+  .logout:hover {
+    background-color: #349df1;
+    color: white;
   }
 </style>
