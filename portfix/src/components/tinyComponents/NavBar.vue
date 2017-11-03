@@ -4,13 +4,12 @@
     <h1>StockAwesome</h1>
     </router-link>
     <div class='dropdownmenu'>
-      <button><img src="../../assets/icons/sign1.svg" alt="Add"></button>
+      <router-link to="/addportfolio">      
+        <button><img src="../../assets/icons/sign1.svg" alt="Add"></button>
+      </router-link>
       <div class="dropdown-content">
         <router-link to="/addportfolio">
           <p>Create a new portfolio</p>
-        </router-link>
-        <router-link to="/">
-          <p>Add a stock position</p>
         </router-link>
       </div>
     </div>
@@ -74,19 +73,18 @@ export default {
     font-weight: 400;
   }
   .dropdownmenu {
-    margin: 0px 1vw 0px auto;
+    margin: 0px 20px 0px auto;
     position: relative;
     display: inline-block;
-    width: 7vw;
-    height: 40px;
+    height: 35px;
   }
   /* Dropdown Button */
   .dropdownmenu button {
     padding: 0px;
     margin: 0px;
     font-size: 1.8em;
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     border: none;
     cursor: pointer;
     font-weight: 400;
@@ -106,14 +104,20 @@ export default {
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+    height: 50px;
+    width: 150px;
   } 
-  .dropdown-content p:hover {
-    background-color: #efefef;
-  }
   .dropdownmenu:hover .dropdown-content {
     display: block;
   }
   .logout {
-    margin: 0px;
+    margin: 0px 10px 0px 5px;
+    background-color: #2196f3;
+    border-radius: 3px;
+    color: white;
+    font-weight: 900;
+    font-size: 1.1em;
+    height: 30px;
+    width: 70px;
   }
 </style>
