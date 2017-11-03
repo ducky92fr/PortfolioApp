@@ -23,6 +23,7 @@
           v-model="password"
           :rules="passwordRules"
           required
+          type="password"
         ></v-text-field>
 
         <v-btn

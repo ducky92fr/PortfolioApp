@@ -22,7 +22,7 @@ export default {
   },
   created () {
     checkUser(this.$root)
-    if (!this.$root.user) this.$router.push('/landing')
+    if (!this.$root.user) this.$router.push('/sign-up')
   },
   components: {
     navbar: NavBar,

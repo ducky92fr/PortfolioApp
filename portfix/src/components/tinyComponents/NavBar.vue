@@ -38,7 +38,7 @@ export default {
   methods: {
     callLogout: function () {
       logout(this.$root)
-      this.$router.push('/landing')
+      this.$router.push('/sign-up')
     }
   }
 }
