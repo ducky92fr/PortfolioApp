@@ -1,7 +1,7 @@
 <template>
   <div class='main'>
     <div class='chart'>
-      <canvas id="myChart" width="600" height="350"></canvas>
+      <canvas id="myChart" width="700" height="450"></canvas>
     </div>
     <h1>{{ticker}} closing price, five years period</h1>
   </div>
@@ -38,12 +38,12 @@ export default {
             label: 'closing price',
             data: prices,
             backgroundColor: [
-                'rgba(210, 122, 60, 0.22)'
+                'rgba(241, 252, 244, 0.72)'
             ],
-            // borderColor: [
-            //     '#d27a3c'
-            // ],
-            // borderWidth: 1,
+            borderColor: [
+                '#8bc34a'
+            ],
+            borderWidth: 2,
         }]
     },
     options: {
@@ -51,11 +51,24 @@ export default {
             yAxes: [{
                 ticks: {
                     beginAtZero:true
+                },
+                gridLines: {
+                    display: true,
+                    color: '#f3f3f3'
+                }  
+            }],
+            xAxes: [{
+                gridLines: {
+                    display: true,
+                    color: '#f3f3f3'
                 }
-            }]
+            }],
         },
         tooltips: {
           enabled: true
+        },
+        legend: {
+          display: false
         },
         elements: {
           point: {
@@ -87,9 +100,7 @@ export default {
 }
 .chart {
   color: black;
-  width: 950px;
-  /* border: 1px solid #2d2d2d;
-  box-shadow: 2px 0px 7px 1px rgba(99, 99, 99, 0.8); */
+  margin-right: 100px;
 }
 h1 {
   font-size: 1.7em;
