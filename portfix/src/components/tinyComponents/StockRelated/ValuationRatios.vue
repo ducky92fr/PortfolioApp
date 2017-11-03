@@ -5,7 +5,7 @@
       <p>Market Cap: <span>{{formatNumber(stats.marketcap)}}</span></p>
       <p>Revenue: <span>{{formatNumber(stats.revenue)}}</span></p>
       <p>EBITDA: <span>{{formatNumber(stats.EBITDA)}}</span></p>      
-      <p>EPS: <span>{{'$' + stats.ttmEPS}}</span></p>
+      <p>EPS: <span>{{'$' + formatRatio(stats.ttmEPS, 2)}}</span></p>
       <p>Price To Sales: <span>{{formatRatio(stats.priceToSales, 2)}}</span></p>
       <p>Price To Book: <span>{{formatRatio(stats.priceToBook, 2)}}</span></p>
     </div>
