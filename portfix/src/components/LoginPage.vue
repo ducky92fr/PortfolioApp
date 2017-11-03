@@ -58,7 +58,10 @@ export default {
         username: this.username,
         password: this.password
       }, this.$root).then( data => {
-        this.$router.push('/')
+        if (data) this.$router.push('/')
+        else {
+          this.error = 'Seems like you entered a wrong username/password. Try again.'
+        }
       }).catch( err => {
         this.error = 'Error happened during Log-in'
         console.error('Login error ', err)

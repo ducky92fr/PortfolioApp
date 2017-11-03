@@ -1,7 +1,7 @@
 <template>
   <div class='footer' id='newsWidget'>
     <h1>News</h1>
-    <section class='news-section'>
+    <section class='news-section' v-if='news'>
       <article v-for='article in news' :key='article.url' class="message is-info">
         <div class='message-header news-title'>
           <h1><a :href="article.url" target="_blank">{{titleFormat(article.headline)}}</a></h1>
@@ -16,6 +16,9 @@
           </p>
         </div>
       </article>
+    </section>
+    <section class='intro' v-if='!news'>
+      <h1>Add some stocks to your portfolio to start getting related news here!</h1>
     </section>
   </div>
 </template>
@@ -175,5 +178,10 @@ h1:first-of-type {
   width: 45px;
   text-align: center;
   display: inline-block;
+}
+.intro {
+  width: 100vw;
+  margin-top: 50px;
+  text-align: center;
 }
 </style>

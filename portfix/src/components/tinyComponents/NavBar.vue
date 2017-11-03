@@ -14,9 +14,9 @@
         </router-link>
       </div>
     </div>
-    <div v-on:click='callLogout'>
+    <button v-on:click='callLogout' class='button is-warning logout'>
       Logout
-    </div>
+    </button>
     <h2>
       Hello, {{user.name}}
     </h2>
@@ -49,8 +49,7 @@ export default {
 <style scoped>
   .navbar {
     width: 100vw;
-    height: 10vh;
-    max-height: 65px;
+    height: 55px;
     background-color: #f3f3f3;
     display: flex;
     align-items: center;
@@ -79,15 +78,15 @@ export default {
     position: relative;
     display: inline-block;
     width: 7vw;
-    height: 7vh;
+    height: 40px;
   }
   /* Dropdown Button */
   .dropdownmenu button {
     padding: 0px;
     margin: 0px;
     font-size: 1.8em;
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     border: none;
     cursor: pointer;
     font-weight: 400;
@@ -113,5 +112,8 @@ export default {
   }
   .dropdownmenu:hover .dropdown-content {
     display: block;
+  }
+  .logout {
+    margin: 0px;
   }
 </style>

@@ -3,7 +3,7 @@
     <navbar></navbar>
     <div class="homePage">
       <portfolio-widget v-on:gotStocks="displayNews" class="PFwidget"></portfolio-widget>
-      <newswidget class="newsWidget" :stocks="allStocksArray"></newswidget>
+      <newswidget class="newsWidget" :stocks="allStocksArray" v-if='allStocksArray'></newswidget>
     </div>
   </div>
 </template>
@@ -48,7 +48,7 @@ h1, h2 {
   justify-content: center;
   align-items: center;
   flex: auto;
-  height: 92vh;
+  height: calc(100vh - 55px);
 }
 .PFwidget {
   margin-top: 8vh; 

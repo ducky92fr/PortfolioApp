@@ -272,6 +272,7 @@ router.get('/IEXfetch/*', (req, res, next) => {
   let url = req.originalUrl
   url = url.slice(13) // getting the original request
   return IEX.get(url).then(response => {
+    console.log('URL', url)
     res.json(response.data)
   }).catch((error) => {
     console.error('ERROR FETCHING IEX REQUEST, ', error)

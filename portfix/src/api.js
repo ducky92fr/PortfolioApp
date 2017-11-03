@@ -169,6 +169,7 @@ export function get5YChartFromIEX (ticker) {
 
 // ======= Getting the news for an array of stocks from IEX =======
 export function getNewsFromIEX (stocksArray) {
-  let url = '/stock/market/batch?symbols=aapl,fb&types=news'
+  let stocks = stocksArray.join()
+  let url = `/stock/market/batch?symbols=${stocks}&types=news`
   return proxyFetchFromIEX(url)
 }
