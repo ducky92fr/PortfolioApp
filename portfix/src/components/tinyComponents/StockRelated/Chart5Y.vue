@@ -1,7 +1,7 @@
 <template>
   <div class='main'>
     <div class='chart'>
-      <canvas id="myChart" width="700" height="450"></canvas>
+      <canvas id="myChart" width="750" height="450"></canvas>
     </div>
     <h1>{{ticker}} closing price, five years period</h1>
   </div>
@@ -103,8 +103,8 @@ export default {
   margin-right: 100px;
 }
 h1 {
-  font-size: 1.7em;
-  font-weight: 400;
+  font-size: 1.6em;
+  font-weight: 600;
   margin: 0px;
   margin-top: 15px;
   font-style: italic;

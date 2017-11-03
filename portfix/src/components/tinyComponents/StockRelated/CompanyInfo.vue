@@ -1,10 +1,11 @@
 <template>
   <div class='company-info'>
     <h1>Company</h1>
-    <div class='row'>
-      <h1>CEO</h1><h1>{{company.CEO}}</h1>
-    </div>
-    <p class='description-text'>{{company.description}}</p>
+    <h2>CEO<span>{{company.CEO}}</span></h2>
+    <p class='description-text'>
+      <span>Description</span>
+      {{company.description}}
+      </p>
   </div>
 </template>
 
@@ -20,29 +21,30 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  color: #363636
 }
 .description-text {
   text-align: start;
+  font-size: 1.5em;
+  color: #797575;
+  font-weight: 600;
 }
-.row {
-  display: flex;
-  flex-direction: row;
-  margin: 2vh 0vw;
-}
-.row h1 {
-  font-size: 2em;
-}
-.row h1:last-child {
-  margin-left: 2vw;
+.description-text span {
+  margin-right: 5px;
+  color: #363636  
 }
 h1 {
-  font-size: 3em;
+  font-size: 2.1em;
+  font-weight: 600;
   margin: 0px;
 }
 h2 {
-  font-size: 2em;
-  font-size: 1.7em;
-  margin: auto 0px 2px 12px;
+  font-size: 1.5em;
+  font-weight: 600;
+  margin: 25px 0px 5px 0px;
+  }
+h2 span {
   color: #797575;
+  margin-left: 20px;
 }
 </style>

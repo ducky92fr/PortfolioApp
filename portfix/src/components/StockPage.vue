@@ -71,12 +71,11 @@ export default {
 }
 .right-col {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #f3f3f3;
-  width: 500px;
-  height: 400px;
+  width: 350px;
   padding: 30px 20px;
 }
 .marketstats, .valuationratios {
@@ -85,9 +84,13 @@ export default {
   justify-content: center;
   align-items: center;
 }
+.marketstats {
+  margin-bottom: 25px;
+}
 .company-info {
   width: 80vw;
-  margin-top: 50px;
+  margin-top: 75px;
+  margin-bottom: 50px;
 }
 h1 {
   font-size: 3em;
