@@ -33,20 +33,20 @@ export default {
   text-align: start;
 }
 .ratios {
-  margin-top: 5vh;
-  margin-left: 1vw;
-  font-size: 1.4em;
+  margin-top: 15px;
+  font-size: 1.3em;
 }
 .ratios p {
-  margin-bottom: 12px;
+  margin-bottom: 6px;
   font-weight: 600;
 }
 .ratios p span {
-  margin-bottom: 12px;
+  margin-bottom: 6px;
   font-weight: 600;
 }
 h1 {
-  font-size: 3em;
+  font-size: 2.2em;
+  font-weight: 600;
   margin: 0px;
 }
 </style>

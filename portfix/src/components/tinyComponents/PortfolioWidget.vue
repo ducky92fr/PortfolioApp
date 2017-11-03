@@ -6,7 +6,7 @@
         <h2>{{portfolio.name}}</h2>
         <h2 class='PFdata'>{{portfolio.current.stocks.PFAPPCASH}}</h2>
         <router-link :to="'/portfolio/' + portfolio._id">
-          <img src="../../assets/icons/eye1.svg" alt="See details">
+          <img src="../../assets/icons/search.svg" alt="See details">
         </router-link>
       </div>
     </div>
@@ -57,7 +57,7 @@ export default {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 1vh 4vw;
+  padding: 1vh 21px;
   margin: 2vh 2vw;
 }
 .singlePF h2 {
@@ -70,11 +70,11 @@ export default {
   margin-right: 1vw;
 }
 .singlePF img {
-  width: 30px;
+  width: 25px;
 }
 .singlePF a {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   margin-left: 1vw;
 }
 </style>

@@ -1,7 +1,3 @@
-// Todo:
-// - Dropdown list with the user PFs as options
-// - Proper data verification rules
-
 <template>
   <div>
     <navbar></navbar>
@@ -9,18 +5,9 @@
       <h1>Sell Stock</h1>
       <template>
         <v-form class='form' v-model="valid" ref="form" lazy-validation>
-          <v-text-field
-            label="Ticker"
-            v-model="ticker"
-            :rules="tickerRules"
-            required
-          ></v-text-field>
-          <v-text-field
-            label="Portfolio"
-            v-model="portfolio"
-            :rules="portfolioRules"
-            required
-          ></v-text-field>
+          <autocomplete id="auto" :items="items" v-model="item" :get-label="getLabel" :component-item='template' @update-items="updateItems" :min-len="0"
+          placeholder="Ticker" :wait="50">
+          </autocomplete>
           <v-text-field
             label="At Date"
             v-model="state.date"
@@ -61,7 +48,10 @@
 </template>
 
 <script>
-import { checkUser, sellStockFromPortfolio } from '@/api'
+import Sifter from 'sifter'
+import Autocomplete from 'v-autocomplete'
+import AutocompleteTemplate from './tinyComponents/AutocompleteTemplate'
+import { checkUser, sellStockFromPortfolio, getAllListedStocksOnIEX, getLastPriceFromIEX } from '@/api'
 import NavBar from './tinyComponents/navbar'
 import Datepicker from 'vuejs-datepicker'
 export default {
@@ -71,6 +61,10 @@ export default {
       errorMessage: null,
       success: null,
       ticker: '',
+      tickerList: null,
+      item: {name: '', symbol:''},
+      items: null,
+      template: AutocompleteTemplate,
       portfolio: this.$route.params.id,
       valid: false,
       user: this.$root.user,
@@ -123,15 +117,49 @@ export default {
     datePicked (date) {
       this.hideCalendar = true
       this.state.date = date
+    },
+    getLabel (item) {
+      this.ticker = item.symbol
+       getLastPriceFromIEX([item.symbol]).then(response => {
+         this.price = response[0].price
+       })
+      if (item.symbol) return item.symbol + ' (' + item.name + ')'
+    },
+    updateItems (text) {
+      let tickerList = this.tickerList
+      let sifter = new Sifter(tickerList)
+      var result = sifter.search(text, {
+        fields: ['symbol', 'name'],
+        sort: [{field: 'symbol', direction: 'asc'}],
+        limit: 5
+      })
+      this.items = result.items.map(item => {
+        return {
+          symbol: tickerList[item.id].symbol,
+          name: tickerList[item.id].name
+          }
+        })
     }
   },
   components: {
     navbar: NavBar,
-    datepicker: Datepicker
-  },
+    datepicker: Datepicker,
+    autocomplete: Autocomplete
+},
   created () {
     checkUser(this.$root)
     this.user = this.$root.user
+    getAllListedStocksOnIEX().then(result => {
+      this.tickerList = result.tickerList
+      this.items = result.tickerList.map(item => {
+        return {
+          symbol: item.symbol,
+          name: item.name
+          }
+        })
+    }).catch((error) => {
+    console.error(error)
+  })
   }
 }
 </script>
@@ -178,5 +206,26 @@ export default {
   .calendar {
     position: absolute;
     z-index: 2;
+  }
+   /* Autocomplete stylings */
+  #auto {
+    font-size: 1.5em;
+    box-shadow: none;
+    border-bottom: 1px solid #919191;
+    margin-bottom: 30px;
+    width: 320px;
+    outline: none;
+  }
+  .v-autocomplete-list {
+    width: 100%;
+    text-align: left;
+    border: none;
+    border-top: none;
+    max-height: 400px;
+    overflow-y: auto;
+    border-bottom: 1px solid #157977;
+  }
+  #auto > div > .v-autocomplete-input {
+    width: 320px;    
   }
 </style>

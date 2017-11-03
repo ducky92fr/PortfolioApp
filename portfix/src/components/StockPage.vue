@@ -6,11 +6,13 @@
         <h1>{{stockInfo.companyName}}</h1>
         <h2>({{stockInfo.ticker}})</h2>
       </article>
-      <chart :ticker="ticker"></chart>
-      <article class='row'>
-        <marketstats v-if="stockInfo" :stats="stockInfo.stats" :price="stockInfo.price" class='marketstats'></marketstats>
-        <valuationratios v-if="stockInfo" :stats="stockInfo.stats" class='valuationratios'></valuationratios>
-      </article>
+      <section class='columns'>
+        <chart :ticker="ticker" class='column'></chart>
+        <article class='column right-col'>
+          <marketstats v-if="stockInfo" :stats="stockInfo.stats" :price="stockInfo.price" class='marketstats'></marketstats>
+          <valuationratios v-if="stockInfo" :stats="stockInfo.stats" class='valuationratios'></valuationratios>
+        </article>
+      </section>
       <companyinfo v-if="stockInfo" :company="stockInfo.company" class='companyinfo'></companyinfo>
     </div>
   </div>
@@ -66,30 +68,31 @@ export default {
   justify-content: center;
   margin-top: 5vh;
 }
-.row {
+.right-col {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   background-color: #f3f3f3;
-  width: 80vw;
+  width: 300px;
   margin-top: 50px;  
-  padding: 5vh 5vw;
+  padding: 30px 20px;
 }
 .marketstats, .valuationratios {
-  width: 50%;
+  width: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.valuationratios {
-  margin-left: 10vw;
+.marketstats {
+  margin-bottom: 50px;
 }
 .company-info {
   width: 80vw;
   margin-top: 50px;
 }
 h1 {
-  font-size: 3.5em;
+  font-size: 3em;
   font-weight: 600;
   margin: 0px;
   margin-bottom: 0px;

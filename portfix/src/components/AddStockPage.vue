@@ -1,7 +1,3 @@
-// Todo:
-// - Dropdown list with the user PFs as options
-// - Proper data verification rules
-
 <template>
   <div>
     <navbar></navbar>

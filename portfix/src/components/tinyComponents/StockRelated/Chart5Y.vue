@@ -1,7 +1,7 @@
 <template>
-  <div class='market-stats'>
+  <div class='main'>
     <div class='chart'>
-      <canvas id="myChart" width="700" height="400"></canvas>
+      <canvas id="myChart" width="600" height="350"></canvas>
     </div>
     <h1>{{ticker}} closing price, five years period</h1>
   </div>
@@ -29,7 +29,7 @@ export default {
       let prices = response.map(day => day.close)
       let dates = response.map(day => day.date)
       let ctx = document.getElementById("myChart")
-      Chart.defaults.global.defaultFontColor = 'white'
+      Chart.defaults.global.defaultFontColor = 'black'
       let myChart = new Chart(ctx, {
     type: 'line',
     data: {
@@ -40,10 +40,10 @@ export default {
             backgroundColor: [
                 'rgba(210, 122, 60, 0.22)'
             ],
-            borderColor: [
-                '#d27a3c'
-            ],
-            borderWidth: 1
+            // borderColor: [
+            //     '#d27a3c'
+            // ],
+            // borderWidth: 1,
         }]
     },
     options: {
@@ -86,12 +86,10 @@ export default {
   margin-bottom: 12px;
 }
 .chart {
-  width: 970px;
-  height: 540px;
-  background-color: #2d2d2d;
-  padding: 20px 30px;
-  border: 1px solid #2d2d2d;
-  box-shadow: 2px 0px 7px 1px rgba(99, 99, 99, 0.8);
+  color: black;
+  width: 950px;
+  /* border: 1px solid #2d2d2d;
+  box-shadow: 2px 0px 7px 1px rgba(99, 99, 99, 0.8); */
 }
 h1 {
   font-size: 1.7em;
