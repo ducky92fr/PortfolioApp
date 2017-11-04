@@ -9,6 +9,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+const OfflinePlugin = require('offline-plugin')
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 
 const env = config.build.env
 
@@ -94,7 +96,48 @@ const webpackConfig = merge(baseWebpackConfig, {
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
-    ])
+    ]),
+
+    new OfflinePlugin({
+      publicPath: '/',
+      caches: {
+        main: [
+          'app.*.css',
+          'vendor.*.js',
+          'app.*.js',
+        ],
+        additional: [
+          ':externals:'
+        ],
+        optional: [
+          ':rest:'
+        ]
+      },
+      externals: [
+        '/'
+      ]
+    }),
+
+    new SWPrecacheWebpackPlugin({
+      cacheId: 'my-vue-app',
+      filename: 'service-worker.js',
+      staticFileGlobs: ['dist/**/*.{js,html,css}'],
+      minify: true,
+      stripPrefix: 'dist/',
+      runtimeCaching: [
+        {
+          urlPattern: /^https:\/\/fonts\.googleapis\.com\//,
+          handler: 'cacheFirst'
+        },
+        {
+          urlPattern: /^https:\/\/fonts\.gstatic\.com\//,
+          handler: 'cacheFirst'
+        },
+        {
+          urlPattern: /^https:\/\/code\.getmdl\.io\//,
+          handler: 'cacheFirst'
+        }]
+    })
   ]
 })
 

@@ -6,6 +6,8 @@ const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.conf')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+const OfflinePlugin = require('offline-plugin')
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 
 // add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
@@ -31,6 +33,46 @@ module.exports = merge(baseWebpackConfig, {
       template: 'index.html',
       inject: true
     }),
-    new FriendlyErrorsPlugin()
+    new FriendlyErrorsPlugin(),
+    new OfflinePlugin({
+      publicPath: '/',
+      caches: {
+        main: [
+          'app.*.css',
+          'vendor.*.js',
+          'app.*.js',
+        ],
+        additional: [
+          ':externals:'
+        ],
+        optional: [
+          ':rest:'
+        ]
+      },
+      externals: [
+        '/'
+      ]
+    }),
+
+    new SWPrecacheWebpackPlugin({
+      cacheId: 'my-vue-app',
+      filename: 'service-worker.js',
+      staticFileGlobs: ['dist/**/*.{js,html,css}'],
+      minify: true,
+      stripPrefix: 'dist/',
+      runtimeCaching: [
+        {
+          urlPattern: /^https:\/\/fonts\.googleapis\.com\//,
+          handler: 'cacheFirst'
+        },
+        {
+          urlPattern: /^https:\/\/fonts\.gstatic\.com\//,
+          handler: 'cacheFirst'
+        },
+        {
+          urlPattern: /^https:\/\/code\.getmdl\.io\//,
+          handler: 'cacheFirst'
+        }]
+    })
   ]
 })

@@ -71,6 +71,10 @@ const strategy = new Strategy(
 // tell pasport to use it
 passport.use(strategy)
 
+app.get('/.well-known/acme-challenge/:content', function (req, res) {
+  res.send(process.env.CERTIFICATE)
+})
+
 app.use('/auth', authRoutes)
 app.use('/api', index)
 

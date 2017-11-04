@@ -11,6 +11,8 @@ import AsyncComputed from 'vue-async-computed'
 import 'bulma/css/bulma.css'
 import('../node_modules/vuetify/dist/vuetify.min.css')
 
+require('offline-plugin/runtime').install()
+
 Vue.use(AsyncComputed)
 Vue.use(Vuetify)
 Vue.config.productionTip = false
