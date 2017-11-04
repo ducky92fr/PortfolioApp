@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import SignUp from '@/components/SignUp'
 import LoginPage from '@/components/LoginPage'
 import Home from '@/components/Home'
+import Screener from '@/components/Screener'
 import AddPortfolioPage from '@/components/AddPortfolioPage'
 import SellStockPage from '@/components/SellStockPage'
 import AddStockPage from '@/components/AddStockPage'
@@ -60,6 +61,11 @@ export default new Router({
       path: '/stock/:id',
       name: 'StockPage',
       component: StockPage
+    },
+    {
+      path: '/stockscreener',
+      name: 'Screener',
+      component: Screener
     }
   ]
 })
