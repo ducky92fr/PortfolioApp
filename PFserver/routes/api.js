@@ -332,5 +332,19 @@ function getAllListedStocksOnIEX () {
   })
 }
 
-// Todo:
-//   - find other data to query
+// Getting all sectors
+router.get('/screener/sectors', (req, res, next) => {
+  getAllSectors().then(sectors => {
+    let unique = [...new Set(sectors)]
+    res.json(unique)
+  })
+  .catch((error) => {
+    console.error('ERROR FETCHING FINANCIALS, ', error)
+  })
+})
+
+function getAllSectors () {
+  return Stock.find().then(stocks => {
+    return stocks.map(stock => stock.sector)
+  })
+}

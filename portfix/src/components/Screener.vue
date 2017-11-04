@@ -6,9 +6,17 @@
       <form :action="screenStocks">
         <select v-model="sector" class='sector-input'>
           <option disabled value="">Please select one</option>
-          <option>A</option>
-          <option>B</option>
-          <option>C</option>
+          <option>Basic Materials</option>
+          <option>Communication Services</option>
+          <option>Consumer Cyclical</option>
+          <option>Consumer Defensive</option>
+          <option>Energy</option>
+          <option>Financial Services</option>
+          <option>Healthcare</option>
+          <option>Industrials</option>
+          <option>Real Estate</option>
+          <option>Technology</option>
+          <option>Utilities</option>
         </select>
         <v-btn @click="screenStocks">
             Lookup Stocks
