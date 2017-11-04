@@ -1,28 +1,9 @@
 CACHE MANIFEST
-#ver:11/4/2017, 12:39:33 PM
+#ver:11/4/2017, 1:26:25 PM
 #plugin:4.8.4
 
 CACHE:
-/static/js/0.3af579819b4801a4f52e.js
-/static/js/app.8c81811581f6f4d51036.js
-/static/js/vendor.a2a1a25ac33cccaf69a1.js
-/static/js/manifest.f9239a8e8b952bd0110f.js
-/static/css/app.7d0d07361fb02c597ed9be46eba4d01a.css
-/
-/static/browserconfig.xml
-/static/android-chrome-192x192.png
-/static/apple-touch-icon.png
-/static/android-chrome-512x512.png
-/static/manifest.json
-/static/favicon.ico
-/static/favicon-16x16.png
-/static/favicon-32x32.png
-/static/mstile-150x150.png
-/static/mstile-144x144.png
-/static/mstile-310x150.png
-/static/mstile-310x310.png
-/static/mstile-70x70.png
-/static/safari-pinned-tab.svg
+
 
 NETWORK:
 *
