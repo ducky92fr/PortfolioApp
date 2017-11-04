@@ -14,6 +14,7 @@
         </article>
       </section>
       <companyinfo v-if="stockInfo" :company="stockInfo.company" class='companyinfo'></companyinfo>
+      <peers v-if='stockInfo' :peers="stockInfo.peers" class='peers'></peers>
     </div>
   </div>
 </template>
@@ -23,6 +24,7 @@ import { checkUser } from '@/api'
 import { getStockInfoFromDB } from '@/api'
 import NavBar from './tinyComponents/navbar'
 import CompanyInfo from './tinyComponents/StockRelated/CompanyInfo'
+import Peers from './tinyComponents/StockRelated/Peers'
 import MarketStats from './tinyComponents/StockRelated/MarketStats'
 import ValuationRatios from './tinyComponents/StockRelated/ValuationRatios'
 import Chart5Y from './tinyComponents/StockRelated/Chart5Y'
@@ -45,7 +47,8 @@ export default {
     companyinfo: CompanyInfo,
     marketstats: MarketStats,
     valuationratios: ValuationRatios,
-    chart: Chart5Y
+    chart: Chart5Y,
+    peers: Peers
   }
 }
 </script>
@@ -90,6 +93,10 @@ export default {
 .company-info {
   width: 80vw;
   margin-top: 75px;
+}
+.peers {
+  width: 80vw;
+  margin-top: 25px;
   margin-bottom: 50px;
 }
 h1 {
