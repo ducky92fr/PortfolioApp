@@ -15,7 +15,7 @@
             <p>Cash</p>
             <img src="../../assets/icons/notes.svg" alt="Cash">
           </td>
-          <td>$ {{ portfolio.current.stocks.PFAPPCASH}}</td>
+          <td>{{ formatNumber(portfolio.current.stocks.PFAPPCASH, 2, ' ', '$')}}</td>
           <td>-</td>
           <td>-</td>
           <td>-</td>
@@ -36,6 +36,7 @@
 import dateFormat from 'dateformat'
 import { checkUser, getUserPortfolio, getLastPriceFromIEX } from '@/api'
 import { calculatePortfolioPnL, calculateSecurityPnL, formatPL, calculatePortfolioValue } from './helperFunctions'
+import accounting from 'accounting'
 export default {
   name: 'SecuritiesWidget',
   data () {
@@ -51,18 +52,25 @@ export default {
       return this.portfolioID
     },
     stocks: function () {
-      if (this.portfolio) {
+      // if (this.portfolio) {
         let stocksArr = []
         Object.keys(this.portfolio.current.stocks).forEach(stock => {
-            if (stock != 'PFAPPCASH') stocksArr.push(stock)
+            if (stock != 'PFAPPCASH') { 
+              stocksArr.push(stock) 
+            }
           }
         )
         return stocksArr
-        }
+        // }
     },
     date: function () {
       return dateFormat(this.portfolio.current.date, 'mmmm dS, yyyy')
     }
+  },
+  methods: {
+    formatNumber: function (num, dec, sep = ' ', pre = '', post = '') {
+      return pre + accounting.formatNumber(num, dec, sep) + post
+    },
   },
   created () {
     checkUser(this.$root)

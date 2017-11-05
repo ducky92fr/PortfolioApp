@@ -5,7 +5,7 @@
     <div class='currentDashboard' v-if="portfolio">
       <h1 v-if="portfolio">{{portfolio.name}}</h1>
       <section class='notification is-info PFvalue'>
-        <p>Current value <span v-if="portfolioValue">{{portfolioValue}}</span></p>
+        <p>Current value <span v-if="portfolioValue">{{formatNumber(portfolioValue, 2, ' ', '$')}}</span></p>
         <p>Change <span v-if="portfolioPL">{{portfolioPL}}</span></p>
       </section>
       <section class='PFactions'>
@@ -27,6 +27,7 @@ import { formatPL } from './tinyComponents/helperFunctions'
 import NavBar from './tinyComponents/navbar'
 import TransactionWidget from './tinyComponents/TransactionWidget'
 import securitiesWidget from './tinyComponents/securitiesWidget'
+import accounting from 'accounting'
 export default {
   name: 'PFDetailPage',
   data () {
@@ -60,7 +61,10 @@ export default {
       this.portfolioPL = formatPL(event.PL)
       this.portfolioValue = event.value
       this.lastUpdate = event.lastUpdate
-    }
+    },
+    formatNumber: function (num, dec, sep = ' ', pre = '', post = '') {
+      return pre + accounting.formatNumber(num, dec, sep) + post
+    },
   },
   components: {
     navbar: NavBar,
