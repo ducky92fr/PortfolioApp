@@ -10,16 +10,21 @@
           <th class='col-4'>Break-Even</th>
           <th class='col-5'>Profit/Loss</th>
         </tr>
-        <tr v-for="item in securities" :key="item.ticker">
-          <td v-if="item.ticker != 'PFAPPCASH'"><router-link :to="'/stock/' + item.ticker">{{ item.ticker }}</router-link></td>
-          <td v-if="item.ticker === 'PFAPPCASH'" class='cash'>
+        <tr>
+          <td class='cash'>
             <p>Cash</p>
             <img src="../../assets/icons/notes.svg" alt="Cash">
           </td>
-          <td v-if="item.ticker != 'PFAPPCASH'">{{ item.quantity }}</td>
-          <td v-if="item.ticker === 'PFAPPCASH'">$ {{ item.quantity }}</td>
-          <td>{{ item.IEXprice }}</td>
-          <td>{{ item.breakEven }}</td>
+          <td>$ {{ portfolio.current.stocks.PFAPPCASH}}</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+        </tr>
+        <tr v-for="item in securities" :key="item.ticker" v-if="item.ticker != 'PFAPPCASH'">
+          <td><router-link :to="'/stock/' + item.ticker">{{ item.ticker }}</router-link></td>
+          <td>{{ item.quantity }}</td>
+          <td>$ {{ item.IEXprice }}</td>
+          <td>$ {{ item.breakEven }}</td>
           <td>{{ item.formattedPL }}</td>
         </tr>
       </table>
@@ -46,7 +51,14 @@ export default {
       return this.portfolioID
     },
     stocks: function () {
-      if (this.portfolio) return Object.keys(this.portfolio.current.stocks)
+      if (this.portfolio) {
+        let stocksArr = []
+        Object.keys(this.portfolio.current.stocks).forEach(stock => {
+            if (stock != 'PFAPPCASH') stocksArr.push(stock)
+          }
+        )
+        return stocksArr
+        }
     },
     date: function () {
       return dateFormat(this.portfolio.current.date, 'mmmm dS, yyyy')

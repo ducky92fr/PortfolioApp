@@ -6,14 +6,16 @@
         <tr>
           <th>Ticked</th>
           <th>Date</th>
+          <th>Order</th>
           <th>Qt Change</th>
           <th>Price</th>
         </tr>
         <tr v-for="item in transactions" :key="item.date">
           <td><router-link :to="'/stock/' + item.affectedStocks[0].ticker">{{ item.affectedStocks[0].ticker }}</router-link></td>
           <td>{{ item.date }}</td>
+          <td>{{ orderType(item) }}</td>
           <td>{{ item.affectedStocks[0].change }}</td>
-          <td>{{ item.affectedStocks[0].atPrice }}</td>
+          <td>$ {{ item.affectedStocks[0].atPrice }}</td>
         </tr>
       </table>
     </div>
@@ -46,6 +48,13 @@ export default {
     }).catch((error) => {
     console.error(error)
   })
+  },
+  methods: {
+    orderType: function (transaction) {
+      let oldQT = transaction.affectedStocks[0].preNum
+      let newQT = transaction.affectedStocks[0].postNum
+      return oldQT > newQT ? 'Sell' : 'Buy'
+    }
   }
 }
 </script>
