@@ -7,6 +7,7 @@ var bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const passport = require('passport')
+const sslRedirect = require('heroku-ssl-redirect')
 const path = require('path')
 const { Strategy, ExtractJwt } = require('passport-jwt')
 
@@ -71,9 +72,7 @@ const strategy = new Strategy(
 // tell pasport to use it
 passport.use(strategy)
 
-app.get('/.well-known/acme-challenge/:content', function (req, res) {
-  res.send(process.env.CERTIFICATE)
-})
+app.use(sslRedirect())
 
 app.use('/auth', authRoutes)
 app.use('/api', index)
