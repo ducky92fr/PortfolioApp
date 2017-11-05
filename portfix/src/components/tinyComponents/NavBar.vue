@@ -13,7 +13,7 @@
         </router-link>
       </div>
     </div>
-    <button v-on:click='callLogout' class='button is-warning logout'>
+    <button v-on:click='callLogout' class='button is-warning' id='logout'>
       Logout
     </button>
     <h2>
@@ -110,7 +110,7 @@ export default {
   .dropdownmenu:hover .dropdown-content {
     display: block;
   }
-  .logout {
+  #logout {
     margin: 0px 10px 0px 5px;
     background-color: #2196f3;
     border-radius: 3px;
@@ -120,7 +120,7 @@ export default {
     height: 32px;
     width: 70px;
   }
-  .logout:hover {
+  #logout:hover {
     background-color: #349df1;
     color: white;
   }

@@ -4,7 +4,7 @@
     <!-- <p v-if='lastUpdate'> Portfolio last changed on {{lastUpdate}}</p> -->
     <div class='currentDashboard' v-if="portfolio">
       <h1 v-if="portfolio">{{portfolio.name}}</h1>
-      <section class='notification is-info PFvalue'>
+      <section class='notification is-info' id='PFvalue'>
         <p>Current value <span v-if="portfolioValue">{{formatNumber(portfolioValue, 2, ' ', '$')}}</span></p>
         <p>Change <span v-if="portfolioPL">{{portfolioPL}}</span></p>
       </section>
@@ -99,7 +99,7 @@ export default {
   margin-bottom: 0px;  
   margin-right: 12px;
 }
-.PFvalue, .PFactions {
+#PFvalue, .PFactions {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -108,14 +108,14 @@ export default {
   margin-left: 1vw;
   padding: 1vh 1vw;
 }
-.PFvalue {
+#PFvalue {
   align-items: flex-start;
   min-height: 65px;
   margin-bottom: 0px;
   background-color: #f3f3f3;
   color: #525252;
 }
-.PFvalue  p {
+#PFvalue  p {
   margin: 0px;
   font-weight: 600;
   font-size: 1.3em;
