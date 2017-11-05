@@ -15,6 +15,10 @@ require('offline-plugin/runtime').install()
 
 Vue.use(AsyncComputed)
 Vue.use(Vuetify)
+
+Vue.component('detectNetwork', require('v-offline')
+)
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

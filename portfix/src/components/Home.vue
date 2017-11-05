@@ -1,6 +1,9 @@
 <template>
   <div>
     <navbar></navbar>
+      <detect-network v-on:detected-condition="detected">
+        <div slot="offline" class='notification is-warning offline'>You're Offline! App will update prices and Portfolio info when you get back online</div>
+    </detect-network>
     <div class="homePage">
       <portfolio-widget v-on:gotStocks="displayNews" class="PFwidget"></portfolio-widget>
       <newswidget class="newsWidget" :stocks="allStocksArray" v-if='allStocksArray'></newswidget>
@@ -17,7 +20,8 @@ export default {
   name: 'Home',
   data () {
     return {
-      allStocksArray: null
+      allStocksArray: null,
+      state: null
     }
   },
   created () {
@@ -32,6 +36,9 @@ export default {
   methods: {
     displayNews: function (array) {
       this.allStocksArray = array
+    },
+    detected: function (e) {
+      this.state = e
     }
   }
 }
@@ -53,5 +60,8 @@ h1, h2 {
 .PFwidget {
   margin-top: 8vh; 
   padding-bottom: 1vh;
+}
+.offline {
+
 }
 </style>
