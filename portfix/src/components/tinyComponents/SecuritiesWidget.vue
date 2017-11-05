@@ -11,8 +11,13 @@
           <th class='col-5'>Profit/Loss</th>
         </tr>
         <tr v-for="item in securities" :key="item.ticker">
-          <td><router-link :to="'/stock/' + item.ticker">{{ item.ticker }}</router-link></td>
-          <td>{{ item.quantity }}</td>
+          <td v-if="item.ticker != 'PFAPPCASH'"><router-link :to="'/stock/' + item.ticker">{{ item.ticker }}</router-link></td>
+          <td v-if="item.ticker === 'PFAPPCASH'" class='cash'>
+            <p>Cash</p>
+            <img src="../../assets/icons/notes.svg" alt="Cash">
+          </td>
+          <td v-if="item.ticker != 'PFAPPCASH'">{{ item.quantity }}</td>
+          <td v-if="item.ticker === 'PFAPPCASH'">$ {{ item.quantity }}</td>
           <td>{{ item.IEXprice }}</td>
           <td>{{ item.breakEven }}</td>
           <td>{{ item.formattedPL }}</td>
@@ -67,6 +72,14 @@ export default {
           this.securities.push(stock_display_info)
           }
         })
+        this.securities.push({
+          ticker: 'PFAPPCASH',
+          quantity: portfolio.current.stocks.PFAPPCASH,
+            IEXprice : '-',
+            breakEven: '-',
+            formattedPL: '-',
+            PL: '-'
+        })
         this.$emit('PLcalculated', {
           PL: calculatePortfolioPnL(this.securities),
           lastUpdate: this.date
@@ -109,6 +122,18 @@ export default {
   padding: 0px;
   border: none;
 }
-
-
+#securitiestable .cash {
+  width: 116px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+#securitiestable .cash img {
+  width: 27px;
+  margin-left: 5px;
+}
+#securitiestable .cash p {
+  margin: 0px;
+}
 </style>
