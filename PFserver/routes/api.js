@@ -65,7 +65,15 @@ router.post('/addstock', passport.authenticate('jwt', config.jwtSession), (req, 
       let oldPortfolio = Object.assign({}, portfolio.current)
       let oldStockNum = oldPortfolio.stocks[ticker] || 0
       let oldStockBEP = oldPortfolio.BEPs[ticker] || 0
+      let oldCash = oldPortfolio.stocks.PFAPPCASH
       let newStockNum = parseInt(oldStockNum, 10) + parseInt(quantity, 10)
+
+      if (parseInt(quantity, 10) * parseInt(price, 10) > parseInt(oldCash, 10)) {
+        res.json({
+          errorMessage: "Couldn't add stock - You don't have enough cash in your Portfolio"
+        })
+        return undefined
+      }
 
       // Creating new transaction
       let newTransaction = new Transaction({
@@ -93,6 +101,7 @@ router.post('/addstock', passport.authenticate('jwt', config.jwtSession), (req, 
           portfolio.date = date
           portfolio.current.stocks[ticker] = newStockNum
           portfolio.current.BEPs[ticker] = (price * quantity + oldStockBEP * oldStockNum) / (newStockNum)
+          portfolio.current.stocks.PFAPPCASH = oldCash - quantity * price
 
           portfolio.markModified('current')
           portfolio.save((error) => {
@@ -132,6 +141,7 @@ router.post('/sellstock', passport.authenticate('jwt', config.jwtSession), (req,
     if (userID.equals(portfolio.userID)) {
       // Current portfolio becomes old portfolio
       let oldPortfolio = Object.assign({}, portfolio.current)
+      let oldCash = oldPortfolio.stocks.PFAPPCASH
       let oldStockNum = oldPortfolio.stocks[ticker] || 0
       let newStockNum = parseInt(oldStockNum, 10) - parseInt(quantity, 10)
 
@@ -164,6 +174,7 @@ router.post('/sellstock', passport.authenticate('jwt', config.jwtSession), (req,
         } else {
           portfolio.history.push(oldPortfolio)
           portfolio.date = date
+          portfolio.current.stocks.PFAPPCASH = oldCash + quantity * price
           if (newStockNum > 0) {
             portfolio.current.stocks[ticker] = newStockNum
           } else {

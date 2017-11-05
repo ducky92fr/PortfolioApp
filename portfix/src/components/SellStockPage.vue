@@ -102,7 +102,7 @@ export default {
       }).then(response=> {
       if (response.errorMessage) {
           this.success = false
-          this.errorMessage = "Couldn't sell stock"
+          this.errorMessage = response.errorMessage
         }
         if (response.success) {
           this.errorMessage = false

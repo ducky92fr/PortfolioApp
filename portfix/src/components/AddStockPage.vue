@@ -101,7 +101,7 @@ export default {
       }).then(response=> {
       if (response.errorMessage) {
           this.success = false
-          this.errorMessage = "Couldn't add stock to your portfolio"
+          this.errorMessage = response.errorMessage
         }
         if (response.success) {
           this.errorMessage = false
