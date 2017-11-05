@@ -136,7 +136,28 @@ const webpackConfig = merge(baseWebpackConfig, {
         {
           urlPattern: /^https:\/\/code\.getmdl\.io\//,
           handler: 'cacheFirst'
-        }]
+        },
+        {
+          urlPattern: /^https:\/\/code\.www.stockawesome.co.herokudns\.com\//,
+          handler: 'cacheFirst'
+        },
+        {
+          urlPattern: /^https:\/\/code\.stockawesome.co.herokudns\.com\//,
+          handler: 'cacheFirst'
+        },
+        {
+          urlPattern: /^https:\/\/code\.stockawesome\.co\//,
+          handler: 'cacheFirst'
+        },
+        {
+          urlPattern: /^https:\.stockawesome\.co\//,
+          handler: 'cacheFirst'
+        },
+        {
+          urlPattern: /^https:\.stockawesome.co\.co\//,
+          handler: 'cacheFirst'
+        }
+      ]
     })
   ]
 })

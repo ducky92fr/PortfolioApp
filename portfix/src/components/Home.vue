@@ -62,6 +62,7 @@ h1, h2 {
   padding-bottom: 1vh;
 }
 .offline {
-
+  font-weight: 600;
+  font-size: 1.5em;
 }
 </style>

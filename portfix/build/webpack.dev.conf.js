@@ -40,7 +40,7 @@ module.exports = merge(baseWebpackConfig, {
         main: [
           'app.*.css',
           'vendor.*.js',
-          'app.*.js',
+          'app.*.js'
         ],
         additional: [
           ':externals:'
@@ -72,7 +72,28 @@ module.exports = merge(baseWebpackConfig, {
         {
           urlPattern: /^https:\/\/code\.getmdl\.io\//,
           handler: 'cacheFirst'
-        }]
+        },
+        {
+          urlPattern: /^https:\/\/code\.www.stockawesome.co.herokudns\.com\//,
+          handler: 'cacheFirst'
+        },
+        {
+          urlPattern: /^https:\/\/code\.stockawesome.co.herokudns\.com\//,
+          handler: 'cacheFirst'
+        },
+        {
+          urlPattern: /^https:\/\/code\.stockawesome\.co\//,
+          handler: 'cacheFirst'
+        },
+        {
+          urlPattern: /^https:\.stockawesome\.co\//,
+          handler: 'cacheFirst'
+        },
+        {
+          urlPattern: /^https:\.stockawesome.co\.co\//,
+          handler: 'cacheFirst'
+        }
+      ]
     })
   ]
 })
