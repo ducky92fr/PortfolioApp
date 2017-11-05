@@ -1,6 +1,7 @@
 <template>
   <div class="navbar">
-    <router-link to="/">
+    <router-link to="/" class='logo-title'>
+    <img src="../../assets/icons/charts.svg" alt="Logo" id='logo'>
     <h1>StockAwesome</h1>
     </router-link>
     <div class='dropdownmenu'>
@@ -123,5 +124,15 @@ export default {
   #logout:hover {
     background-color: #349df1;
     color: white;
+  }
+  .logo-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  #logo {
+    width: 40px;
+    margin-left: 15px;
   }
 </style>

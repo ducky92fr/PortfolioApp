@@ -4,7 +4,7 @@
     <div class='portfolios'>
       <div class='singlePF' v-for="portfolio in portfolios" :key="portfolio._id">
         <h2>{{portfolio.name}}</h2>
-        <h2 class='PFdata'>{{portfolio.current.stocks.PFAPPCASH}}</h2>
+        <h2 class='PFdata'>{{getPFValue(portfolio._id)}}</h2>
         <router-link :to="'/portfolio/' + portfolio._id">
           <img src="../../assets/icons/search.svg" alt="See details">
         </router-link>
@@ -35,6 +35,11 @@ export default {
     }).catch((error) => {
     console.error(error)
   })
+  },
+  methods: {
+    getPFValue: function (id) {
+      return this.$root['value' + id]
+    }
   }
 }
 </script>

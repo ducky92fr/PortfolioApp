@@ -52,7 +52,7 @@ export default {
       return this.portfolioID
     },
     stocks: function () {
-      // if (this.portfolio) {
+      if (this.portfolio) {
         let stocksArr = []
         Object.keys(this.portfolio.current.stocks).forEach(stock => {
             if (stock != 'PFAPPCASH') { 
@@ -61,7 +61,7 @@ export default {
           }
         )
         return stocksArr
-        // }
+        }
     },
     date: function () {
       return dateFormat(this.portfolio.current.date, 'mmmm dS, yyyy')
@@ -105,6 +105,7 @@ export default {
           value: calculatePortfolioValue(this.securities),
           lastUpdate: this.date
         })
+        this.$root['value' + portfolio._id] = calculatePortfolioValue(this.securities)
       }).catch((error) => {
     console.error(error)
   })
