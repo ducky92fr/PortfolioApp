@@ -5,7 +5,7 @@
     <div class='currentDashboard' v-if="portfolio">
       <h1 v-if="portfolio">{{portfolio.name}}</h1>
       <section class='notification is-info PFvalue'>
-        <p>Current value {{portfolio.current.stocks.PFAPPCASH}}</p>
+        <p>Current value <span v-if="portfolioValue">{{portfolioValue}}</span></p>
         <p>Change <span v-if="portfolioPL">{{portfolioPL}}</span></p>
       </section>
       <section class='PFactions'>
@@ -34,6 +34,7 @@ export default {
       PFid: this.$route.params.id,
       portfolio: null,
       portfolioPL: null,
+      portfolioValue: null,
       lastUpdate: null
     }
   },
@@ -57,6 +58,7 @@ export default {
     },
     updatePL: function (event) {
       this.portfolioPL = formatPL(event.PL)
+      this.portfolioValue = event.value
       this.lastUpdate = event.lastUpdate
     }
   },

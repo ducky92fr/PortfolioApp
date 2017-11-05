@@ -1,13 +1,25 @@
 import dateFormat from 'dateformat'
 
 // Function that takes in the securities in the Portfolio and returns
+// the portfolio value
+export function calculatePortfolioValue (securities) {
+  let value = 0
+  securities.forEach(security => {
+    if (security.ticker === 'PFAPPCASH') value += parseInt(security.quantity)
+    if (security.ticker !== 'PFAPPCASH') value += parseInt(security.quantity) * parseInt(security.IEXprice)
+  })
+  return value
+}
+
+// Function that takes in the securities in the Portfolio and returns
 // the portfolio P&L
 export function calculatePortfolioPnL (securities) {
   let PNL = 0
   securities.forEach(security => {
-    PNL += security.PL
+    if (security.ticker === 'PFAPPCASH') PNL += 0
+    if (security.ticker !== 'PFAPPCASH') PNL += parseInt(security.quantity) * parseInt(security.PL)
   })
-  return PNL
+  return (PNL / calculatePortfolioValue(securities))
 }
 
 // Function that takes in a security and returns its P&L

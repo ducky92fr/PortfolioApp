@@ -30,7 +30,7 @@
 <script>
 import dateFormat from 'dateformat'
 import { checkUser, getUserPortfolio, getLastPriceFromIEX } from '@/api'
-import { calculatePortfolioPnL, calculateSecurityPnL, formatPL } from './helperFunctions'
+import { calculatePortfolioPnL, calculateSecurityPnL, formatPL, calculatePortfolioValue } from './helperFunctions'
 export default {
   name: 'SecuritiesWidget',
   data () {
@@ -82,6 +82,7 @@ export default {
         })
         this.$emit('PLcalculated', {
           PL: calculatePortfolioPnL(this.securities),
+          value: calculatePortfolioValue(this.securities),
           lastUpdate: this.date
         })
       }).catch((error) => {
