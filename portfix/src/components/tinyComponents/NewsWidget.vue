@@ -32,6 +32,7 @@ export default {
     news: function () {
       return getNewsFromIEX(this.stocks).then(newsObject => {
         let newsArticles = []
+        let urls = []
         Object.keys(newsObject).forEach(stock => {
           let array_of_news = newsObject[stock].news
           array_of_news.forEach(news => {
@@ -45,7 +46,10 @@ export default {
                 }
               })
               news.ticker = ticker
-              newsArticles.push(news)
+              if (urls.indexOf(news.url) === -1) {
+                newsArticles.push(news)
+                urls.push(news.url)
+              }
             }
           })
         })
@@ -159,10 +163,10 @@ h1:first-of-type {
   font-size: 1.3em;
   text-align: left;
   line-height: 24px;
-  text-align: justify;
   margin: 0px;
   padding: 0px;
   color: #2b2a2a;
+  padding-right: 5px;
 }
 .news-section article .news-body p span {
   font-weight: 600;

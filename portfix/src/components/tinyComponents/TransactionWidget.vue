@@ -4,7 +4,7 @@
     <div class='transactions' id='transactionstable'>
       <table class="table transactions-table">
         <tr>
-          <th>Ticked</th>
+          <th>Ticker</th>
           <th>Date</th>
           <th>Order</th>
           <th>Qt Change</th>
