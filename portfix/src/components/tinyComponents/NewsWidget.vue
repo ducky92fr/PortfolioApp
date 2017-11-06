@@ -86,7 +86,7 @@ export default {
   height: 350px;
   padding: 23px 20px 20px 20px;
   margin-top: auto;
-  background: #2196f3d1;
+  background-color: rgba(33, 150, 243, 0.82);
   border: 1px solid #6db0ea;
   box-shadow: 0px 1px 3px 1px rgb(96, 99, 101);
 }

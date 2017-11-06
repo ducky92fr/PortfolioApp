@@ -56,7 +56,7 @@ export default {
 .singlePF {
   width: 60vw;
   max-width: 600px;
-  background-color: #dcdcdc8c;
+  background-color: rgba(220, 220, 220, 0.55);
   height: 40px;
   border-radius: 5px;
   display: flex;
